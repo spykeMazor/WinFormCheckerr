@@ -40,7 +40,7 @@ namespace Ex5.UI
                     m_ButtonMatrixGameBoard[i, j] = new PictureBox();
                     if ((j % 2 == 0 && i % 2 == 0) || (i % 2 != 0 && j % 2 != 0))
                     {
-                        m_ButtonMatrixGameBoard[i, j].BackgroundImage = Image.FromFile(@"C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\brown_square.PNG");
+                        m_ButtonMatrixGameBoard[i, j].BackgroundImage = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\brown_square.PNG");
                     }
                     ////else if (i % 2 != 0 && j % 2 != 0)
                     ////{
@@ -48,7 +48,7 @@ namespace Ex5.UI
                     ////}
                     else
                     {
-                        m_ButtonMatrixGameBoard[i, j].BackgroundImage = Image.FromFile(@"C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\whitesquare.PNG");
+                        m_ButtonMatrixGameBoard[i, j].BackgroundImage = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\whitesquare.PNG");
                     }
                     m_ButtonMatrixGameBoard[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     m_ButtonMatrixGameBoard[i, j].BackColor = Color.Black;

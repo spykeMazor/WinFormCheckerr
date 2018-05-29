@@ -77,14 +77,14 @@ namespace Ex5.UI
                 {
                     if(i_Game.GetTestingMatrix[j,i] == (char)Checker.Symbol.O)
                     {
-                        Image checkerImg = Image.FromFile(@"C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\black_king.png").GetThumbnailImage(55,55,null, IntPtr.Zero);
+                        Image checkerImg = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\black_soldier.png").GetThumbnailImage(55,55,null, IntPtr.Zero);
                         m_Board.GetBoard[i, j].Image = checkerImg;
                         //m_Board.GetBoard[i, j].ImageAlign = ContentAlignment.MiddleCenter;
                         //m_Board.GetBoard[i, j].
                     }
                     else if (i_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.X)
                     {
-                        Image checkerImg = Image.FromFile(@"C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\red_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+                        Image checkerImg = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\red_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
                         m_Board.GetBoard[i, j].Image = checkerImg;
                         //m_Board.GetBoard[i, j].ImageAlign = ContentAlignment.MiddleCenter;
                     }

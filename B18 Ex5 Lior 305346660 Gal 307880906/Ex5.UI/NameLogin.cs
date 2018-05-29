@@ -126,6 +126,7 @@ namespace Ex5.UI
 
         //}
 
+
             private void m_Player2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (M_Player2CheckBox.Checked)
@@ -136,6 +137,7 @@ namespace Ex5.UI
             {
                 m_TextboxPlayer2name.Text = "[Computer]";
                 m_TextboxPlayer2name.Enabled = false;
+
             }
         }
 
@@ -154,6 +156,7 @@ namespace Ex5.UI
             {
                 m_BoardSizeSelection = GameBoardUI.e_BoardSize.Large;
             }
+
             this.Close();
         }
 
