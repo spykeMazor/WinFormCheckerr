@@ -19,7 +19,7 @@ namespace Ex5.UI
             this.Text = "Gal & Lior Checker Game";
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1000, 800);
-            this.BackgroundImage = Image.FromFile(@"C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\black_marble.JPG");
+            this.BackgroundImage = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\black_marble.JPG");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.BackColor = Color.Black;
         }
@@ -92,22 +92,22 @@ namespace Ex5.UI
             }
         }
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FormGame
-            // 
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(816, 509);
-            this.HelpButton = true;
-            this.Name = "FormGame";
-            this.Load += new System.EventHandler(this.FormGame_Load);
-            this.Click += new System.EventHandler(this.FormGame_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormGame_MouseDown);
-            this.ResumeLayout(false);
+        ////private void InitializeComponent()
+        ////{
+        ////    this.SuspendLayout();
+        ////    // 
+        ////    // FormGame
+        ////    // 
+        ////    this.AutoScroll = true;
+        ////    this.ClientSize = new System.Drawing.Size(816, 509);
+        ////    this.HelpButton = true;
+        ////    this.Name = "FormGame";
+        ////    this.Load += new System.EventHandler(this.FormGame_Load);
+        ////    this.Click += new System.EventHandler(this.FormGame_Load);
+        ////    this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormGame_MouseDown);
+        ////    this.ResumeLayout(false);
 
-        }
+        ////}
 
         private void FormGame_Load(object sender, EventArgs e)
         {

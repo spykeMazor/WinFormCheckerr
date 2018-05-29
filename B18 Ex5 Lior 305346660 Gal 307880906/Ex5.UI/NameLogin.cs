@@ -84,14 +84,13 @@ namespace Ex5.UI
             m_RadioButtonLargeBoard.Font = new Font(FontFamily.GenericSansSerif,
             8.5F,
             FontStyle.Bold);
-
            
             m_TextboxPlayer2name.Location = new Point(M_Player2CheckBox.Right + 3,
                 M_Player2CheckBox.Bottom - 20);
             m_TextboxPlayer2name.Text = "[Computer]";
             m_TextboxPlayer2name.Enabled = false;
            
-            //this.Width = m_TextboxPlayer2name.Right + 7;
+            //// this.Width = m_TextboxPlayer2name.Right + 7;
 
             m_TextboxPlayer1name.Location = new Point(M_Player2CheckBox.Right + 4,
                 m_LabelPlayer1Name.Bottom - 20);
@@ -143,19 +142,30 @@ namespace Ex5.UI
 
         void m_ButtonDone_Click(object sender, EventArgs e)
         {
+            LogInExceptionForm logInException;
             this.DialogResult = DialogResult.OK;
-            if(m_RadioButtonSmallBoard.Checked)
+            if (Player1Name.Length > 0)
             {
-                m_BoardSizeSelection = GameBoardUI.e_BoardSize.Small;
+                if (m_RadioButtonSmallBoard.Checked)
+                {
+                    m_BoardSizeSelection = GameBoardUI.e_BoardSize.Small;
+                }
+                else if (m_RadioButtonMediumBoard.Checked)
+                {
+                    m_BoardSizeSelection = GameBoardUI.e_BoardSize.Medium;
+                }
+                else if (m_RadioButtonLargeBoard.Checked)
+                {
+                    m_BoardSizeSelection = GameBoardUI.e_BoardSize.Large;
+                }
             }
-            else if(m_RadioButtonMediumBoard.Checked)
+            else
             {
-                m_BoardSizeSelection = GameBoardUI.e_BoardSize.Medium;
+                logInException = new LogInExceptionForm();
+                logInException.ShowDialog();
             }
-            else if(m_RadioButtonLargeBoard.Checked)
-            {
-                m_BoardSizeSelection = GameBoardUI.e_BoardSize.Large;
-            }
+            
+
 
             this.Close();
         }
