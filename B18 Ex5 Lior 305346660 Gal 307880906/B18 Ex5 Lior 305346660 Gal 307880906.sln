@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckerLogic", "CheckerLogic\CheckerLogic.csproj", "{958FDE49-D9DC-4E51-9DD3-2B7F54E2D7B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex5.UI", "Ex5.UI\Ex5.UI.csproj", "{70703392-901F-4D94-A21E-9B1DD79224DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD48D1FC-3B84-4294-8200-BB70120AE2EE}"
+	ProjectSection(SolutionItems) = preProject
+		black_king.png = black_king.png
+		black_marble.jpg = black_marble.jpg
+		black_soldier.png = black_soldier.png
+		brown_square.PNG = brown_square.PNG
+		red_queen.png = red_queen.png
+		red_soldier.png = red_soldier.png
+		whitesquare.PNG = whitesquare.PNG
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{958FDE49-D9DC-4E51-9DD3-2B7F54E2D7B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958FDE49-D9DC-4E51-9DD3-2B7F54E2D7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958FDE49-D9DC-4E51-9DD3-2B7F54E2D7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958FDE49-D9DC-4E51-9DD3-2B7F54E2D7B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70703392-901F-4D94-A21E-9B1DD79224DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70703392-901F-4D94-A21E-9B1DD79224DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70703392-901F-4D94-A21E-9B1DD79224DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70703392-901F-4D94-A21E-9B1DD79224DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4431DA8-5123-4364-90EE-4310224294EE}
+	EndGlobalSection
+EndGlobal
