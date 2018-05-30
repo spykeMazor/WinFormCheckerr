@@ -43,7 +43,10 @@ namespace Ex5.UI
             this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.BackColor = Color.Black;
+
         }
+
+
 
         private void loadCheckersPics()
         {
@@ -82,6 +85,7 @@ namespace Ex5.UI
             Player2.InitAllTheCheckersOfOnePlayer((int)i_BoardSize, Player.e_LocationOfThePlayer.DOWN);
             m_Game = new Game(Player1, Player2, (int)i_BoardSize);
             m_Board = new GameBoardUI(i_BoardSize);
+            invokeTheBoard();
             initCheckers();
             for (int i = 0; i < (int)i_BoardSize; i++)
             {
@@ -95,15 +99,23 @@ namespace Ex5.UI
 
             m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.UP);
             invokeClickOnChecker(m_Game.MoveListOfPlayer1);
-            if (m_WasMove)
-            {
-                m_WasMove = false;
-                m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.DOWN);
-                invokeClickOnChecker(m_Game.MoveListOfPlayer2);
-            }
+
         }
 
-
+        private void invokeTheBoard()
+        {
+            for (int i = 0; i < m_Game.BoradSize; i++)
+            {
+                for (int j = 0; j < m_Game.BoradSize; j++)
+                {
+                    if (m_Board.GetBoard[i, j].BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
+                    {
+                        m_Board.GetBoard[i, j].Click += new EventHandler(PictureBoxInTheBoard_Click);
+                        m_Board.GetBoard[i, j].Enabled = false;
+                    }
+                }
+            }
+        }
         private void initCheckers()
         {
 
@@ -119,15 +131,16 @@ namespace Ex5.UI
                     {
                         if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.O)
                         {
-                            Image checkerImg = m_BlackChackerImage;
+                            // Image checkerImg = m_BlackChackerImage;
                             m_Board.GetBoard[i, j].Image = m_BlackChackerImage;
                         }
                         else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.X)
                         {
-                            Image checkerImg = m_RedChackerImage;
+                            //Image checkerImg = m_RedChackerImage;
                             m_Board.GetBoard[i, j].Image = m_RedChackerImage;
                         }
                     }
+
                 }
             }
         }
@@ -150,147 +163,187 @@ namespace Ex5.UI
 
         private void invokeClickOnChecker(LinkedList<KeyValuePair<string, string>> i_MoveList)
         {
+
             m_AllTheClickableSquareReadyToMove.Clear();
-            Point tempPointMoveFrom = new Point();
-            Point tempPointMoveTo = new Point();
+            Point PointMoveFrom = new Point();
+            Point PointMoveTo = new Point();
+            Point lastPointMoveFrom = new Point(-1, -1);
+
             foreach (KeyValuePair<string, string> kvp in i_MoveList)
             {
-                if (tempPointMoveFrom != converCheckerPositionToPoint(kvp.Key))
+                PointMoveFrom = converCheckerPositionToPoint(kvp.Key);
+                PointMoveTo = converCheckerPositionToPoint(kvp.Value);
+                m_AllTheClickableSquareReadyToMove.Add(new KeyValuePair<Point, Point>(PointMoveFrom, PointMoveTo));
+                if (lastPointMoveFrom != converCheckerPositionToPoint(kvp.Key))
                 {
-                    tempPointMoveFrom = converCheckerPositionToPoint(kvp.Key);
-                    tempPointMoveTo = converCheckerPositionToPoint(kvp.Value);
-
-                    m_Board.GetBoard[tempPointMoveFrom.X, tempPointMoveFrom.Y].Click += new EventHandler(PictureBoxInTheBoard_Click);
-                    m_AllTheClickableSquareReadyToMove.Add(new KeyValuePair<Point, Point>(tempPointMoveFrom, tempPointMoveTo));
+                    lastPointMoveFrom = converCheckerPositionToPoint(kvp.Key);
+                    m_Board.GetBoard[PointMoveFrom.X, PointMoveFrom.Y].Enabled = true;
                 }
-        
+
             }
         }
 
-        private void PictureBoxInTheBoard_Click(object sender, EventArgs e)
+        public void PictureBoxInTheBoard_Click(object sender, EventArgs e)
         {
             PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
-
-            //picAsSender.Enabled = !picAsSender.Enabled;
-            Image DefaultBackGroundImage = m_Board.WhiteBackGround;
-            if (picAsSender.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
+            if (picAsSender.Image != null)
             {
-                picAsSender.BackgroundImage = m_Board.BlueBackGround;
-                picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
-                m_LastMoveFrom = picAsSender.PointInTheBoard;
-                invokeAllTheOptionalMoveSquare(picAsSender);
+                Image DefaultBackGroundImage = m_Board.WhiteBackGround;
+                if (picAsSender.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
+                {
+                    picAsSender.BackgroundImage = m_Board.BlueBackGround;
+                    picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
+                    m_LastMoveFrom = picAsSender.PointInTheBoard;
+                    invokeAllTheOptionalMoveSquare(picAsSender);
+                }
+                else
+                {
+                    picAsSender.BackgroundImage = DefaultBackGroundImage;
+                    picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
+                    disableAllMoveToClickableSquare();
+                    foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
+                    {
+                        m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
+                    }
+                }
             }
+
             else
             {
-                picAsSender.BackgroundImage = DefaultBackGroundImage;
-                picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
-                foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
+                //PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
+                afterMoving(picAsSender);
+            }
+        }
+
+        private void afterMoving(PictureBoxInTheBoard i_CurrentPicBoxThatMoveTo)
+        {
+            m_LastMoveTo = i_CurrentPicBoxThatMoveTo.PointInTheBoard;
+            m_WasMove = true;
+
+            returnSqureToEmpty();
+            if (m_WasMove)
+            {
+                if (!m_CurrentPlayer)
                 {
-                    m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player1,
+                  m_Game.Player2,
+                  convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                  convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                 ref m_wasAttack);
+                    initCheckers();
+                    m_WasMove = false;
+                    if (!m_wasAttack)
+                    {
+                        m_CurrentPlayer = true;////---> now player2 turn
+                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                    }
+                    else
+                    {////--->was attack turn stay in Player1
+                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    }
+                }
+                else
+                {
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                        m_Game.Player1,
+                        convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                        convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                        ref m_wasAttack);
+                    initCheckers();
+                    m_WasMove = false;
+                    if (!m_wasAttack)
+                    {
+                        m_CurrentPlayer = false;////---> now player1 turn
+                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    }
+                    else
+                    {////--->was attack turn stay in Player2
+                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                    }
                 }
             }
         }
 
         private void invokeAllTheOptionalMoveSquare(PictureBoxInTheBoard i_PicAsSender)
         {
-            Point blueSquare = new Point();
-            foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
+            Point blueSquare = new Point();           
+            blueSquare.X = i_PicAsSender.PointInTheBoard.X;
+            blueSquare.Y = i_PicAsSender.PointInTheBoard.Y;
+
+            foreach (KeyValuePair<Point, Point> kpv in m_AllTheClickableSquareReadyToMove)
             {
-                if (m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
+                if (kpv.Key != i_PicAsSender.PointInTheBoard)
                 {
-                    blueSquare.X = kvp.Key.X;
-                    blueSquare.Y = kvp.Key.Y;
-                }
-                else
-                {
-                    m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = false;
+                    m_Board.GetBoard[kpv.Key.X, kpv.Key.Y].Enabled = false;
                 }
             }
 
             if (i_PicAsSender.Image.Tag.ToString() == e_TypeUICheckers.BlackChecker.ToString() ||
                 i_PicAsSender.Image.Tag.ToString() == e_TypeUICheckers.BlackQueen.ToString())
             {
-                foreach (KeyValuePair<string, string> kvp in m_Game.MoveListOfPlayer1)
+                if (m_Game.AttackListOfPlayer1.Count > 0)
                 {
-
-                    if (blueSquare == converCheckerPositionToPoint(kvp.Key))
-                    {
-                        Point optionalSquareToMove = new Point();
-                        optionalSquareToMove = converCheckerPositionToPoint(kvp.Value);
-                        if (optionalSquareToMove.Y != m_Game.BoradSize - 1)
-                        {
-                            m_Board.GetBoard[optionalSquareToMove.X, optionalSquareToMove.Y].Click += new EventHandler(PictureBoxInTheBoard_ClickToMovePlayer);
-                        }
-
-                    }
+                    enableMoveToSquare(m_Game.AttackListOfPlayer1, blueSquare);
+                }
+                else
+                {
+                    enableMoveToSquare(m_Game.MoveListOfPlayer1, blueSquare);
                 }
             }
             else
             {
-                foreach (KeyValuePair<string, string> kvp in m_Game.MoveListOfPlayer2)
+                if (m_Game.AttackListOfPlayer1.Count > 0)
                 {
-                    if (blueSquare == converCheckerPositionToPoint(kvp.Key))
-                    {
-                        Point optionalSquareToMove = new Point();
-                        optionalSquareToMove = converCheckerPositionToPoint(kvp.Value);
-                        if (optionalSquareToMove.Y != m_Game.BoradSize - 1)
-                        {
-                            m_Board.GetBoard[optionalSquareToMove.X, optionalSquareToMove.Y].Click += new EventHandler(PictureBoxInTheBoard_ClickToMovePlayer);
-                        }
-
-                    }
-                }
-            }
-        }
-
-        private void PictureBoxInTheBoard_ClickToMovePlayer(object sender, EventArgs e)
-        {
-            PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
-            m_LastMoveTo = picAsSender.PointInTheBoard;
-            m_WasMove = true;
-            //picAsSender.Image = m_BlackChackerImage;
-            returnSqureToEmpty();
-            if (m_WasMove)
-            {
-                if (!m_CurrentPlayer)
-                {
-                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player1, m_Game.Player2, convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom), convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo), m_wasAttack);
-                    initCheckers();
-                    m_WasMove = false;
-                    m_CurrentPlayer = true;////---> now player2 turn
-                    m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.DOWN);
-                    invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                    enableMoveToSquare(m_Game.AttackListOfPlayer2, blueSquare);
                 }
                 else
                 {
-                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2, m_Game.Player1, convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom), convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo), m_wasAttack);
-                    initCheckers();
-                    m_WasMove = false;
-                    m_CurrentPlayer = false;////---> now player1 turn
-                    m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.UP);
-                    invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    enableMoveToSquare(m_Game.MoveListOfPlayer2, blueSquare);
                 }
             }
-
         }
 
+        private void enableMoveToSquare(LinkedList<KeyValuePair<string, string>> i_MoveListOfTheCurrentPlayer, Point i_BlueSquare)
+        {
+            
+
+            foreach (KeyValuePair<string, string> kvp in i_MoveListOfTheCurrentPlayer)
+            {
+                if (i_BlueSquare == converCheckerPositionToPoint(kvp.Key))
+                {
+                    Point optionalSquareToMove = new Point();
+                    optionalSquareToMove = converCheckerPositionToPoint(kvp.Value);
+                    m_Board.GetBoard[optionalSquareToMove.X, optionalSquareToMove.Y].Enabled = true;
+                }
+                else
+                {
+
+                }
+            }
+        }
+        
         private void returnSqureToEmpty()
         {
             foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
             {
-                m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Click -= (PictureBoxInTheBoard_Click);
-                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Click -= (PictureBoxInTheBoard_ClickToMovePlayer);
-
+                m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = false;
+                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Enabled = false;
                 if (m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
                 {
                     m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage = m_Board.WhiteBackGround;
                     m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
                 }
-
-
             }
         }
-       
+
+        private void disableAllMoveToClickableSquare()
+        {
+            foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
+            {
+                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Enabled = false;
+            }
+        }
+
         private void InitializeComponent()
         {
             this.SuspendLayout();

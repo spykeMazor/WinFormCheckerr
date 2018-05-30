@@ -87,7 +87,7 @@ namespace Ex5.UI
                         
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage = m_WhiteBackGround;
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.WHITE;
-                        //m_ButtonMatrixGameBoard[i, j].Click += new EventHandler(PictureBoxInTheBoard_Click);
+                        //m_ButtonMatrixGameBoard[i, j].Click += new EventHandler(FormGame.PictureBoxInTheBoard_Click);
                         //m_ButtonMatrixGameBoard[i, j].MouseClick += new MouseEventHandler(PictureBoxInTheBoard_MouseClick);
                     }
                     m_ButtonMatrixGameBoard[i, j].BackgroundImageLayout = ImageLayout.Stretch;
