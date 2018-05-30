@@ -303,7 +303,6 @@ namespace Ex5.UI
             this.Name = "FormGame";
             this.Load += new System.EventHandler(this.FormGame_Load);
             this.Click += new System.EventHandler(this.FormGame_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormGame_MouseDown);
             this.ResumeLayout(false);
 
         }
