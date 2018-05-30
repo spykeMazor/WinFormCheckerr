@@ -105,28 +105,8 @@ namespace Ex5.UI
                 m_RadioButtonLargeBoard, m_LabelPlayer1Name, M_Player2CheckBox, m_TextboxPlayer1name, m_TextboxPlayer2name,m_ButtonDone});
             this.m_ButtonDone.Click += new EventHandler(m_ButtonDone_Click);
         }
-
-
-        //private void radioButton_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    // Executed when any radio button is changed.
-        //    // ... It is wired up to every single radio button.
-        //    // Search for first radio button in GroupBox.
-        //    foreach (Control control in this.Controls)
-        //    {
-        //        if (control is RadioButton)
-        //        {
-        //            RadioButton radio = control as RadioButton;
-        //            if (radio.Checked)
-        //            {
-        //                radio.BackColor = Color.Gold;
-        //            }
-        //        }
-        //    }
-
-        //}
-
-            private void m_Player2CheckBox_CheckedChanged(object sender, EventArgs e)
+      
+           private void m_Player2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (M_Player2CheckBox.Checked)
             {

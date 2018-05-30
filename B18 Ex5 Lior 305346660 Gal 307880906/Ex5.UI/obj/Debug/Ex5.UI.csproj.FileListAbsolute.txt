@@ -10,3 +10,17 @@ C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.pdb
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.FormGame.resources
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.GameSettings.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\bin\Debug\Ex5.UI.exe
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\bin\Debug\Ex5.UI.pdb
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\bin\Debug\CheckerLogic.dll
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\bin\Debug\CheckerLogic.pdb
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.csprojAssemblyReference.cache
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.FormGame.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.GameSettings.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.Properties.Resources.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.Testing.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.csproj.GenerateResource.cache
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.csproj.CoreCompileInputs.cache
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.csproj.CopyComplete
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.exe
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.pdb
