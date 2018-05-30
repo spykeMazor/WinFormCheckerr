@@ -10,7 +10,8 @@ namespace Ex5.UI
 {
     public class FormGame : Form
     {
-        GameSettings m_FormNameLogin = new GameSettings();
+        ////GameSettings m_FormNameLogin = new GameSettings();
+        SettingsLogin m_FormNameLogin = new SettingsLogin();
         GameBoardUI m_Board;
         CheckerLogic.Game Game;
         public FormGame()
@@ -31,7 +32,7 @@ namespace Ex5.UI
             InitControls();
         }
 
-        public GameSettings GetNameLogin
+        public SettingsLogin GetNameLogin
         {
             get { return m_FormNameLogin; }
             set { m_FormNameLogin = value; }
