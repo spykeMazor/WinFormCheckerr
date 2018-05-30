@@ -57,14 +57,29 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GameBoardUI.cs" />
-    <Compile Include="NameLogin.cs">
+    <Compile Include="LogInBoardSizeExceptionForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInBoardSizeExceptionForm.Designer.cs">
+      <DependentUpon>LogInBoardSizeExceptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogInNameExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PictureBoxInTheBoard.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsLogin.Designer.cs">
+      <DependentUpon>SettingsLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Testing.cs">
       <SubType>Form</SubType>
@@ -92,12 +107,18 @@
     <EmbeddedResource Include="FormGame.resx">
       <DependentUpon>FormGame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NameLogin.resx">
-      <DependentUpon>NameLogin.cs</DependentUpon>
+    <EmbeddedResource Include="LogInBoardSizeExceptionForm.resx">
+      <DependentUpon>LogInBoardSizeExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogInNameExceptionForm.resx">
+      <DependentUpon>LogInNameExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsLogin.resx">
+      <DependentUpon>SettingsLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Testing.resx">
       <DependentUpon>Testing.cs</DependentUpon>
