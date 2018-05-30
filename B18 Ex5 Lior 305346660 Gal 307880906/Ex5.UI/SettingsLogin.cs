@@ -29,7 +29,7 @@ namespace Ex5.UI
             }
             else
             {
-                textBoxPlayer2Name.Text = "[Computer]";
+                textBoxPlayer2Name.Text = ConstantsUI.k_ComputerNameTextBox;
                 textBoxPlayer2Name.BackColor = System.Drawing.SystemColors.AppWorkspace;
                 textBoxPlayer2Name.Enabled = false;
                 textBoxPlayer2Name.TabStop = false;
@@ -86,7 +86,20 @@ namespace Ex5.UI
 
         public string Player2Name
         {
-            get { return textBoxPlayer2Name.Text; }
+            get
+            {
+                string player2Name;
+                if (textBoxPlayer2Name.Text.CompareTo(ConstantsUI.k_ComputerNameTextBox) == 0)
+                {
+                    player2Name = ConstantsUI.k_ComputerPlayerName;
+                }
+                else
+                {
+                    player2Name = textBoxPlayer2Name.Text;
+                }
+
+                return player2Name;
+            }
             set { textBoxPlayer2Name.Text = value; }
         }
 

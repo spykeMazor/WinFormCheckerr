@@ -168,7 +168,7 @@
             this.textBoxPlayer2Name.Name = "textBoxPlayer2Name";
             this.textBoxPlayer2Name.Size = new System.Drawing.Size(229, 35);
             this.textBoxPlayer2Name.TabIndex = 5;
-            this.textBoxPlayer2Name.Text = "[Compter]";
+            this.textBoxPlayer2Name.Text = "[Computer]";
             // 
             // SettingsLogin
             // 
