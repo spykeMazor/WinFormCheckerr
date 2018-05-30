@@ -66,7 +66,9 @@
     <Compile Include="LogInNameExceptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NameLogin.cs" />
+    <Compile Include="PictureBoxInTheBoard.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -111,13 +113,9 @@
     <EmbeddedResource Include="LogInNameExceptionForm.resx">
       <DependentUpon>LogInNameExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NameLogin.resx">
-      <DependentUpon>NameLogin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsLogin.resx">
       <DependentUpon>SettingsLogin.cs</DependentUpon>
@@ -131,6 +129,14 @@
       <Project>{958fde49-d9dc-4e51-9dd3-2b7f54e2d7b4}</Project>
       <Name>CheckerLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black_marble.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\black_soldier.png" />
+    <Content Include="Resources\brown_square.PNG" />
+    <Content Include="Resources\whitesquare.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

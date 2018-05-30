@@ -73,10 +73,13 @@ namespace CheckerLogic
             get { return m_AttackListOfPlayer2; }
         }
 
-        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, string i_InputMoveFrom, string i_InputMoveTo, bool i_AttackFlag)
+        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, Player i_SecondPlayer, string i_InputMoveFrom, string i_InputMoveTo, bool i_AttackFlag)
         {
             i_CorrectPlayer.MoveChecker(i_InputMoveFrom, i_InputMoveTo);
+            i_AttackFlag = ConfirmAttack(i_InputMoveFrom, i_InputMoveTo, i_CorrectPlayer, this);
             UpdateTestingMatrix(i_InputMoveFrom, i_InputMoveTo, i_AttackFlag);
+            UpdateMoveList(i_CorrectPlayer.GetUpOrDown);
+            UpdateMoveList(i_SecondPlayer.GetUpOrDown);
         }
 
         public int Player1Score()

@@ -2,7 +2,14 @@ C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Deb
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Debug\CheckerLogic.pdb
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.dll
 C:\Users\galma\Desktop\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.pdb
-C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Debug\CheckerLogic.dll
-C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Debug\CheckerLogic.pdb
-C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.dll
-C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.pdb
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Debug\CheckerLogic.dll
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\bin\Debug\CheckerLogic.pdb
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.csprojAssemblyReference.cache
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.csproj.CoreCompileInputs.cache
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.dll
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\CheckerLogic\obj\Debug\CheckerLogic.pdb
+C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\CheckerLogic\bin\Debug\CheckerLogic.dll
+C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\CheckerLogic\bin\Debug\CheckerLogic.pdb
+C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\CheckerLogic\obj\Debug\CheckerLogic.csprojResolveAssemblyReference.cache
+C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\CheckerLogic\obj\Debug\CheckerLogic.dll
+C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\CheckerLogic\obj\Debug\CheckerLogic.pdb
