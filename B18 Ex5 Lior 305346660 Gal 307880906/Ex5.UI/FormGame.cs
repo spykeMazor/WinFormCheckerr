@@ -35,11 +35,12 @@ namespace Ex5.UI
         private bool m_wasAttack = false;
         public FormGame()
         {
+            loadCheckersPics();
             this.BackColor = Color.Azure;
             this.Text = "Gal & Lior Checker Game";
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1000, 800);
-            this.BackgroundImage = Image.FromFile(@"C:\Users\galma\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\black_marble.JPG");
+            this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.BackColor = Color.Black;
         }
@@ -162,24 +163,7 @@ namespace Ex5.UI
                     m_Board.GetBoard[tempPointMoveFrom.X, tempPointMoveFrom.Y].Click += new EventHandler(PictureBoxInTheBoard_Click);
                     m_AllTheClickableSquareReadyToMove.Add(new KeyValuePair<Point, Point>(tempPointMoveFrom, tempPointMoveTo));
                 }
-                //    if (m_wasMove)
-                //    {
-                //        break;
-                //    }
-                //}
-
-                //foreach (KeyValuePair<string, string> kvp in i_MoveList)
-                //{
-                //    if (tempPointMoveFrom != converCheckerPositionToPoint(kvp.Key))
-                //    {
-                //        tempPointMoveFrom = converCheckerPositionToPoint(kvp.Key);
-                //        tempPointMoveTo = converCheckerPositionToPoint(kvp.Value);
-
-                //        m_Board.GetBoard[tempPointMoveFrom.X, tempPointMoveFrom.Y].Click -= new EventHandler(PictureBoxInTheBoard_Click);
-
-                //        //}
-                //    }
-                //}
+        
             }
         }
 
@@ -195,7 +179,6 @@ namespace Ex5.UI
                 picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
                 m_LastMoveFrom = picAsSender.PointInTheBoard;
                 invokeAllTheOptionalMoveSquare(picAsSender);
-
             }
             else
             {
@@ -204,7 +187,6 @@ namespace Ex5.UI
                 foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
                 {
                     m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
-
                 }
             }
         }
@@ -292,13 +274,6 @@ namespace Ex5.UI
 
         }
 
-        //private void PictureBoxInTheBoard_ClickToMovePlayer2(object sender, EventArgs e)
-        //{
-        //    PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
-        //    picAsSender.Image = m_RedChackerImage;
-        //    returnSqureToEmpty();
-        //}
-
         private void returnSqureToEmpty()
         {
             foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
@@ -315,21 +290,7 @@ namespace Ex5.UI
 
             }
         }
-        //private void PictureBoxInTheBoard_ClickToMovePlayer1ToBeQween(object sender, EventArgs e)
-        //{
-
-        //}
-
-
-
-
-
-
-
-
-
-
-
+       
         private void InitializeComponent()
         {
             this.SuspendLayout();
@@ -352,10 +313,7 @@ namespace Ex5.UI
 
         }
 
-        private void FormGame_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
+        
 
 
     }
