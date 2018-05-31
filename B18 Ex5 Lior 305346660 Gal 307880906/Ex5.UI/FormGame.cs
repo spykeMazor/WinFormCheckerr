@@ -144,7 +144,8 @@ namespace Ex5.UI
                 }
             }
         }
-
+        //// Convert from "PositionPoint"  to Drawing.Point obj
+        
         private string convertCheckerPositionPointToSquareOfLogic(Point i_CheckerPoint)
         {
             PointOfPosition tempPointPosition = new PointOfPosition();
