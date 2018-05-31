@@ -90,6 +90,11 @@ namespace Ex5.UI
             set { textBoxPlayer2Name.Text = value; }
         }
 
+        public bool ComputerOrNot
+        {
+            get { return checkBoxPlayer2.Checked; }
+        }
+
         public GameBoardUI.e_BoardSize BoardSizeSelection
         {
             get { return m_BoardSizeSelection; }

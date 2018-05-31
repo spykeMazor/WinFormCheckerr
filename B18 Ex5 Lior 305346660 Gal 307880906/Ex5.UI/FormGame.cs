@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Xml;
 using CheckerLogic;
+using System.Threading;
 
 namespace Ex5.UI
 {
@@ -33,6 +34,7 @@ namespace Ex5.UI
         private bool m_CurrentPlayer = false; //// False = Player1, True = Player2
         List<KeyValuePair<Point, Point>> m_AllTheClickableSquareReadyToMove = new List<KeyValuePair<Point, Point>>();
         private bool m_wasAttack = false;
+        bool m_hasAnotherAttack = false;
         public FormGame()
         {
             loadCheckersPics();
@@ -78,7 +80,7 @@ namespace Ex5.UI
             string player1Name = m_FormNameLogin.Player1Name;
             string player2Name = m_FormNameLogin.Player2Name;
             Player Player1 = new Player(player1Name, (int)i_BoardSize, 1, false);
-            Player Player2 = new Player(player2Name, (int)i_BoardSize, 2, false);
+            Player Player2 = new Player(player2Name, (int)i_BoardSize, 2, !m_FormNameLogin.ComputerOrNot);
             Player1.InitAllTheCheckersOfOnePlayer((int)i_BoardSize, Player.e_LocationOfThePlayer.UP);
             Player2.InitAllTheCheckersOfOnePlayer((int)i_BoardSize, Player.e_LocationOfThePlayer.DOWN);
             m_Game = new Game(Player1, Player2, (int)i_BoardSize);
@@ -227,8 +229,7 @@ namespace Ex5.UI
         private void afterMoving(PictureBoxInTheBoard i_CurrentPicBoxThatMoveTo)
         {
             m_LastMoveTo = i_CurrentPicBoxThatMoveTo.PointInTheBoard;
-            m_WasMove = true;
-
+            m_WasMove = true;        
             returnSqureToEmpty();
             if (m_WasMove)
             {
@@ -238,43 +239,45 @@ namespace Ex5.UI
                   m_Game.Player2,
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                 ref m_wasAttack);
+                 ref m_wasAttack, ref m_hasAnotherAttack);
                     initCheckers();
                     m_WasMove = false;
-                    if (!m_wasAttack)
+                    if (!m_hasAnotherAttack)
                     {
                         m_CurrentPlayer = true;////---> now player2 turn
-                        if (m_Game.AttackListOfPlayer2.Count > 0)
-                        {
-                            invokeClickOnChecker(m_Game.AttackListOfPlayer2);
-                        }
-                        else
-                        {
-                            invokeClickOnChecker(m_Game.MoveListOfPlayer2);
-                        }
+                        //if (m_Game.Player2.MachineOrNot)
+                        //{
+                        //    computerMove();
+                        //}
+                        ////else
+                        //{
+
+                            if (m_Game.AttackListOfPlayer2.Count > 0)
+                            {
+
+                                invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                            }
+                            else
+                            {
+                                invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                            }
+                      //  }
+                   }
+                    else
+                    {////--->Combo one more attack -> turn stay in Player1 
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer1);                    
                     }
-                    ////else
-                    ////{////--->was attack turn stay in Player1
-                    ////    if (m_Game.AttackListOfPlayer1.Count > 0)
-                    ////    {
-                    ////        ///comboooo player1
-                    ////    }
-                    ////    else
-                    ////    {
-                    ////        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
-                    ////    }
-                    ////}
                 }
                 else
                 {
-                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
-                        m_Game.Player1,
-                        convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
-                        convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                        ref m_wasAttack);
-                    initCheckers();
-                    m_WasMove = false;
-                    if (!m_wasAttack)
+                        m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                            m_Game.Player1,
+                            convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                            convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                            ref m_wasAttack, ref m_hasAnotherAttack);
+                        initCheckers();
+                        m_WasMove = false;           
+                    if (!m_hasAnotherAttack)
                     {
                         m_CurrentPlayer = false;////---> now player1 turn
                         if (m_Game.AttackListOfPlayer1.Count > 0)
@@ -286,19 +289,33 @@ namespace Ex5.UI
                             invokeClickOnChecker(m_Game.MoveListOfPlayer1);
                         }
                     }
-                    ////else
-                    ////{////--->was attack turn stay in Player2
-                    ////    if (m_Game.AttackListOfPlayer2.Count > 0)
-                    ////    {
-                    ////        ///comboooo player2
-                    ////    }
-                    ////    else
-                    ////    {
-                    ////        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
-                    ////    }
-                    ////}
+                    else
+                    {////--->Combo one more attack -> turn stay in Player2 
+                        //if (m_Game.Player2.MachineOrNot)
+                        //{
+                        //    computerMove();
+                        //}
+                        //else
+                        //{
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                        //}
+                    }
                 }
             }
+        }
+
+        private void computerMove()
+        { 
+            KeyValuePair<string, string> computerNextMove = new KeyValuePair<string, string>();
+            computerNextMove = m_Game.SelectRandomMove();
+            m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                       m_Game.Player1,
+                       convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                       convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                       ref m_wasAttack, ref m_hasAnotherAttack);
+            Thread.Sleep(1000);
+            initCheckers();
+            m_WasMove = false;
         }
 
         private void invokeAllTheOptionalMoveSquare(PictureBoxInTheBoard i_PicAsSender)

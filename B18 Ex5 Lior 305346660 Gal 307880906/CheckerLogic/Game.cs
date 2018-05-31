@@ -11,14 +11,14 @@ namespace CheckerLogic
 
         private Player m_Player2;
 
-        private readonly LinkedList<KeyValuePair<string, string>> m_MovesListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
-
-        private readonly LinkedList<KeyValuePair<string, string>> m_MovesListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
-
-        private readonly LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
-
-        private readonly LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
-
+        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
+                                                                  
+        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
+                                                                  
+        private LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
+                                                                  
+        private LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
+                                                                  
         private int m_BoardSize;
 
         private char[,] m_MatrixBoardForTesting;
@@ -55,31 +55,44 @@ namespace CheckerLogic
 
         public LinkedList<KeyValuePair<string, string>> MoveListOfPlayer1
         {
-            get { return m_MovesListOfPlayer1; }
+            get { return  r_MovesListOfPlayer1; }
         }
 
         public LinkedList<KeyValuePair<string, string>> MoveListOfPlayer2
         {
-            get { return m_MovesListOfPlayer2; }
+            get { return  r_MovesListOfPlayer2; }
         }
 
         public LinkedList<KeyValuePair<string, string>> AttackListOfPlayer1
         {
-            get { return m_AttackListOfPlayer1; }
+            get { return  m_AttackListOfPlayer1; }
         }
 
         public LinkedList<KeyValuePair<string, string>> AttackListOfPlayer2
         {
-            get { return m_AttackListOfPlayer2; }
+            get { return  m_AttackListOfPlayer2; }
         }
 
-        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, Player i_SecondPlayer, string i_InputMoveFrom, string i_InputMoveTo,ref bool i_AttackFlag)
+        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, Player i_SecondPlayer, string i_InputMoveFrom, string i_InputMoveTo,ref bool i_AttackFlag, ref bool i_AttackMoreFlag)
         {
             i_CorrectPlayer.MoveChecker(i_InputMoveFrom, i_InputMoveTo);
             i_AttackFlag = ConfirmAttack(i_InputMoveFrom, i_InputMoveTo, i_CorrectPlayer, this);
             UpdateTestingMatrix(i_InputMoveFrom, i_InputMoveTo, i_AttackFlag);
             UpdateMoveList(i_CorrectPlayer.GetUpOrDown);
             UpdateMoveList(i_SecondPlayer.GetUpOrDown);
+            if (i_AttackFlag)
+            {
+                if (i_CorrectPlayer.GetUpOrDown == Player.e_LocationOfThePlayer.UP)
+                {
+                    i_AttackMoreFlag = CanAttackMore(i_InputMoveTo, m_AttackListOfPlayer1);
+                    updateAttackListForOneMoreAttack(i_InputMoveTo, ref m_AttackListOfPlayer1);
+                }
+                else
+                {
+                    i_AttackMoreFlag = CanAttackMore(i_InputMoveTo, m_AttackListOfPlayer2);
+                    updateAttackListForOneMoreAttack(i_InputMoveTo, ref m_AttackListOfPlayer2);
+                }
+            }
         }
 
         public int Player1Score()
@@ -130,12 +143,12 @@ namespace CheckerLogic
             Random rand = new Random();
             KeyValuePair<string, string> selectedMove = new KeyValuePair<string, string>();
             UpdateMoveListOfPlayer2();
-            if (m_AttackListOfPlayer2.Count > 0)
+            if ( m_AttackListOfPlayer2.Count > 0)
             {
                 int counter = 0;
-                int numberOfMoves = m_AttackListOfPlayer2.Count;
+                int numberOfMoves =  m_AttackListOfPlayer2.Count;
                 int randomNumber = rand.Next(numberOfMoves);
-                foreach (KeyValuePair<string, string> move in m_AttackListOfPlayer2)
+                foreach (KeyValuePair<string, string> move in  m_AttackListOfPlayer2)
                 {
                     if (counter == randomNumber)
                     {
@@ -148,9 +161,9 @@ namespace CheckerLogic
             else
             {
                 int counter = 0;
-                int numberOfMoves = m_MovesListOfPlayer2.Count;
+                int numberOfMoves =  r_MovesListOfPlayer2.Count;
                 int randomNumber = rand.Next(numberOfMoves);
-                foreach (KeyValuePair<string, string> move in m_MovesListOfPlayer2)
+                foreach (KeyValuePair<string, string> move in  r_MovesListOfPlayer2)
                 {
                     if (counter == randomNumber)
                     {
@@ -287,14 +300,14 @@ namespace CheckerLogic
             bool optionalMove = false;
             if (i_UpOrDownPlayer == Player.e_LocationOfThePlayer.UP)
             {
-                if (ListContainTwoStringsInOneNode(m_MovesListOfPlayer1, i_MoveFrom, i_MoveTo))
+                if (ListContainTwoStringsInOneNode( r_MovesListOfPlayer1, i_MoveFrom, i_MoveTo))
                 {
                     optionalMove = true;
                 }
             }
             else
             {
-                if (ListContainTwoStringsInOneNode(m_MovesListOfPlayer2, i_MoveFrom, i_MoveTo))
+                if (ListContainTwoStringsInOneNode( r_MovesListOfPlayer2, i_MoveFrom, i_MoveTo))
                 {
                     optionalMove = true;
                 }
@@ -343,29 +356,29 @@ namespace CheckerLogic
 
         public void UpdateMoveListOfPlayer1()
         {
-            m_MovesListOfPlayer1.Clear();
-            m_AttackListOfPlayer1.Clear();
+             r_MovesListOfPlayer1.Clear();
+             m_AttackListOfPlayer1.Clear();
             foreach (Checker checker in m_Player1.ListOfCheckers)
             {
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves(m_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks(m_MovesListOfPlayer1, m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalMoves( r_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalAttacks( r_MovesListOfPlayer1,  m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
             }
         }
 
         public void UpdateMoveListOfPlayer2()
         {
-            m_MovesListOfPlayer2.Clear();
-            m_AttackListOfPlayer2.Clear();
+             r_MovesListOfPlayer2.Clear();
+             m_AttackListOfPlayer2.Clear();
             foreach (Checker checker in m_Player2.ListOfCheckers)
             {
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves(m_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks(m_MovesListOfPlayer2, m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalMoves( r_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalAttacks( r_MovesListOfPlayer2,  m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
 
             }
         }
@@ -424,7 +437,7 @@ namespace CheckerLogic
 
         private void Check4OptionalAttacks(
          LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer,
-         LinkedList<KeyValuePair<string, string>> r_AttackListOfPlayer,
+         LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer,
         int i_XCoordinate,
         int i_YCoordinate,
         char i_SymbolOfChecker)
@@ -451,7 +464,7 @@ namespace CheckerLogic
                     {
                         KeyValuePair<string, string> tempKVP = new KeyValuePair<string, string>(Position.ConvertPointToSquare(checkerPoint), Position.ConvertPointToSquare(leftUpAfterAttack));
                         r_MovesListOfPlayer.AddLast(tempKVP);
-                        r_AttackListOfPlayer.AddLast(tempKVP);
+                        m_AttackListOfPlayer.AddLast(tempKVP);
                     }
                 }
 
@@ -464,7 +477,7 @@ namespace CheckerLogic
                     {
                         KeyValuePair<string, string> tempKVP = new KeyValuePair<string, string>(Position.ConvertPointToSquare(checkerPoint), Position.ConvertPointToSquare(rightUpAfterAttack));
                         r_MovesListOfPlayer.AddLast(tempKVP);
-                        r_AttackListOfPlayer.AddLast(tempKVP);
+                        m_AttackListOfPlayer.AddLast(tempKVP);
                     }
                 }
             }
@@ -481,7 +494,7 @@ namespace CheckerLogic
                     {
                         KeyValuePair<string, string> tempKVP = new KeyValuePair<string, string>(Position.ConvertPointToSquare(checkerPoint), Position.ConvertPointToSquare(leftDownAfterAttack));
                         r_MovesListOfPlayer.AddLast(tempKVP);
-                        r_AttackListOfPlayer.AddLast(tempKVP);
+                        m_AttackListOfPlayer.AddLast(tempKVP);
                     }
                 }
 
@@ -494,7 +507,7 @@ namespace CheckerLogic
                     {
                         KeyValuePair<string, string> tempKVP = new KeyValuePair<string, string>(Position.ConvertPointToSquare(checkerPoint), Position.ConvertPointToSquare(rightDownAfterAttack));
                         r_MovesListOfPlayer.AddLast(tempKVP);
-                        r_AttackListOfPlayer.AddLast(tempKVP);
+                        m_AttackListOfPlayer.AddLast(tempKVP);
                     }
                 }
             }
@@ -533,6 +546,24 @@ namespace CheckerLogic
         }
 
         ////MOVES AND ATTACKS CATEGORY
+        private void updateAttackListForOneMoreAttack(string i_MoveFrom, ref LinkedList<KeyValuePair<string, string>> i_AttackingListOfTheCorrectPlayer)
+        {
+            LinkedList<KeyValuePair<string, string>> updatedAttackList = new LinkedList<KeyValuePair<string, string>>();
+            foreach (KeyValuePair<string, string> kvp in i_AttackingListOfTheCorrectPlayer)
+            {
+                if (kvp.Key.Equals(i_MoveFrom))
+                {
+                    updatedAttackList.AddLast(kvp);
+                }
+            }
+
+            i_AttackingListOfTheCorrectPlayer.Clear();
+            foreach (KeyValuePair<string, string> kvp in updatedAttackList)
+            {
+                i_AttackingListOfTheCorrectPlayer.AddLast(kvp);
+
+            }
+        }
 
         public bool CanAttackMore(string i_MoveFrom, LinkedList<KeyValuePair<string, string>> i_AttackingListOfTheCorrectPlayer)
         {
