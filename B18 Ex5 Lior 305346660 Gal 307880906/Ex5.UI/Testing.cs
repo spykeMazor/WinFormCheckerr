@@ -13,6 +13,10 @@ namespace Ex5.UI
         public Testing()
         {
             InitializeComponent();
+            Button b = new Button();
+            this.Controls.Add(b);
+            b.Click += new EventHandler(button_Click);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -20,8 +24,11 @@ namespace Ex5.UI
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_Click(object sender, EventArgs e)
         {
+            Button senderButton = sender as Button;
+            senderButton.Location = new Point(senderButton.Location.X + 20, senderButton.Location.Y + 20);
+
 
         }
 
@@ -31,6 +38,11 @@ namespace Ex5.UI
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

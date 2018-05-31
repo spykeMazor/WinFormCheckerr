@@ -52,16 +52,7 @@ namespace Ex5.UI
         {
             get { return m_BlueBackGround; }
         }
-        //public LinkedList<PictureBoxInTheBoard> Player1CheckersListOnTheBoard
-        //{
-        //    get { return r_Player1CheckersListOnTheBoard; }
-        //}
-
-        //public LinkedList<PictureBoxInTheBoard> Player2CheckersListOnTheBoard
-        //{
-        //    get { return r_Player2CheckersListOnTheBoard; }
-        //}
-
+      
         public PictureBoxInTheBoard[,] GetBoard
         {
             get { return m_ButtonMatrixGameBoard; }
@@ -82,19 +73,12 @@ namespace Ex5.UI
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.BROWN;
                     }
                     else
-                    {
-                       
-                        
+                    {    
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage = m_WhiteBackGround;
-                        m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.WHITE;
-                        //m_ButtonMatrixGameBoard[i, j].Click += new EventHandler(FormGame.PictureBoxInTheBoard_Click);
-                        //m_ButtonMatrixGameBoard[i, j].MouseClick += new MouseEventHandler(PictureBoxInTheBoard_MouseClick);
+                        m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.WHITE;                     
                     }
                     m_ButtonMatrixGameBoard[i, j].BackgroundImageLayout = ImageLayout.Stretch;
-                    m_ButtonMatrixGameBoard[i, j].BackColor = Color.Black;
-                   // m_ButtonMatrixGameBoard[i, j].MouseEnter += new EventHandler(panel1_MouseEnter);
-
-                  
+                    m_ButtonMatrixGameBoard[i, j].BackColor = Color.Black;  
                 }
             }
 

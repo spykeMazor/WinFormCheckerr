@@ -46,8 +46,6 @@ namespace Ex5.UI
 
         }
 
-
-
         private void loadCheckersPics()
         {
             m_BlackChackerImage = Image.FromFile(@"C:\black_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
@@ -116,9 +114,9 @@ namespace Ex5.UI
                 }
             }
         }
+
         private void initCheckers()
         {
-
             for (int i = 0; i < m_Game.BoradSize; i++)
             {
                 for (int j = 0; j < m_Game.BoradSize; j++)
@@ -138,6 +136,16 @@ namespace Ex5.UI
                         {
                             //Image checkerImg = m_RedChackerImage;
                             m_Board.GetBoard[i, j].Image = m_RedChackerImage;
+                        }
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.K)
+                        {
+                            //Image checkerImg = m_RedChackerImage;
+                            m_Board.GetBoard[i, j].Image = m_RedQueenChackerImage;
+                        }
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.U)
+                        {
+                            //Image checkerImg = m_RedChackerImage;
+                            m_Board.GetBoard[i, j].Image = m_BlackQueenChackerImage;
                         }
                     }
 
@@ -211,7 +219,7 @@ namespace Ex5.UI
 
             else
             {
-                //PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
+                
                 afterMoving(picAsSender);
             }
         }
@@ -236,12 +244,26 @@ namespace Ex5.UI
                     if (!m_wasAttack)
                     {
                         m_CurrentPlayer = true;////---> now player2 turn
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                        if (m_Game.AttackListOfPlayer2.Count > 0)
+                        {
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                        }
+                        else
+                        {
+                            invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                        }
                     }
-                    else
-                    {////--->was attack turn stay in Player1
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
-                    }
+                    ////else
+                    ////{////--->was attack turn stay in Player1
+                    ////    if (m_Game.AttackListOfPlayer1.Count > 0)
+                    ////    {
+                    ////        ///comboooo player1
+                    ////    }
+                    ////    else
+                    ////    {
+                    ////        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    ////    }
+                    ////}
                 }
                 else
                 {
@@ -255,12 +277,26 @@ namespace Ex5.UI
                     if (!m_wasAttack)
                     {
                         m_CurrentPlayer = false;////---> now player1 turn
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                        if (m_Game.AttackListOfPlayer1.Count > 0)
+                        {
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                        }
+                        else
+                        {
+                            invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                        }
                     }
-                    else
-                    {////--->was attack turn stay in Player2
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
-                    }
+                    ////else
+                    ////{////--->was attack turn stay in Player2
+                    ////    if (m_Game.AttackListOfPlayer2.Count > 0)
+                    ////    {
+                    ////        ///comboooo player2
+                    ////    }
+                    ////    else
+                    ////    {
+                    ////        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                    ////    }
+                    ////}
                 }
             }
         }
@@ -293,7 +329,7 @@ namespace Ex5.UI
             }
             else
             {
-                if (m_Game.AttackListOfPlayer1.Count > 0)
+                if (m_Game.AttackListOfPlayer2.Count > 0)
                 {
                     enableMoveToSquare(m_Game.AttackListOfPlayer2, blueSquare);
                 }
