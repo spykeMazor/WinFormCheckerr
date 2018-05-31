@@ -1,4 +1,6 @@
-﻿namespace Ex5.UI
+﻿using System.Drawing;
+
+namespace Ex5.UI
 {
     partial class SettingsLogin
     {
@@ -28,8 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxBoardSize = new System.Windows.Forms.TextBox();
-            this.Player1NameBox = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsLogin));
             this.textBoxPlayer1Name = new System.Windows.Forms.TextBox();
             this.boardGameSmallSize = new System.Windows.Forms.RadioButton();
             this.buttonDone = new System.Windows.Forms.Button();
@@ -37,34 +38,13 @@
             this.boardGameMediumSize = new System.Windows.Forms.RadioButton();
             this.boardGameLargeSize = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxPlayers = new System.Windows.Forms.TextBox();
             this.textBoxPlayer2Name = new System.Windows.Forms.TextBox();
+            this.labelBoardSize = new System.Windows.Forms.Label();
+            this.labelPlayers = new System.Windows.Forms.Label();
+            this.labelPlayer1Name = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBoxBoardSize
-            // 
-            this.textBoxBoardSize.BackColor = System.Drawing.Color.SteelBlue;
-            this.textBoxBoardSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxBoardSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textBoxBoardSize.Location = new System.Drawing.Point(51, 46);
-            this.textBoxBoardSize.Name = "textBoxBoardSize";
-            this.textBoxBoardSize.Size = new System.Drawing.Size(197, 34);
-            this.textBoxBoardSize.TabIndex = 0;
-            this.textBoxBoardSize.TabStop = false;
-            this.textBoxBoardSize.Text = "Board Size:";
-            // 
-            // Player1NameBox
-            // 
-            this.Player1NameBox.BackColor = System.Drawing.Color.SteelBlue;
-            this.Player1NameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Player1NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Player1NameBox.Location = new System.Drawing.Point(51, 265);
-            this.Player1NameBox.Name = "Player1NameBox";
-            this.Player1NameBox.Size = new System.Drawing.Size(100, 28);
-            this.Player1NameBox.TabIndex = 2;
-            this.Player1NameBox.TabStop = false;
-            this.Player1NameBox.Text = "Player 1:";
             // 
             // textBoxPlayer1Name
             // 
@@ -78,6 +58,7 @@
             // 
             this.boardGameSmallSize.AutoSize = true;
             this.boardGameSmallSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.boardGameSmallSize.ForeColor = System.Drawing.SystemColors.Info;
             this.boardGameSmallSize.Location = new System.Drawing.Point(26, 12);
             this.boardGameSmallSize.Name = "boardGameSmallSize";
             this.boardGameSmallSize.Size = new System.Drawing.Size(84, 33);
@@ -89,10 +70,10 @@
             // buttonDone
             // 
             this.buttonDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDone.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonDone.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.buttonDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.buttonDone.Location = new System.Drawing.Point(339, 385);
+            this.buttonDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.buttonDone.Location = new System.Drawing.Point(226, 385);
             this.buttonDone.Name = "buttonDone";
             this.buttonDone.Size = new System.Drawing.Size(125, 35);
             this.buttonDone.TabIndex = 6;
@@ -103,19 +84,22 @@
             // checkBoxPlayer2
             // 
             this.checkBoxPlayer2.AutoSize = true;
-            this.checkBoxPlayer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.checkBoxPlayer2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxPlayer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.checkBoxPlayer2.ForeColor = System.Drawing.SystemColors.Info;
             this.checkBoxPlayer2.Location = new System.Drawing.Point(28, 321);
             this.checkBoxPlayer2.Name = "checkBoxPlayer2";
-            this.checkBoxPlayer2.Size = new System.Drawing.Size(132, 33);
+            this.checkBoxPlayer2.Size = new System.Drawing.Size(141, 33);
             this.checkBoxPlayer2.TabIndex = 4;
             this.checkBoxPlayer2.Text = "Player 2:";
-            this.checkBoxPlayer2.UseVisualStyleBackColor = true;
+            this.checkBoxPlayer2.UseVisualStyleBackColor = false;
             this.checkBoxPlayer2.CheckedChanged += new System.EventHandler(this.checkBoxPlayer2_CheckedChanged);
             // 
             // boardGameMediumSize
             // 
             this.boardGameMediumSize.AutoSize = true;
             this.boardGameMediumSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.boardGameMediumSize.ForeColor = System.Drawing.SystemColors.Info;
             this.boardGameMediumSize.Location = new System.Drawing.Point(26, 62);
             this.boardGameMediumSize.Name = "boardGameMediumSize";
             this.boardGameMediumSize.Size = new System.Drawing.Size(84, 33);
@@ -128,6 +112,7 @@
             // 
             this.boardGameLargeSize.AutoSize = true;
             this.boardGameLargeSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.boardGameLargeSize.ForeColor = System.Drawing.SystemColors.Info;
             this.boardGameLargeSize.Location = new System.Drawing.Point(26, 112);
             this.boardGameLargeSize.Name = "boardGameLargeSize";
             this.boardGameLargeSize.Size = new System.Drawing.Size(112, 33);
@@ -138,6 +123,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.boardGameLargeSize);
             this.panel1.Controls.Add(this.boardGameMediumSize);
             this.panel1.Controls.Add(this.boardGameSmallSize);
@@ -145,18 +131,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(185, 162);
             this.panel1.TabIndex = 12;
-            // 
-            // textBoxPlayers
-            // 
-            this.textBoxPlayers.BackColor = System.Drawing.Color.SteelBlue;
-            this.textBoxPlayers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textBoxPlayers.Location = new System.Drawing.Point(51, 212);
-            this.textBoxPlayers.Name = "textBoxPlayers";
-            this.textBoxPlayers.Size = new System.Drawing.Size(197, 34);
-            this.textBoxPlayers.TabIndex = 13;
-            this.textBoxPlayers.TabStop = false;
-            this.textBoxPlayers.Text = "Players:";
             // 
             // textBoxPlayer2Name
             // 
@@ -170,6 +144,56 @@
             this.textBoxPlayer2Name.TabIndex = 5;
             this.textBoxPlayer2Name.Text = "[Computer]";
             // 
+            // labelBoardSize
+            // 
+            this.labelBoardSize.AutoSize = true;
+            this.labelBoardSize.BackColor = System.Drawing.Color.Transparent;
+            this.labelBoardSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelBoardSize.ForeColor = System.Drawing.SystemColors.Info;
+            this.labelBoardSize.Location = new System.Drawing.Point(45, 44);
+            this.labelBoardSize.Name = "labelBoardSize";
+            this.labelBoardSize.Size = new System.Drawing.Size(180, 36);
+            this.labelBoardSize.TabIndex = 14;
+            this.labelBoardSize.Text = "Board Size:";
+            // 
+            // labelPlayers
+            // 
+            this.labelPlayers.AutoSize = true;
+            this.labelPlayers.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelPlayers.ForeColor = System.Drawing.SystemColors.Info;
+            this.labelPlayers.Location = new System.Drawing.Point(45, 210);
+            this.labelPlayers.Name = "labelPlayers";
+            this.labelPlayers.Size = new System.Drawing.Size(130, 36);
+            this.labelPlayers.TabIndex = 15;
+            this.labelPlayers.Text = "Players:";
+            // 
+            // labelPlayer1Name
+            // 
+            this.labelPlayer1Name.AutoSize = true;
+            this.labelPlayer1Name.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelPlayer1Name.ForeColor = System.Drawing.SystemColors.Info;
+            this.labelPlayer1Name.Location = new System.Drawing.Point(54, 264);
+            this.labelPlayer1Name.Name = "labelPlayer1Name";
+            this.labelPlayer1Name.Size = new System.Drawing.Size(115, 29);
+            this.labelPlayer1Name.TabIndex = 16;
+            this.labelPlayer1Name.Text = "Player 1:";
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.buttonCancel.Location = new System.Drawing.Point(374, 385);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(125, 35);
+            this.buttonCancel.TabIndex = 17;
+            this.buttonCancel.Text = "CANCEL";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
             // SettingsLogin
             // 
             this.AcceptButton = this.buttonDone;
@@ -177,18 +201,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
+            this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(511, 445);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.labelPlayer1Name);
+            this.Controls.Add(this.labelPlayers);
+            this.Controls.Add(this.labelBoardSize);
             this.Controls.Add(this.textBoxPlayer2Name);
-            this.Controls.Add(this.textBoxPlayers);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxPlayer2);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.textBoxPlayer1Name);
-            this.Controls.Add(this.Player1NameBox);
-            this.Controls.Add(this.textBoxBoardSize);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimizeBox = true;
             this.Name = "SettingsLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Settings";
@@ -200,9 +227,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxBoardSize;
-        private System.Windows.Forms.TextBox Player1NameBox;
         private System.Windows.Forms.TextBox textBoxPlayer1Name;
         private System.Windows.Forms.RadioButton boardGameSmallSize;
         private System.Windows.Forms.Button buttonDone;
@@ -210,7 +234,10 @@
         private System.Windows.Forms.RadioButton boardGameMediumSize;
         private System.Windows.Forms.RadioButton boardGameLargeSize;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBoxPlayers;
         private System.Windows.Forms.TextBox textBoxPlayer2Name;
+        private System.Windows.Forms.Label labelBoardSize;
+        private System.Windows.Forms.Label labelPlayers;
+        private System.Windows.Forms.Label labelPlayer1Name;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

@@ -8,13 +8,21 @@ using System.Windows.Forms;
 
 namespace Ex5.UI
 {
-    public partial class LogInNameExceptionForm : Form
+    public partial class LogInExceptionForm : Form
     {
-        public LogInNameExceptionForm()
+        private string m_ExceptionType;
+
+        public LogInExceptionForm(string i_ExceptionType)
         {
+            WhatIsExceptionType = i_ExceptionType;
             InitializeComponent();
         }
 
+        public string WhatIsExceptionType
+        {
+            get { return m_ExceptionType; }
+            set { m_ExceptionType = value; }
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -57,7 +65,7 @@ namespace Ex5.UI
             this.errorPlayerNameMessage.ReadOnly = true;
             this.errorPlayerNameMessage.Size = new System.Drawing.Size(362, 91);
             this.errorPlayerNameMessage.TabIndex = 1;
-            this.errorPlayerNameMessage.Text = "\r\nPlayer\'s name must include \r\nat least 1 charecter";
+            this.errorPlayerNameMessage.Text = WhatIsExceptionType;
             this.errorPlayerNameMessage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LogInExceptionForm

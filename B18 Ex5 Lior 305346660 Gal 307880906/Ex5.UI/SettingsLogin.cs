@@ -20,7 +20,7 @@ namespace Ex5.UI
 
         private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBoxPlayer2.Checked)
+            if (checkBoxPlayer2.Checked)
             {
                 textBoxPlayer2Name.Clear();
                 textBoxPlayer2Name.BackColor = System.Drawing.SystemColors.Window;
@@ -38,10 +38,10 @@ namespace Ex5.UI
 
         private void buttonDone_Click(object sender, EventArgs e)
         {
-            bool userChoosedSize = true ;
-            LogInNameExceptionForm logInNameException;
-            LogInBoardSizeExceptionForm logInBoardSizeException;
-            if ((Player1Name.Length > 0) && (Player2Name.Length > 0))
+            bool userChoosedSize = true;
+            LogInExceptionForm logInException;
+            ////LogInBoardSizeExceptionForm logInBoardSizeException;
+            if ((Player1Name.Length > 0) && (Player2Name.Length > 0) && (Player1Name.Length < 15) && (Player2Name.Length < 15))
             {
                 if (boardGameSmallSize.Checked)
                 {
@@ -67,15 +67,15 @@ namespace Ex5.UI
                 }
                 else
                 {
-                    logInBoardSizeException = new LogInBoardSizeExceptionForm();
-                    logInBoardSizeException.ShowDialog();
+                    logInException = new LogInExceptionForm(ConstantsUI.k_BoardSizeLogInException);
+                    logInException.ShowDialog();
                 }
             }
             else
             {
-                logInNameException = new LogInNameExceptionForm();
-                logInNameException.ShowDialog();
-            }          
+                logInException = new LogInExceptionForm(ConstantsUI.k_NameLogInException);
+                logInException.ShowDialog();
+            }
         }
 
         public string Player1Name
@@ -106,6 +106,16 @@ namespace Ex5.UI
         public GameBoardUI.e_BoardSize BoardSizeSelection
         {
             get { return m_BoardSizeSelection; }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage);
+            quitForm.ShowDialog();
+            if (quitForm.DialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }
