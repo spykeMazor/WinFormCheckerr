@@ -40,7 +40,6 @@ C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\Ex5.UI\
 C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\Ex5.UI\obj\Debug\Ex5.UI.Testing.resources
 C:\Users\galma\Desktop\גל\B18 Ex5 Lior 305346660 Gal 307880906    lior\Ex5.UI\obj\Debug\Ex5.UI.csproj.GenerateResource.Cache
 C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.LogInBoardSizeExceptionForm.resources
-C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.LogInNameExceptionForm.resources
 C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.SettingsLogin.resources
 C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\obj\Debug\Ex5.UI.exe
 C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\obj\Debug\Ex5.UI.pdb
@@ -57,3 +56,5 @@ C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\bi
 C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\bin\Debug\Ex5.UI.pdb
 C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\bin\Debug\CheckerLogic.dll
 C:\Users\galma\Desktop\damka\B18 Ex5 Lior 305346660 Gal 307880906 lior\Ex5.UI\bin\Debug\CheckerLogic.pdb
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.LogInExceptionForm.resources
+C:\Users\ulmer\Documents\GitHub\WinFormCheckerr\B18 Ex5 Lior 305346660 Gal 307880906\Ex5.UI\obj\Debug\Ex5.UI.VerifyForm.resources

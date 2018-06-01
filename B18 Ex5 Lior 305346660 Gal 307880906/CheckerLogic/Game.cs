@@ -138,6 +138,12 @@ namespace CheckerLogic
             return scoreForKings + distance;
         }
 
+        public void ComputerPlaying()
+        {
+
+
+        }
+
         public KeyValuePair<string, string> SelectRandomMove()
         {
             Random rand = new Random();
