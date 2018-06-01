@@ -245,12 +245,12 @@ namespace Ex5.UI
                     if (!m_hasAnotherAttack)
                     {
                         m_CurrentPlayer = true;////---> now player2 turn
-                        //if (m_Game.Player2.MachineOrNot)
-                        //{
-                        //    computerMove();
-                        //}
-                        ////else
-                        //{
+                        if (m_Game.Player2.MachineOrNot)
+                        {
+                            computerMove();
+                        }
+                        else
+                        { 
 
                             if (m_Game.AttackListOfPlayer2.Count > 0)
                             {
@@ -261,7 +261,7 @@ namespace Ex5.UI
                             {
                                 invokeClickOnChecker(m_Game.MoveListOfPlayer2);
                             }
-                      //  }
+                        }
                    }
                     else
                     {////--->Combo one more attack -> turn stay in Player1 
@@ -305,7 +305,7 @@ namespace Ex5.UI
         }
 
         private void computerMove()
-        { /// computer moving managment
+        { /// computer moving managmen
             KeyValuePair<string, string> computerNextMove = new KeyValuePair<string, string>();
             computerNextMove = m_Game.SelectRandomMove();
             m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
@@ -316,9 +316,35 @@ namespace Ex5.UI
             Thread.Sleep(1000);
             initCheckers();
             m_WasMove = false;
+            if (!m_hasAnotherAttack)
+            {
+                m_CurrentPlayer = false;////---> now player1 turn
+                if (m_Game.AttackListOfPlayer1.Count > 0)
+                {
+                    invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                }
+                else
+                {
+                    invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                }
+            }
+            else
+            {////--->Combo one more attack -> turn stay in Player2 
+                while(m_hasAnotherAttack)
+                {
+                    computerNextMove = new KeyValuePair<string, string>();
+                    computerNextMove = m_Game.SelectRandomMove();
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                               m_Game.Player1,
+                               convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                               convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                               ref m_wasAttack, ref m_hasAnotherAttack);
+                    Thread.Sleep(1000);
+                    initCheckers();
+                }
+            }
         }
-
-        private void invokeAllTheOptionalMoveSquare(PictureBoxInTheBoard i_PicAsSender)
+            private void invokeAllTheOptionalMoveSquare(PictureBoxInTheBoard i_PicAsSender)
         {
             Point blueSquare = new Point();           
             blueSquare.X = i_PicAsSender.PointInTheBoard.X;
