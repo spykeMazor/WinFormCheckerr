@@ -143,7 +143,6 @@ namespace Ex5.UI
 
         private void initCheckers()
         {
-
             for (int i = 0; i < m_Game.BoradSize; i++)
             {
                 for (int j = 0; j < m_Game.BoradSize; j++)
@@ -164,7 +163,18 @@ namespace Ex5.UI
                             //Image checkerImg = m_RedChackerImage;
                             m_Board.GetBoard[i, j].Image = m_RedChackerImage;
                         }
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.K)
+                        {
+                            //Image checkerImg = m_RedChackerImage;
+                            m_Board.GetBoard[i, j].Image = m_RedQueenChackerImage;
+                        }
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.U)
+                        {
+                            //Image checkerImg = m_RedChackerImage;
+                            m_Board.GetBoard[i, j].Image = m_BlackQueenChackerImage;
+                        }
                     }
+
                 }
             }
         }

@@ -458,6 +458,8 @@ namespace CheckerLogic
             PointOfPosition leftDownAfterAttack = new PointOfPosition(i_XCoordinate - 2, i_YCoordinate + 2);
             PointOfPosition rightDownAfterAttack = new PointOfPosition(i_XCoordinate + 2, i_YCoordinate + 2);
             char SymbolOfChecker = i_SymbolOfChecker;
+            //Player.e_LocationOfThePlayer location;
+            //if(SymbolOfChecker == (char)Checker.Symbol.U || SymbolOfChecker ==)
             if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K ||
                 SymbolOfChecker == (char)Checker.Symbol.U)
             {
