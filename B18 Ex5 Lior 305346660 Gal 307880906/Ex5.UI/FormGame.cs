@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Xml;
 using CheckerLogic;
+using System.Threading;
 
 namespace Ex5.UI
 {
@@ -34,6 +35,7 @@ namespace Ex5.UI
         private bool m_CurrentPlayer = false; //// False = Player1, True = Player2
         List<KeyValuePair<Point, Point>> m_AllTheClickableSquareReadyToMove = new List<KeyValuePair<Point, Point>>();
         private bool m_wasAttack = false;
+        private bool m_hasAnotherAttack = false;
         private Label headLine;
         private Label labelScore1;
         private Label labelScore2;
@@ -63,15 +65,24 @@ namespace Ex5.UI
 
         private void loadCheckersPics()
         {
-            m_BlackChackerImage = Image.FromFile(@"C:\black_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            ////m_BlackChackerImage = Image.FromFile(@"C:\black_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            ////m_BlackChackerImage.Tag = e_TypeUICheckers.BlackChecker;
+            ////m_RedChackerImage = Image.FromFile(@"C:\red_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            ////m_RedChackerImage.Tag = e_TypeUICheckers.RedChecker;
+            ////m_BlackQueenChackerImage = Image.FromFile(@"C:\black_king.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            ////m_BlackQueenChackerImage.Tag = e_TypeUICheckers.BlackQueen;
+            ////m_RedQueenChackerImage = Image.FromFile(@"C:\red_queen.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            ////m_RedQueenChackerImage.Tag = e_TypeUICheckers.RedQueen;
+            m_BlackChackerImage = Properties.Resources.black_soldier.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_BlackChackerImage.Tag = e_TypeUICheckers.BlackChecker;
-            m_RedChackerImage = Image.FromFile(@"C:\red_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            m_RedChackerImage = Properties.Resources.red_soldier.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_RedChackerImage.Tag = e_TypeUICheckers.RedChecker;
-            m_BlackQueenChackerImage = Image.FromFile(@"C:\black_king.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            m_BlackQueenChackerImage = Properties.Resources.black_king.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_BlackQueenChackerImage.Tag = e_TypeUICheckers.BlackQueen;
-            m_RedQueenChackerImage = Image.FromFile(@"C:\red_queen.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
+            m_RedQueenChackerImage = Properties.Resources.red_queen.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_RedQueenChackerImage.Tag = e_TypeUICheckers.RedQueen;
         }
+
 
 
         protected override void OnLoad(EventArgs e)
@@ -112,7 +123,6 @@ namespace Ex5.UI
 
             m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.UP);
             invokeClickOnChecker(m_Game.MoveListOfPlayer1);
-
         }
 
         private void invokeTheBoard()
@@ -129,6 +139,7 @@ namespace Ex5.UI
                 }
             }
         }
+
         private void initCheckers()
         {
 
@@ -153,7 +164,6 @@ namespace Ex5.UI
                             m_Board.GetBoard[i, j].Image = m_RedChackerImage;
                         }
                     }
-
                 }
             }
         }
@@ -177,7 +187,6 @@ namespace Ex5.UI
 
         private void invokeClickOnChecker(LinkedList<KeyValuePair<string, string>> i_MoveList)
         {
-
             m_AllTheClickableSquareReadyToMove.Clear();
             Point PointMoveFrom = new Point();
             Point PointMoveTo = new Point();
@@ -221,10 +230,8 @@ namespace Ex5.UI
                     }
                 }
             }
-
             else
             {
-                //PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
                 afterMoving(picAsSender);
             }
         }
@@ -233,7 +240,6 @@ namespace Ex5.UI
         {
             m_LastMoveTo = i_CurrentPicBoxThatMoveTo.PointInTheBoard;
             m_WasMove = true;
-
             returnSqureToEmpty();
             if (m_WasMove)
             {
@@ -243,17 +249,33 @@ namespace Ex5.UI
                   m_Game.Player2,
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                 ref m_wasAttack);
+                 ref m_wasAttack, ref m_hasAnotherAttack);
                     initCheckers();
                     m_WasMove = false;
-                    if (!m_wasAttack)
+                    if (!m_hasAnotherAttack)
                     {
-                        m_CurrentPlayer = true; ////---> now player2 turn
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                        m_CurrentPlayer = true;////---> now player2 turn
+                                               //if (m_Game.Player2.MachineOrNot)
+                                               //{
+                                               //    computerMove();
+                                               //}
+                                               ////else
+                                               //{
+
+                        if (m_Game.AttackListOfPlayer2.Count > 0)
+                        {
+
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                        }
+                        else
+                        {
+                            invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                        }
+                        //  }
                     }
                     else
-                    { ////--->was attack turn stay in Player1
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    {////--->Combo one more attack -> turn stay in Player1 
+                        invokeClickOnChecker(m_Game.AttackListOfPlayer1);
                     }
                 }
                 else
@@ -262,20 +284,48 @@ namespace Ex5.UI
                         m_Game.Player1,
                         convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                         convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                        ref m_wasAttack);
+                        ref m_wasAttack, ref m_hasAnotherAttack);
                     initCheckers();
                     m_WasMove = false;
-                    if (!m_wasAttack)
+                    if (!m_hasAnotherAttack)
                     {
-                        m_CurrentPlayer = false; ////---> now player1 turn
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                        m_CurrentPlayer = false;////---> now player1 turn
+                        if (m_Game.AttackListOfPlayer1.Count > 0)
+                        {
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                        }
+                        else
+                        {
+                            invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                        }
                     }
                     else
-                    { ////--->was attack turn stay in Player2
-                        invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                    {////--->Combo one more attack -> turn stay in Player2 
+                     //if (m_Game.Player2.MachineOrNot)
+                     //{
+                     //    computerMove();
+                     //}
+                     //else
+                     //{
+                        invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                        //}
                     }
                 }
             }
+        }
+
+        private void computerMove()
+        { /// computer moving managment
+            KeyValuePair<string, string> computerNextMove = new KeyValuePair<string, string>();
+            computerNextMove = m_Game.SelectRandomMove();
+            m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                       m_Game.Player1,
+                       convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
+                       convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
+                       ref m_wasAttack, ref m_hasAnotherAttack);
+            Thread.Sleep(1000);
+            initCheckers();
+            m_WasMove = false;
         }
 
         private void invokeAllTheOptionalMoveSquare(PictureBoxInTheBoard i_PicAsSender)
@@ -283,7 +333,6 @@ namespace Ex5.UI
             Point blueSquare = new Point();           
             blueSquare.X = i_PicAsSender.PointInTheBoard.X;
             blueSquare.Y = i_PicAsSender.PointInTheBoard.Y;
-
             foreach (KeyValuePair<Point, Point> kpv in m_AllTheClickableSquareReadyToMove)
             {
                 if (kpv.Key != i_PicAsSender.PointInTheBoard)
@@ -426,14 +475,18 @@ namespace Ex5.UI
             // splitContainer1.Panel1
             // 
 
-            this.splitContainer1.Panel1.BackgroundImage = Image.FromFile(@"C:\black_soldier.PNG");
+            ////this.splitContainer1.Panel1.BackgroundImage = Image.FromFile(@"C:\black_soldier.PNG");
+            this.splitContainer1.Panel1.BackgroundImage = Properties.Resources.black_soldier;
+
             this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainer1.Panel1.Controls.Add(this.labelScore1);
             this.splitContainer1.Panel1.Controls.Add(this.labelPlayer1Name);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackgroundImage = Image.FromFile(@"C:\red_soldier.PNG");
+            ////this.splitContainer1.Panel2.BackgroundImage = Image.FromFile(@"C:\red_soldier.PNG");
+            this.splitContainer1.Panel2.BackgroundImage = Properties.Resources.red_soldier; 
+
             this.splitContainer1.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainer1.Panel2.Controls.Add(this.labelScore2);
             this.splitContainer1.Panel2.Controls.Add(this.labelPlayer2Name);
@@ -503,7 +556,8 @@ namespace Ex5.UI
             // FormGame
             // 
             this.BackColor = System.Drawing.Color.Black;
-            this.BackgroundImage = Image.FromFile(@"C:\damka3d.jpg");
+            ////this.BackgroundImage = Image.FromFile(@"C:\damka3d.jpg");
+            this.BackgroundImage = Properties.Resources.damka3d;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 694);
             this.Controls.Add(this.buttonStartOver);

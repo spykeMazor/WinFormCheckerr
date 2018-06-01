@@ -23,12 +23,16 @@ namespace Ex5.UI
             BLUE
 
         }
-        PictureBoxInTheBoard[,] m_ButtonMatrixGameBoard;
-        Image m_WhiteBackGround = Image.FromFile(@"C:\whitesquare.PNG");
-        Image m_BrownBackGround = Image.FromFile(@"C:\brown_square.PNG");
-        Image m_BlueBackGround = Image.FromFile(@"C:\blue.JPG");
 
-        LinkedList<PictureBoxInTheBoard> r_Player1CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
+        PictureBoxInTheBoard[,] m_ButtonMatrixGameBoard;
+        ////Image m_WhiteBackGround = Image.FromFile(@"C:\whitesquare.PNG");
+        ////Image m_BrownBackGround = Image.FromFile(@"C:\brown_square.PNG");
+        ////Image m_BlueBackGround = Image.FromFile(@"C:\blue.JPG");
+        Image m_WhiteBackGround = Properties.Resources.whitesquare;
+        Image m_BrownBackGround = Properties.Resources.brown_square;
+        Image m_BlueBackGround = Properties.Resources.blue;
+
+        LinkedList <PictureBoxInTheBoard> r_Player1CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
         LinkedList<PictureBoxInTheBoard> r_Player2CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
         //CheckerLogic.Game Game;
         public GameBoardUI(e_BoardSize i_BoardSize)
@@ -52,16 +56,7 @@ namespace Ex5.UI
         {
             get { return m_BlueBackGround; }
         }
-        //public LinkedList<PictureBoxInTheBoard> Player1CheckersListOnTheBoard
-        //{
-        //    get { return r_Player1CheckersListOnTheBoard; }
-        //}
-
-        //public LinkedList<PictureBoxInTheBoard> Player2CheckersListOnTheBoard
-        //{
-        //    get { return r_Player2CheckersListOnTheBoard; }
-        //}
-
+     
         public PictureBoxInTheBoard[,] GetBoard
         {
             get { return m_ButtonMatrixGameBoard; }
@@ -82,24 +77,15 @@ namespace Ex5.UI
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.BROWN;
                     }
                     else
-                    {
-                       
-                        
+                    {              
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage = m_WhiteBackGround;
                         m_ButtonMatrixGameBoard[i, j].BackgroundImage.Tag = e_TypeOfBackGround.WHITE;
-                        //m_ButtonMatrixGameBoard[i, j].Click += new EventHandler(FormGame.PictureBoxInTheBoard_Click);
-                        //m_ButtonMatrixGameBoard[i, j].MouseClick += new MouseEventHandler(PictureBoxInTheBoard_MouseClick);
                     }
+
                     m_ButtonMatrixGameBoard[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     m_ButtonMatrixGameBoard[i, j].BackColor = Color.Black;
-                   // m_ButtonMatrixGameBoard[i, j].MouseEnter += new EventHandler(panel1_MouseEnter);
-
-                  
                 }
             }
-
-        }
-
-       
+        }      
     }
 }

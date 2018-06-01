@@ -201,7 +201,8 @@ namespace Ex5.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
+            ////this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
+            this.BackgroundImage = Properties.Resources.black_marble;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(511, 445);
             this.Controls.Add(this.buttonCancel);
