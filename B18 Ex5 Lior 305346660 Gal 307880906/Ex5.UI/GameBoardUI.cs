@@ -25,9 +25,6 @@ namespace Ex5.UI
         }
 
         PictureBoxInTheBoard[,] m_ButtonMatrixGameBoard;
-        ////Image m_WhiteBackGround = Image.FromFile(@"C:\whitesquare.PNG");
-        ////Image m_BrownBackGround = Image.FromFile(@"C:\brown_square.PNG");
-        ////Image m_BlueBackGround = Image.FromFile(@"C:\blue.JPG");
         Image m_WhiteBackGround = Properties.Resources.whitesquare;
         Image m_BrownBackGround = Properties.Resources.brown_square;
         Image m_BlueBackGround = Properties.Resources.blue;

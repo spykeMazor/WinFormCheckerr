@@ -40,7 +40,11 @@ namespace Ex5.UI
         {
             bool userChoosedSize = true;
             LogInExceptionForm logInException;
-            ////LogInBoardSizeExceptionForm logInBoardSizeException;
+            ////////
+            MessageBoxButtons checkrhis = MessageBoxButtons.OK;
+            
+            MessageBox checkrhgis;
+            ///////////
             if ((Player1Name.Length > 0) && (Player2Name.Length > 0) && (Player1Name.Length < 15) && (Player2Name.Length < 15))
             {
                 if (boardGameSmallSize.Checked)
@@ -67,13 +71,14 @@ namespace Ex5.UI
                 }
                 else
                 {
-                    logInException = new LogInExceptionForm(ConstantsUI.k_BoardSizeLogInException);
+                    //MessageBox.Show(ConstantsUI.k_BoardSizeLogInException, "Board size error", checkrhis, MessageBoxIcon.Information);
+                    logInException = new LogInExceptionForm(ConstantsUI.k_BoardSizeLogInException, ConstantsUI.k_BoardSizeLogInExceptionTitle);
                     logInException.ShowDialog();
                 }
             }
             else
             {
-                logInException = new LogInExceptionForm(ConstantsUI.k_NameLogInException);
+                logInException = new LogInExceptionForm(ConstantsUI.k_NameLogInException, ConstantsUI.k_NameLogInExceptionTitle);
                 logInException.ShowDialog();
             }
         }
@@ -115,7 +120,7 @@ namespace Ex5.UI
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage);
+            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage, ConstantsUI.k_QuitMessageTitle);
             quitForm.ShowDialog();
             if (quitForm.DialogResult == DialogResult.Yes)
             {

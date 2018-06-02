@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
+
 
 namespace Ex5.UI
 {
@@ -31,28 +33,20 @@ namespace Ex5.UI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsLogin));
-            this.textBoxPlayer1Name = new System.Windows.Forms.TextBox();
-            this.boardGameSmallSize = new System.Windows.Forms.RadioButton();
-            this.buttonDone = new System.Windows.Forms.Button();
-            this.checkBoxPlayer2 = new System.Windows.Forms.CheckBox();
-            this.boardGameMediumSize = new System.Windows.Forms.RadioButton();
-            this.boardGameLargeSize = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxPlayer2Name = new System.Windows.Forms.TextBox();
-            this.labelBoardSize = new System.Windows.Forms.Label();
-            this.labelPlayers = new System.Windows.Forms.Label();
-            this.labelPlayer1Name = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.textBoxPlayer1Name = new TextBox();
+            this.boardGameSmallSize = new RadioButton();
+            this.buttonDone = new Button();
+            this.checkBoxPlayer2 = new CheckBox();
+            this.boardGameMediumSize = new RadioButton();
+            this.boardGameLargeSize = new RadioButton();
+            this.panel1 = new Panel();
+            this.textBoxPlayer2Name = new TextBox();
+            this.labelBoardSize = new Label();
+            this.labelPlayers = new Label();
+            this.labelPlayer1Name = new Label();
+            ////this.buttonCancel = new Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBoxPlayer1Name
-            // 
-            this.textBoxPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textBoxPlayer1Name.Location = new System.Drawing.Point(197, 258);
-            this.textBoxPlayer1Name.Name = "textBoxPlayer1Name";
-            this.textBoxPlayer1Name.Size = new System.Drawing.Size(229, 35);
-            this.textBoxPlayer1Name.TabIndex = 0;
             // 
             // boardGameSmallSize
             // 
@@ -66,20 +60,6 @@ namespace Ex5.UI
             this.boardGameSmallSize.TabStop = true;
             this.boardGameSmallSize.Text = "6X6";
             this.boardGameSmallSize.UseVisualStyleBackColor = true;
-            // 
-            // buttonDone
-            // 
-            this.buttonDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDone.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.buttonDone.Location = new System.Drawing.Point(226, 385);
-            this.buttonDone.Name = "buttonDone";
-            this.buttonDone.Size = new System.Drawing.Size(125, 35);
-            this.buttonDone.TabIndex = 6;
-            this.buttonDone.Text = "DONE";
-            this.buttonDone.UseVisualStyleBackColor = false;
-            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
             // 
             // checkBoxPlayer2
             // 
@@ -132,10 +112,18 @@ namespace Ex5.UI
             this.panel1.Size = new System.Drawing.Size(185, 162);
             this.panel1.TabIndex = 12;
             // 
+            // textBoxPlayer1Name
+            // 
+            this.textBoxPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.textBoxPlayer1Name.Location = new System.Drawing.Point(197, 258);
+            this.textBoxPlayer1Name.Name = "textBoxPlayer1Name";
+            this.textBoxPlayer1Name.Size = new System.Drawing.Size(229, 35);
+            this.textBoxPlayer1Name.TabIndex = 0;
+            // 
             // textBoxPlayer2Name
             // 
             this.textBoxPlayer2Name.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.textBoxPlayer2Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            ////this.textBoxPlayer2Name.BorderStyle = .BorderStyle.FixedSingle;
             this.textBoxPlayer2Name.Enabled = false;
             this.textBoxPlayer2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBoxPlayer2Name.Location = new System.Drawing.Point(197, 321);
@@ -180,32 +168,48 @@ namespace Ex5.UI
             this.labelPlayer1Name.TabIndex = 16;
             this.labelPlayer1Name.Text = "Player 1:";
             // 
+            // buttonDone
+            // 
+            this.buttonDone.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
+            this.buttonDone.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonDone.FlatStyle = FlatStyle.Popup;
+            this.buttonDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            ////////// CASE WE WANT TO ADD AGAIN THE CANCEL BUTTON
+            ////this.buttonDone.Location = new System.Drawing.Point(226, 385);
+            ///////////
+            this.buttonDone.Location = new System.Drawing.Point(374, 385);
+            this.buttonDone.Name = "buttonDone";
+            this.buttonDone.Size = new System.Drawing.Size(125, 42);
+            this.buttonDone.TabIndex = 6;
+            this.buttonDone.Text = "DONE";
+            this.buttonDone.UseVisualStyleBackColor = false;
+            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
+            // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.buttonCancel.Location = new System.Drawing.Point(374, 385);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(125, 35);
-            this.buttonCancel.TabIndex = 17;
-            this.buttonCancel.Text = "CANCEL";
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            ////this.buttonCancel.Anchor = ((.AnchorStyles)((.AnchorStyles.Bottom | .AnchorStyles.Right)));
+            ////this.buttonCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            ////this.buttonCancel.FlatStyle = .FlatStyle.Popup;
+            ////this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            ////this.buttonCancel.Location = new System.Drawing.Point(374, 385);
+            ////this.buttonCancel.Name = "buttonCancel";
+            ////this.buttonCancel.Size = new System.Drawing.Size(125, 35);
+            ////this.buttonCancel.TabIndex = 7;
+            ////this.buttonCancel.Text = "CANCEL";
+            ////this.buttonCancel.UseVisualStyleBackColor = false;
+            ////this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // SettingsLogin
             // 
             this.AcceptButton = this.buttonDone;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            ////this.BackgroundImage = Image.FromFile(@"C:\black_marble.JPG");
             this.BackgroundImage = Properties.Resources.black_marble;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(511, 445);
-            this.Controls.Add(this.buttonCancel);
+            ////this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelPlayer1Name);
             this.Controls.Add(this.labelPlayers);
             this.Controls.Add(this.labelBoardSize);
@@ -214,11 +218,11 @@ namespace Ex5.UI
             this.Controls.Add(this.checkBoxPlayer2);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.textBoxPlayer1Name);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
             this.Name = "SettingsLogin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Game Settings";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -228,17 +232,17 @@ namespace Ex5.UI
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxPlayer1Name;
-        private System.Windows.Forms.RadioButton boardGameSmallSize;
-        private System.Windows.Forms.Button buttonDone;
-        private System.Windows.Forms.CheckBox checkBoxPlayer2;
-        private System.Windows.Forms.RadioButton boardGameMediumSize;
-        private System.Windows.Forms.RadioButton boardGameLargeSize;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBoxPlayer2Name;
-        private System.Windows.Forms.Label labelBoardSize;
-        private System.Windows.Forms.Label labelPlayers;
-        private System.Windows.Forms.Label labelPlayer1Name;
-        private System.Windows.Forms.Button buttonCancel;
+        private TextBox textBoxPlayer1Name;
+        private RadioButton boardGameSmallSize;
+        private Button buttonDone;
+        private CheckBox checkBoxPlayer2;
+        private RadioButton boardGameMediumSize;
+        private RadioButton boardGameLargeSize;
+        private Panel panel1;
+        private TextBox textBoxPlayer2Name;
+        private Label labelBoardSize;
+        private Label labelPlayers;
+        private Label labelPlayer1Name;
+        ////private .Button buttonCancel;
     }
 }

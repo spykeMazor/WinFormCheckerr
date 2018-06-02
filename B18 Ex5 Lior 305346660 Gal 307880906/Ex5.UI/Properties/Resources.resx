@@ -136,13 +136,52 @@
   <data name="damka3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\damka3d.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="informationPng" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\informationPng.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="information_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\information_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="red_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red_queen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="red_soldier" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red_soldier.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Warning_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Warning_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="whitesquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\whitesquare.PNG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_Circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue_Circle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_PngYellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_PngYellow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue_Background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heart_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heart_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="purple_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\purple_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

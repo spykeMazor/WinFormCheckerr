@@ -10,9 +10,15 @@ namespace Ex5.UI
         public const string k_ComputerNameTextBox = "[Computer]";
         public const string k_ComputerPlayerName = "Computer";
         ////public const string k_QuestionToDo = "Are you sure you\r\nwant to {0}?";
-        public const string k_QuitMessage = "Are you sure\r\n you want to QUIT?";
-        public const string k_StartOverMessage = "Are you sure you\r\nwant to START OVER?";
-        public const string k_BoardSizeLogInException = "\r\nYou must choose Board \r\nSize from the given options";
-        public const string k_NameLogInException = "\r\nPlayer\'s name must include \r\n1-15 charecters";
+        public const string k_QuitMessage = "Are you sure\n you want to Quit?";
+        public const string k_QuitMessageTitle = "Quit Game";
+        public const string k_StartOverMessage = "Are you sure you\nwant to Start Over?";
+        public const string k_StartOverMessageTtle = "Start Over";
+        public const string k_BoardSizeLogInException = "\nYou must choose Board \nSize from the given options";
+        public const string k_BoardSizeLogInExceptionTitle = "Board Size Error";
+
+        public const string k_NameLogInException = "\nPlayer\'s name must include \n1-15 charecters";
+        public const string k_NameLogInExceptionTitle = "Name Login Error";
+
     }
 }

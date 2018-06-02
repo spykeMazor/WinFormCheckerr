@@ -11,9 +11,11 @@ namespace Ex5.UI
     public partial class VerifyForm : Form
     {
         private string m_WhatToDo;
-        public VerifyForm(string i_WhatToDo)
+        private string m_WhatToDoTitle;
+        public VerifyForm(string i_WhatToDo, string i_WhatToDoTitle)
         {
             WhatToPrint = i_WhatToDo;
+            WhatToPrintTitle = i_WhatToDoTitle;
             InitializeComponent();
         }
 
@@ -21,6 +23,12 @@ namespace Ex5.UI
         {
             get { return m_WhatToDo; }
             set { m_WhatToDo = value; }
+        }
+
+        public string WhatToPrintTitle
+        {
+            get { return m_WhatToDoTitle; }
+            set { m_WhatToDoTitle = value; }
         }
     }
 }

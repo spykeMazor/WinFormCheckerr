@@ -43,12 +43,19 @@ namespace Ex5.UI
         private Label labelPlayer1Name;
         private Label labelPlayer2Name;
         private Button buttonQuit;
+        ////private ComboBox comboBoxBackground;
         private Button buttonStartOver;
+
+        /// <summary>
+        private PictureBox arrowPictureBoxPlayer1;
+        private PictureBox arrowPictureBoxPlayer2;
+        ////private Image m_MyBackground ;
+        /// </summary>
         public void FormGameStart()
         {
             m_FormNameLogin.ShowDialog();
             if (m_FormNameLogin.DialogResult == DialogResult.OK)
-            {
+            {                
                 loadCheckersPics();
                 InitializeComponent();
             }
@@ -65,14 +72,6 @@ namespace Ex5.UI
 
         private void loadCheckersPics()
         {
-            ////m_BlackChackerImage = Image.FromFile(@"C:\black_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
-            ////m_BlackChackerImage.Tag = e_TypeUICheckers.BlackChecker;
-            ////m_RedChackerImage = Image.FromFile(@"C:\red_soldier.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
-            ////m_RedChackerImage.Tag = e_TypeUICheckers.RedChecker;
-            ////m_BlackQueenChackerImage = Image.FromFile(@"C:\black_king.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
-            ////m_BlackQueenChackerImage.Tag = e_TypeUICheckers.BlackQueen;
-            ////m_RedQueenChackerImage = Image.FromFile(@"C:\red_queen.png").GetThumbnailImage(55, 55, null, IntPtr.Zero);
-            ////m_RedQueenChackerImage.Tag = e_TypeUICheckers.RedQueen;
             m_BlackChackerImage = Properties.Resources.black_soldier.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_BlackChackerImage.Tag = e_TypeUICheckers.BlackChecker;
             m_RedChackerImage = Properties.Resources.red_soldier.GetThumbnailImage(55, 55, null, IntPtr.Zero);
@@ -82,8 +81,6 @@ namespace Ex5.UI
             m_RedQueenChackerImage = Properties.Resources.red_queen.GetThumbnailImage(55, 55, null, IntPtr.Zero);
             m_RedQueenChackerImage.Tag = e_TypeUICheckers.RedQueen;
         }
-
-
 
         protected override void OnLoad(EventArgs e)
         {
@@ -96,6 +93,12 @@ namespace Ex5.UI
             get { return m_FormNameLogin; }
             set { m_FormNameLogin = value; }
         }
+
+        ////public Image UpdateBackground
+        ////{
+        ////    get { return m_MyBackground; }
+        ////    set { m_MyBackground = value; }
+        ////}
 
         private void InitControls()
         {
@@ -248,8 +251,7 @@ namespace Ex5.UI
         }
 
         private void afterMoving(PictureBoxInTheBoard i_CurrentPicBoxThatMoveTo)
-        {
-           
+        {        
             if (i_CurrentPicBoxThatMoveTo != null)
             {
                 m_LastMoveTo = i_CurrentPicBoxThatMoveTo.PointInTheBoard;
@@ -259,7 +261,9 @@ namespace Ex5.UI
             if (m_WasMove)
             {
                 if (!m_CurrentPlayer)
-                {
+                { //// case this is the player 1
+                    this.arrowPictureBoxPlayer1.Visible = false;
+                    this.arrowPictureBoxPlayer2.Visible = true;
                     m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player1,
                   m_Game.Player2,
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
@@ -290,13 +294,18 @@ namespace Ex5.UI
                         }
                     }
                     else
-                    {////--->Combo one more attack -> turn stay in Player1 
+                    { ////--->Combo one more attack -> turn stay in Player1 
                         invokeClickOnChecker(m_Game.AttackListOfPlayer1);
                     }
+
+                    this.arrowPictureBoxPlayer2.Visible = false;
+                    this.arrowPictureBoxPlayer1.Visible = true;
                 }
                 else
-                { 
-                        m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                { //// case this is the player 2
+                    this.arrowPictureBoxPlayer2.Visible = false;
+                    this.arrowPictureBoxPlayer1.Visible = true;
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
                             m_Game.Player1,
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
@@ -305,7 +314,7 @@ namespace Ex5.UI
                     m_WasMove = false;
                     if (!m_hasAnotherAttack)
                     {
-                        m_CurrentPlayer = false;////---> now player1 turn
+                        m_CurrentPlayer = false; ////---> now player1 turn
                         if (m_Game.AttackListOfPlayer1.Count > 0)
                         {
                             invokeClickOnChecker(m_Game.AttackListOfPlayer1);
@@ -316,12 +325,13 @@ namespace Ex5.UI
                         }
                     }
                     else
-                    {////--->Combo one more attack -> turn stay in Player2                 
+                    { ////--->Combo one more attack -> turn stay in Player2                 
                         invokeClickOnChecker(m_Game.AttackListOfPlayer2);
-
                     }
+
+                    this.arrowPictureBoxPlayer1.Visible = false;
+                    this.arrowPictureBoxPlayer2.Visible = true;
                 }
-            
             }
         }
 
@@ -336,7 +346,7 @@ namespace Ex5.UI
                      computerNextMove.Key,
                        computerNextMove.Value,
                        ref m_wasAttack, ref m_hasAnotherAttack);
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
             initCheckers();
             this.labelScore1.Text = m_Game.Player1Score().ToString();
             this.labelScore2.Text = m_Game.Player2Score().ToString();
@@ -344,7 +354,7 @@ namespace Ex5.UI
             m_WasMove = false;
             if (!m_hasAnotherAttack)
             {
-                m_CurrentPlayer = false;////---> now player1 turn
+                m_CurrentPlayer = false; ////---> now player1 turn
                 if (m_Game.AttackListOfPlayer1.Count > 0)
                 {
                     invokeClickOnChecker(m_Game.AttackListOfPlayer1);
@@ -398,10 +408,11 @@ namespace Ex5.UI
             }
         }
 
+
+        ///////////////////////////
+  
         private void enableMoveToSquare(LinkedList<KeyValuePair<string, string>> i_MoveListOfTheCurrentPlayer, Point i_BlueSquare)
         {
-            
-
             foreach (KeyValuePair<string, string> kvp in i_MoveListOfTheCurrentPlayer)
             {
                 if (i_BlueSquare == converCheckerPositionToPoint(kvp.Key))
@@ -439,17 +450,43 @@ namespace Ex5.UI
             }
         }
 
+        ////private void comboBoxBackground_SelectedIndexChanged(object sender, EventArgs e)
+        ////{
+        ////    if (this.Text.CompareTo("Blue") == 0)
+        ////    {
+        ////        UpdateBackground = Properties.Resources.blue_Background;
+        ////    }
+        ////    else if (this.Text.CompareTo("Purple") == 0)
+        ////    {
+        ////        UpdateBackground = Properties.Resources.purple_Background;
+        ////    }
+        ////    else if (this.Text.CompareTo("Heart") == 0)
+        ////    {
+        ////        UpdateBackground = Properties.Resources.heart_Background;
+        ////    }
+        ////    else if (this.Text.CompareTo("Green") == 0)
+        ////    {
+        ////        UpdateBackground = Properties.Resources.green_Background;
+        ////    }
+        ////    else
+        ////    {
+        ////        UpdateBackground = Properties.Resources.damka3d;
+        ////    }
+
+        ////}
+
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGame));
-            this.headLine = new System.Windows.Forms.Label();
-            this.labelScore1 = new System.Windows.Forms.Label();
-            this.labelScore2 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.labelPlayer1Name = new System.Windows.Forms.Label();
-            this.labelPlayer2Name = new System.Windows.Forms.Label();
-            this.buttonQuit = new System.Windows.Forms.Button();
-            this.buttonStartOver = new System.Windows.Forms.Button();
+            this.headLine = new Label();
+            this.labelScore1 = new Label();
+            this.labelScore2 = new Label();
+            this.splitContainer1 = new SplitContainer();
+            this.labelPlayer1Name = new Label();
+            this.labelPlayer2Name = new Label();
+            this.buttonQuit = new Button();
+            this.buttonStartOver = new Button();
+            ////this.comboBoxBackground = new System.Windows.Forms.ComboBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -457,7 +494,7 @@ namespace Ex5.UI
             // 
             // headLine
             // 
-            this.headLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.headLine.Anchor = AnchorStyles.Top;
             this.headLine.AutoSize = true;
             this.headLine.BackColor = System.Drawing.Color.Yellow;
             this.headLine.Font = new System.Drawing.Font("MV Boli", 19F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(177)), true);
@@ -502,7 +539,7 @@ namespace Ex5.UI
             this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Location = new System.Drawing.Point(688, 106);
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainer1.Orientation = Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
@@ -510,16 +547,15 @@ namespace Ex5.UI
             ////this.splitContainer1.Panel1.BackgroundImage = Image.FromFile(@"C:\black_soldier.PNG");
             this.splitContainer1.Panel1.BackgroundImage = Properties.Resources.black_soldier;
 
-            this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.splitContainer1.Panel1.BackgroundImageLayout = ImageLayout.Stretch;
             this.splitContainer1.Panel1.Controls.Add(this.labelScore1);
             this.splitContainer1.Panel1.Controls.Add(this.labelPlayer1Name);
             // 
             // splitContainer1.Panel2
             // 
-            ////this.splitContainer1.Panel2.BackgroundImage = Image.FromFile(@"C:\red_soldier.PNG");
             this.splitContainer1.Panel2.BackgroundImage = Properties.Resources.red_soldier; 
 
-            this.splitContainer1.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.splitContainer1.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
             this.splitContainer1.Panel2.Controls.Add(this.labelScore2);
             this.splitContainer1.Panel2.Controls.Add(this.labelPlayer2Name);
             this.splitContainer1.Size = new System.Drawing.Size(218, 354);
@@ -529,8 +565,9 @@ namespace Ex5.UI
             // 
             // labelPlayer1Name
             // 
-            this.labelPlayer1Name.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelPlayer1Name.Anchor = AnchorStyles.None;
             this.labelPlayer1Name.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer1Name.Text = m_FormNameLogin.Player1Name;
             this.labelPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelPlayer1Name.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.labelPlayer1Name.Location = new System.Drawing.Point(61, 55);
@@ -542,13 +579,13 @@ namespace Ex5.UI
             // 
             // labelPlayer2Name
             // 
-            this.labelPlayer2Name.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelPlayer2Name.Anchor = AnchorStyles.None;
             this.labelPlayer2Name.BackColor = System.Drawing.Color.Transparent;
             this.labelPlayer2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelPlayer2Name.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelPlayer2Name.Location = new System.Drawing.Point(70, 57);
+            this.labelPlayer2Name.Location = new System.Drawing.Point(61, 55);
             this.labelPlayer2Name.Name = "labelPlayer2Name";
-            this.labelPlayer2Name.Size = new System.Drawing.Size(69, 40);
+            this.labelPlayer2Name.Size = new System.Drawing.Size(101, 40);
             this.labelPlayer2Name.TabIndex = 3;
             this.labelPlayer2Name.Text = m_FormNameLogin.Player2Name;
             this.labelPlayer2Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -556,47 +593,105 @@ namespace Ex5.UI
             // buttonQuit
             // 
             this.buttonQuit.AutoSize = true;
-            this.buttonQuit.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonQuit.Cursor = System.Windows.Forms.Cursors.Help;
-            this.buttonQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonQuit.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonQuit.Cursor = Cursors.Help;
+            this.buttonQuit.FlatStyle = FlatStyle.Popup;
             this.buttonQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.buttonQuit.Location = new System.Drawing.Point(832, 608);
             this.buttonQuit.Name = "buttonQuit";
             this.buttonQuit.Size = new System.Drawing.Size(121, 33);
             this.buttonQuit.TabIndex = 4;
             this.buttonQuit.Text = "QUIT";
-            this.buttonQuit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonQuit.TextImageRelation = TextImageRelation.ImageAboveText;
             this.buttonQuit.UseVisualStyleBackColor = false;
             this.buttonQuit.Click += new System.EventHandler(this.buttonQuit_Click);
+            // 
+            // arrowPictureBoxPlayer1
+            // 
+            this.arrowPictureBoxPlayer1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBoxPlayer1)).BeginInit();
+
+            this.arrowPictureBoxPlayer1.Image = Properties.Resources.arrow_PngYellow;
+            this.arrowPictureBoxPlayer1.BackColor = System.Drawing.Color.Transparent;
+            this.arrowPictureBoxPlayer1.Location = new System.Drawing.Point(900, 163);
+            this.arrowPictureBoxPlayer1.Name = "arrowPictureBox1";
+            this.arrowPictureBoxPlayer1.Size = new System.Drawing.Size(64, 64);
+            this.arrowPictureBoxPlayer1.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.arrowPictureBoxPlayer1.TabIndex = 1;
+            this.arrowPictureBoxPlayer1.TabStop = false;
+            this.arrowPictureBoxPlayer1.Visible = true;
+            this.Controls.Add(this.arrowPictureBoxPlayer1);
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBoxPlayer1)).EndInit();
+
+            // 
+            // arrowPictureBoxPlayer2
+            // 
+            this.arrowPictureBoxPlayer2 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBoxPlayer1)).BeginInit();
+
+            this.arrowPictureBoxPlayer2.Image = Properties.Resources.arrow_PngYellow;
+            this.arrowPictureBoxPlayer2.BackColor = System.Drawing.Color.Transparent;
+            this.arrowPictureBoxPlayer2.Location = new System.Drawing.Point(900, 340);
+            this.arrowPictureBoxPlayer2.Name = "arrowPictureBox2";
+            this.arrowPictureBoxPlayer2.Size = new System.Drawing.Size(64, 64);
+            this.arrowPictureBoxPlayer2.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.arrowPictureBoxPlayer2.TabIndex = 1;
+            this.arrowPictureBoxPlayer2.TabStop = false;
+            this.arrowPictureBoxPlayer2.Visible = false;
+            this.Controls.Add(this.arrowPictureBoxPlayer2);
+            ((System.ComponentModel.ISupportInitialize)(this.arrowPictureBoxPlayer2)).EndInit();
+
+
             // 
             // buttonStartOver
             // 
             this.buttonStartOver.AutoSize = true;
-            this.buttonStartOver.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonStartOver.Cursor = System.Windows.Forms.Cursors.Help;
-            this.buttonStartOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonStartOver.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonStartOver.Cursor = Cursors.Help;
+            this.buttonStartOver.FlatStyle = FlatStyle.Popup;
             this.buttonStartOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.buttonStartOver.Location = new System.Drawing.Point(685, 608);
             this.buttonStartOver.Name = "buttonStartOver";
             this.buttonStartOver.Size = new System.Drawing.Size(131, 33);
             this.buttonStartOver.TabIndex = 5;
             this.buttonStartOver.Text = "START OVER";
-            this.buttonStartOver.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonStartOver.TextImageRelation = TextImageRelation.ImageAboveText;
             this.buttonStartOver.UseVisualStyleBackColor = false;
             this.buttonStartOver.Click += new System.EventHandler(this.buttonStartOver_Click);
-            // 
+            ////// 
+            ////// comboBoxBackground
+            ////// 
+            ////this.comboBoxBackground.BackColor = System.Drawing.Color.Blue;
+            ////this.comboBoxBackground.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            ////this.comboBoxBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            ////this.comboBoxBackground.ForeColor = System.Drawing.Color.Yellow;
+            ////this.comboBoxBackground.FormattingEnabled = true;
+            ////this.comboBoxBackground.ItemHeight = 13;
+            ////this.comboBoxBackground.Items.AddRange(new object[] {
+            ////"Blue ",
+            ////"Heart",
+            ////"Green",
+            ////"Purple",
+            ////"Damka3D"});
+            ////this.comboBoxBackground.Location = new System.Drawing.Point(832, 560);
+            ////this.comboBoxBackground.Name = "comboBoxBackground";
+            ////this.comboBoxBackground.Size = new System.Drawing.Size(143, 21);
+            ////this.comboBoxBackground.TabIndex = 0;
+            ////this.comboBoxBackground.Text = "BACKGROUNDS";
+            ////this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackground_SelectedIndexChanged);
+            //  
             // FormGame
             // 
             this.BackColor = System.Drawing.Color.Black;
-            ////this.BackgroundImage = Image.FromFile(@"C:\damka3d.jpg");
             this.BackgroundImage = Properties.Resources.damka3d;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 694);
             this.Controls.Add(this.buttonStartOver);
             this.Controls.Add(this.buttonQuit);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.headLine);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            ////this.Controls.Add(this.comboBoxBackground);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Name = "FormGame";
             this.Text = "Gal & Lior Checker Game";
             this.MaximizeBox = false;
@@ -608,12 +703,11 @@ namespace Ex5.UI
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)
         {
-            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage);
+            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage, ConstantsUI.k_QuitMessageTitle);
             quitForm.ShowDialog();
             if (quitForm.DialogResult == DialogResult.Yes)
             {
@@ -623,11 +717,13 @@ namespace Ex5.UI
 
         private void buttonStartOver_Click(object sender, EventArgs e)
         {
-            VerifyForm startOver = new VerifyForm(ConstantsUI.k_StartOverMessage);
+            VerifyForm startOver = new VerifyForm(ConstantsUI.k_StartOverMessage, ConstantsUI.k_StartOverMessageTtle);
             startOver.ShowDialog();
             if (startOver.DialogResult == DialogResult.Yes)
             {
-                this.InitializeComponent();
+                loadCheckersPics();
+                InitializeComponent();
+                InitControls();
             }
         }
     }

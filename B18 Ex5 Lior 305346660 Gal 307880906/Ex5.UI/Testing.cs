@@ -15,24 +15,28 @@ namespace Ex5.UI
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void comboBoxBackground_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            if (this.Text.CompareTo("Blue") == 0)
+            {
+                this.BackgroundImage = Properties.Resources.blue_Background;
+            }
+            else if (this.Text.CompareTo("Purple") == 0)
+            {
+                this.BackgroundImage = Properties.Resources.purple_Background;
+            }
+            else if(this.Text.CompareTo("Heart") == 0)
+            {
+                this.BackgroundImage = Properties.Resources.heart_Background;
+            }
+            else if (this.Text.CompareTo("Green") == 0)
+            {
+                this.BackgroundImage = Properties.Resources.green_Background;
+            }
+            else
+            {
+                this.BackgroundImage = Properties.Resources.damka3d;
+            }
         }
     }
 }
