@@ -11,9 +11,13 @@ namespace Ex5.UI
     public partial class SettingsLogin : Form
     {
         GameBoardUI.e_BoardSize m_BoardSizeSelection;
+        private int m_Player1TotalScore;
+        private int m_Player2TotalScore;
 
         public SettingsLogin()
         {
+            Player1TotalScoreCounter = 0;
+            Player2TotalScoreCounter = 0;
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
         }
@@ -102,6 +106,18 @@ namespace Ex5.UI
                 return player2Name;
             }
             set { textBoxPlayer2Name.Text = value; }
+        }
+
+        public int Player1TotalScoreCounter
+        {
+            get { return m_Player1TotalScore; }
+            set { m_Player1TotalScore = value; }
+        }
+
+        public int Player2TotalScoreCounter
+        {
+            get { return m_Player2TotalScore; }
+            set { m_Player2TotalScore = value; }
         }
 
         public GameBoardUI.e_BoardSize BoardSizeSelection
