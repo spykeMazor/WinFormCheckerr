@@ -23,8 +23,9 @@ namespace Ex5.UI
 
         public enum e_SquaerTag
         {
-            WorngMove,
-            BlueTag,
+            WrongMove,
+            WrongChecker,
+            WrongSelection,
             OptionalMoveFrom,
             OptionalMoveTo
 
@@ -46,10 +47,15 @@ namespace Ex5.UI
         List<KeyValuePair<Point, Point>> m_AllTheClickableSquareReadyToMove = new List<KeyValuePair<Point, Point>>();
         private bool m_wasAttack = false;
         private bool m_hasAnotherAttack = false;
+        private bool m_ChekerSelectedOnBoard = false;
         private Label headLine;
         private Label labelScore1;
         private Label labelScore2;
-        private SplitContainer splitContainer1;
+        private Label labelTotalScore1;
+        private Label labelTotalScore2;
+        private SplitContainer splitContainerNameAndCurrentScore;
+        private SplitContainer splitContainerTotalScore;
+
         private Label labelPlayer1Name;
         private Label labelPlayer2Name;
         private Button buttonQuit;
@@ -142,23 +148,31 @@ namespace Ex5.UI
             Player Player2 = new Player(player2Name, boardSizeAsInt, 2, !m_FormNameLogin.ComputerOrNot);
             Player1.InitAllTheCheckersOfOnePlayer(boardSizeAsInt, Player.e_LocationOfThePlayer.UP);
             Player2.InitAllTheCheckersOfOnePlayer(boardSizeAsInt, Player.e_LocationOfThePlayer.DOWN);
-            m_Game = new Game(Player1, Player2, boardSizeAsInt);
-           
+            m_Game = new Game(Player1, Player2, boardSizeAsInt);       
             m_Board = new GameBoardUI(i_BoardSize);
+            locateBoardOnTheForm(boardSizeAsInt);
+            startGame(m_Game);
+        }
+
+        private void startGame(Game i_CurrentGame)
+        {
             invokeTheBoard();
             initCheckers();
-            for (int i = 0; i < boardSizeAsInt; i++)
+            m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.UP);
+            invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+        }
+
+        private void locateBoardOnTheForm(int i_BoardSize)
+        {
+            for (int i = 0; i < i_BoardSize; i++)
             {
-                for (int j = 0; j < boardSizeAsInt; j++)
+                for (int j = 0; j < i_BoardSize; j++)
                 {
                     m_Board.GetBoard[i, j].Size = new Size(60, 60);
                     m_Board.GetBoard[i, j].Location = new Point((i + 1) * 60, (j + 1) * 60);
                     this.Controls.Add(m_Board.GetBoard[i, j]);
                 }
             }
-
-            m_Game.UpdateMoveList(Player.e_LocationOfThePlayer.UP);
-            invokeClickOnChecker(m_Game.MoveListOfPlayer1);
         }
 
         private void invokeTheBoard()
@@ -170,8 +184,7 @@ namespace Ex5.UI
                     if (m_Board.GetBoard[i, j].BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
                     {
                         m_Board.GetBoard[i, j].Click += new EventHandler(PictureBoxInTheBoard_Click);
-                        m_Board.GetBoard[i, j].Tag = e_SquaerTag.WorngMove;
-                        //m_Board.GetBoard[i, j].Enabled = false;
+                        m_Board.GetBoard[i, j].Tag = e_SquaerTag.WrongSelection;  
                     }
                 }
             }
@@ -189,6 +202,7 @@ namespace Ex5.UI
                     }
                     else
                     {
+                        m_Board.GetBoard[i, j].Tag = e_SquaerTag.WrongChecker;
                         if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.O)
                         {
                             // Image checkerImg = m_BlackChackerImage;
@@ -232,34 +246,90 @@ namespace Ex5.UI
             return checkerPointInTheUIBoard;
         }
 
+        private bool winnerOrDraw()
+        {
+            bool winnerOrDrawFlag = false;
+            Player tempPlayer = m_Game.TheWinnerPlayerIs();
+            DialogResult gameEndedAndWantsToStartOver;
+            string resultMessage=ConstantsUI.k_EmptyString;
+            if (tempPlayer != null)///There is a WINNER IN THE GAME
+            {
+                winnerOrDrawFlag = true;
+                resultMessage = tempPlayer.GetName + ConstantsUI.k_WinnerMessage;
+                initCheckers();
+                this.Update();
+            }
+            else if (m_Game.ThereIsDraw())////tHERE IS A dRAW IN THE GAME
+            {
+                winnerOrDrawFlag = true;
+                resultMessage = tempPlayer.GetName + ConstantsUI.k_DrawMessage;
+                initCheckers();
+                this.Update();
+            }
+            else
+            {
+                winnerOrDrawFlag = false;
+            }
+
+            if (winnerOrDrawFlag)
+            {
+                gameEndedAndWantsToStartOver = MessageBox.Show(resultMessage, ConstantsUI.k_DamkaTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (gameEndedAndWantsToStartOver == DialogResult.No)
+                {
+                    this.Close();
+                }
+                else
+                { //// Player wants to start over
+                    StartOverGame = true;
+                    this.Close();
+                }
+            }
+
+            return winnerOrDrawFlag;
+        }
+
         private void invokeClickOnChecker(LinkedList<KeyValuePair<string, string>> i_MoveList)
         {
-            m_AllTheClickableSquareReadyToMove.Clear();
-            Point PointMoveFrom = new Point();
-            Point PointMoveTo = new Point();
-            Point lastPointMoveFrom = new Point(-1, -1);
+                m_ChekerSelectedOnBoard = false;
+                m_AllTheClickableSquareReadyToMove.Clear();
+                Point PointMoveFrom = new Point();
+                Point PointMoveTo = new Point();
+                Point lastPointMoveFrom = new Point(-1, -1);
 
-            foreach (KeyValuePair<string, string> kvp in i_MoveList)
-            {
-                PointMoveFrom = converCheckerPositionToPoint(kvp.Key);
-                PointMoveTo = converCheckerPositionToPoint(kvp.Value);
-                m_AllTheClickableSquareReadyToMove.Add(new KeyValuePair<Point, Point>(PointMoveFrom, PointMoveTo));
-                if (lastPointMoveFrom != converCheckerPositionToPoint(kvp.Key))
+                foreach (KeyValuePair<string, string> kvp in i_MoveList)
                 {
-                    lastPointMoveFrom = converCheckerPositionToPoint(kvp.Key);
-                   // m_Board.GetBoard[PointMoveFrom.X, PointMoveFrom.Y].Enabled = true;
-                    m_Board.GetBoard[PointMoveFrom.X, PointMoveFrom.Y].Tag = e_SquaerTag.OptionalMoveFrom;
-                }
+                    PointMoveFrom = converCheckerPositionToPoint(kvp.Key);
+                    PointMoveTo = converCheckerPositionToPoint(kvp.Value);
+                    m_AllTheClickableSquareReadyToMove.Add(new KeyValuePair<Point, Point>(PointMoveFrom, PointMoveTo));
+                    if (lastPointMoveFrom != converCheckerPositionToPoint(kvp.Key))
+                    {
+                        lastPointMoveFrom = converCheckerPositionToPoint(kvp.Key);
+                        // m_Board.GetBoard[PointMoveFrom.X, PointMoveFrom.Y].Enabled = true;
+                        m_Board.GetBoard[PointMoveFrom.X, PointMoveFrom.Y].Tag = e_SquaerTag.OptionalMoveFrom;
+                    }
 
-            }
+                }
+            
         }
 
         public void PictureBoxInTheBoard_Click(object sender, EventArgs e)
         {
+            MessageBoxButtons wrongInputExceptionMessageType = MessageBoxButtons.OK;
             PictureBoxInTheBoard picAsSender = sender as PictureBoxInTheBoard;
-            if(picAsSender.Tag.ToString() == e_SquaerTag.WorngMove.ToString())
+            if(picAsSender.Tag.ToString() == e_SquaerTag.WrongSelection.ToString())
             {
-                wongInputException.ShowDialog();
+                if (m_ChekerSelectedOnBoard)
+                {
+                    MessageBox.Show("Wrong Move", "Wrong", wrongInputExceptionMessageType, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Wrong Selection", "Wrong", wrongInputExceptionMessageType, MessageBoxIcon.Warning);
+                }
+            }  
+            else if(picAsSender.Tag.ToString() == e_SquaerTag.WrongChecker.ToString())
+            {
+                MessageBox.Show("Wrong Checker Selected", "Wrong", wrongInputExceptionMessageType, MessageBoxIcon.Warning);
             }
             else if(picAsSender.Image != null)
              {
@@ -270,18 +340,21 @@ namespace Ex5.UI
                     {
                         picAsSender.BackgroundImage = m_Board.BlueBackGround;
                         picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
-                        picAsSender.Tag = e_SquaerTag.BlueTag;
+                        m_ChekerSelectedOnBoard = true;
+                        picAsSender.Tag = e_SquaerTag.OptionalMoveFrom;
                         m_LastMoveFrom = picAsSender.PointInTheBoard;
                         invokeAllTheOptionalMoveSquare(picAsSender);
                     }
-                    else
+                    else if(picAsSender.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
                     {
                         picAsSender.BackgroundImage = DefaultBackGroundImage;
                         picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
+                        m_ChekerSelectedOnBoard = false;
                         disableAllMoveToClickableSquare();
                         foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
                         {
                             // m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
+                            
                             m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Tag = e_SquaerTag.OptionalMoveFrom;
                         }
                     }
@@ -312,37 +385,40 @@ namespace Ex5.UI
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
                  ref m_wasAttack, ref m_hasAnotherAttack);
-                    initCheckers();
-                    this.labelScore1.Text = m_Game.Player1Score().ToString();
-                    this.labelScore2.Text = m_Game.Player2Score().ToString();
-                    this.Update();
-                    m_WasMove = false;
-                    if (!m_hasAnotherAttack)
+                    if (!winnerOrDraw())
                     {
-                        if (m_Game.Player2.MachineOrNot)
-                        { 
-                            computerMove();
-                        }
-                        else
+                        initCheckers();
+                        this.labelScore1.Text = m_Game.Player1Score().ToString();
+                        this.labelScore2.Text = m_Game.Player2Score().ToString();
+                        this.Update();
+                        m_WasMove = false;
+                        if (!m_hasAnotherAttack)
                         {
-                            m_CurrentPlayer = true;////---> now player2 turn
-                            if (m_Game.AttackListOfPlayer2.Count > 0)
+                            if (m_Game.Player2.MachineOrNot)
                             {
-                                invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                                computerMove();
                             }
                             else
                             {
-                                invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                                m_CurrentPlayer = true;////---> now player2 turn
+                                if (m_Game.AttackListOfPlayer2.Count > 0)
+                                {
+                                    invokeClickOnChecker(m_Game.AttackListOfPlayer2);
+                                }
+                                else
+                                {
+                                    invokeClickOnChecker(m_Game.MoveListOfPlayer2);
+                                }
                             }
                         }
-                    }
-                    else
-                    { ////--->Combo one more attack -> turn stay in Player1 
-                        invokeClickOnChecker(m_Game.AttackListOfPlayer1);
-                    }
+                        else
+                        { ////--->Combo one more attack -> turn stay in Player1 
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                        }
 
-                    this.arrowPictureBoxPlayer2.Visible = false;
-                    this.arrowPictureBoxPlayer1.Visible = true;
+                        this.arrowPictureBoxPlayer2.Visible = false;
+                        this.arrowPictureBoxPlayer1.Visible = true;
+                    }
                 }
                 else
                 { //// case this is the player 2
@@ -353,27 +429,30 @@ namespace Ex5.UI
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
                             ref m_wasAttack, ref m_hasAnotherAttack);
-                        initCheckers();
-                    m_WasMove = false;
-                    if (!m_hasAnotherAttack)
+                    if (!winnerOrDraw())
                     {
-                        m_CurrentPlayer = false; ////---> now player1 turn
-                        if (m_Game.AttackListOfPlayer1.Count > 0)
+                        initCheckers();
+                        m_WasMove = false;
+                        if (!m_hasAnotherAttack)
                         {
-                            invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                            m_CurrentPlayer = false; ////---> now player1 turn
+                            if (m_Game.AttackListOfPlayer1.Count > 0)
+                            {
+                                invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                            }
+                            else
+                            {
+                                invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                            }
                         }
                         else
-                        {
-                            invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                        { ////--->Combo one more attack -> turn stay in Player2                 
+                            invokeClickOnChecker(m_Game.AttackListOfPlayer2);
                         }
+
+                        this.arrowPictureBoxPlayer1.Visible = false;
+                        this.arrowPictureBoxPlayer2.Visible = true;
                     }
-                    else
-                    { ////--->Combo one more attack -> turn stay in Player2                 
-                        invokeClickOnChecker(m_Game.AttackListOfPlayer2);
-                    }
-                     
-                    this.arrowPictureBoxPlayer1.Visible = false;
-                    this.arrowPictureBoxPlayer2.Visible = true;
                 }
             }
         }
@@ -389,27 +468,30 @@ namespace Ex5.UI
                      computerNextMove.Key,
                        computerNextMove.Value,
                        ref m_wasAttack, ref m_hasAnotherAttack);
-            Thread.Sleep(2000);
-            initCheckers();
-            this.labelScore1.Text = m_Game.Player1Score().ToString();
-            this.labelScore2.Text = m_Game.Player2Score().ToString();
-            this.Update();
-            m_WasMove = false;
-            if (!m_hasAnotherAttack)
+            if (!winnerOrDraw())
             {
-                m_CurrentPlayer = false; ////---> now player1 turn
-                if (m_Game.AttackListOfPlayer1.Count > 0)
+                Thread.Sleep(2000);
+                initCheckers();
+                this.labelScore1.Text = m_Game.Player1Score().ToString();
+                this.labelScore2.Text = m_Game.Player2Score().ToString();
+                this.Update();
+                m_WasMove = false;
+                if (!m_hasAnotherAttack)
                 {
-                    invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                    m_CurrentPlayer = false; ////---> now player1 turn
+                    if (m_Game.AttackListOfPlayer1.Count > 0)
+                    {
+                        invokeClickOnChecker(m_Game.AttackListOfPlayer1);
+                    }
+                    else
+                    {
+                        invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    }
                 }
                 else
                 {
-                    invokeClickOnChecker(m_Game.MoveListOfPlayer1);
+                    computerMove();
                 }
-            }
-            else
-            {
-                computerMove();
             }
         }
 
@@ -423,7 +505,7 @@ namespace Ex5.UI
                 if (kpv.Key != i_PicAsSender.PointInTheBoard)
                 {
                     //m_Board.GetBoard[kpv.Key.X, kpv.Key.Y].Enabled = false;
-                    m_Board.GetBoard[kpv.Key.X, kpv.Key.Y].Tag = e_SquaerTag.WorngMove;
+                    m_Board.GetBoard[kpv.Key.X, kpv.Key.Y].Tag = e_SquaerTag.WrongChecker;
                 }
             }
 
@@ -466,10 +548,7 @@ namespace Ex5.UI
                     //m_Board.GetBoard[optionalSquareToMove.X, optionalSquareToMove.Y].Enabled = true;
                     m_Board.GetBoard[optionalSquareToMove.X, optionalSquareToMove.Y].Tag = e_SquaerTag.OptionalMoveTo;
                 }
-                //else
-                //{
-
-                //}
+               
             }
         }
         
@@ -478,9 +557,9 @@ namespace Ex5.UI
             foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
             {
                 //m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = false;
-                m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Tag = e_SquaerTag.WorngMove;
+                m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Tag = e_SquaerTag.WrongSelection;
                // m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Enabled = false;
-                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Tag = e_SquaerTag.WorngMove;
+                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Tag = e_SquaerTag.WrongSelection;
                 if (m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
                 {
                     m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].BackgroundImage = m_Board.WhiteBackGround;
@@ -494,7 +573,7 @@ namespace Ex5.UI
             foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
             {
                 //m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Enabled = false;
-                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Tag = e_SquaerTag.WorngMove;
+                m_Board.GetBoard[kvp.Value.X, kvp.Value.Y].Tag = e_SquaerTag.WrongSelection;
             }
         }
 
@@ -503,24 +582,28 @@ namespace Ex5.UI
             if (this.comboBoxBackground.Text.CompareTo("Damka3D") == 0)
             {
                 UpdateBackground = Properties.Resources.damka3d;
-                this.headLine.ForeColor = System.Drawing.Color.Yellow;
+                this.labelBackground.ForeColor = System.Drawing.Color.Blue;
 
             }
             else if (this.comboBoxBackground.Text.CompareTo("Purple") == 0)
             {
                 UpdateBackground = Properties.Resources.purple_Background;
+                this.labelBackground.ForeColor = System.Drawing.Color.Yellow;
             }
             else if (this.comboBoxBackground.Text.CompareTo("Heart") == 0)
             {
                 UpdateBackground = Properties.Resources.heart_Background;
+                this.labelBackground.ForeColor = System.Drawing.Color.Yellow;
             }
             else if (this.comboBoxBackground.Text.CompareTo("Green") == 0)
             {
                 UpdateBackground = Properties.Resources.green_Background;
+                this.labelBackground.ForeColor = System.Drawing.Color.Black;
             }
             else
             {
                 UpdateBackground = Properties.Resources.blue_Background;
+                this.labelBackground.ForeColor = System.Drawing.Color.Yellow;
             }
 
             this.BackgroundImage = UpdateBackground;
@@ -547,16 +630,23 @@ namespace Ex5.UI
             this.headLine = new Label();
             this.labelScore1 = new Label();
             this.labelScore2 = new Label();
-            this.splitContainer1 = new SplitContainer();
+            this.labelTotalScore1 = new Label();
+            this.labelTotalScore2 = new Label();
+            this.splitContainerNameAndCurrentScore = new SplitContainer();
+            this.splitContainerTotalScore = new SplitContainer();
+
             this.labelPlayer1Name = new Label();
             this.labelPlayer2Name = new Label();
             this.buttonQuit = new Button();
             this.buttonStartOver = new Button();
             this.labelBackground = new Label();
             this.comboBoxBackground = new System.Windows.Forms.ComboBox();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.splitContainerNameAndCurrentScore.Panel1.SuspendLayout();
+            this.splitContainerNameAndCurrentScore.Panel2.SuspendLayout();
+            this.splitContainerNameAndCurrentScore.SuspendLayout();
+            this.splitContainerTotalScore.Panel1.SuspendLayout();
+            this.splitContainerTotalScore.Panel2.SuspendLayout();
+            this.splitContainerTotalScore.SuspendLayout();
             this.SuspendLayout();
             // 
             // headLine
@@ -580,7 +670,7 @@ namespace Ex5.UI
             this.labelScore1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelScore1.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.labelScore1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelScore1.Location = new System.Drawing.Point(100, 110);
+            this.labelScore1.Location = new System.Drawing.Point(80, 110);
             this.labelScore1.Name = "labelScore1";
             this.labelScore1.Size = new System.Drawing.Size(36, 37);
             this.labelScore1.TabIndex = 3;
@@ -594,41 +684,93 @@ namespace Ex5.UI
             this.labelScore2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelScore2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelScore2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelScore2.Location = new System.Drawing.Point(100, 110);
+            this.labelScore2.Location = new System.Drawing.Point(80, 110);
             this.labelScore2.Name = "labelScore2";
             this.labelScore2.Size = new System.Drawing.Size(36, 37);
             this.labelScore2.TabIndex = 4;
             this.labelScore2.Text = "0";
             this.labelScore2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // splitContainer1
+            // splitContainerNameAndCurrentScore
             // 
-            this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer1.Location = new System.Drawing.Point(688, 106);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = Orientation.Horizontal;
+            this.splitContainerNameAndCurrentScore.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainerNameAndCurrentScore.Location = new System.Drawing.Point(712, 106);
+            this.splitContainerNameAndCurrentScore.Name = "splitContainerNameAndCurrentScore";
+            this.splitContainerNameAndCurrentScore.Orientation = Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerNameAndCurrentScore.Panel1
             // 
 
-            ////this.splitContainer1.Panel1.BackgroundImage = Image.FromFile(@"C:\black_soldier.PNG");
-            this.splitContainer1.Panel1.BackgroundImage = Properties.Resources.black_soldier;
+            this.splitContainerNameAndCurrentScore.Panel1.BackgroundImage = Properties.Resources.black_soldier;
 
-            this.splitContainer1.Panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            this.splitContainer1.Panel1.Controls.Add(this.labelScore1);
-            this.splitContainer1.Panel1.Controls.Add(this.labelPlayer1Name);
+            this.splitContainerNameAndCurrentScore.Panel1.BackgroundImageLayout = ImageLayout.Stretch;
+            this.splitContainerNameAndCurrentScore.Panel1.Controls.Add(this.labelScore1);
+            this.splitContainerNameAndCurrentScore.Panel1.Controls.Add(this.labelPlayer1Name);
             // 
-            // splitContainer1.Panel2
+            // splitContainerNameAndCurrentScore.Panel2
             // 
-            this.splitContainer1.Panel2.BackgroundImage = Properties.Resources.red_soldier;
+            this.splitContainerNameAndCurrentScore.Panel2.BackgroundImage = Properties.Resources.red_soldier;
+            this.splitContainerNameAndCurrentScore.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
+            this.splitContainerNameAndCurrentScore.Panel2.Controls.Add(this.labelScore2);
+            this.splitContainerNameAndCurrentScore.Panel2.Controls.Add(this.labelPlayer2Name);
+            this.splitContainerNameAndCurrentScore.Size = new System.Drawing.Size(177, 354);
+            this.splitContainerNameAndCurrentScore.SplitterDistance = 177;
+            this.splitContainerNameAndCurrentScore.SplitterWidth = 1;
+            this.splitContainerNameAndCurrentScore.TabIndex = 3;
+            // 
+            // splitContainerTotalScore
+            // 
+            this.splitContainerTotalScore.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainerTotalScore.Location = new System.Drawing.Point(820, 540);
+            this.splitContainerTotalScore.Name = "splitContainerTotalScore";
+            this.splitContainerTotalScore.Orientation = Orientation.Vertical;
+            // 
+            // splitContainerTotalScore.Panel1
+            // 
 
-            this.splitContainer1.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
-            this.splitContainer1.Panel2.Controls.Add(this.labelScore2);
-            this.splitContainer1.Panel2.Controls.Add(this.labelPlayer2Name);
-            this.splitContainer1.Size = new System.Drawing.Size(218, 354);
-            this.splitContainer1.SplitterDistance = 177;
-            this.splitContainer1.SplitterWidth = 1;
-            this.splitContainer1.TabIndex = 3;
+            this.splitContainerTotalScore.Panel1.BackgroundImage = Properties.Resources.black_soldier;
+
+            this.splitContainerTotalScore.Panel1.BackgroundImageLayout = ImageLayout.Stretch;
+            //this.splitContainerTotalScore.Panel1.Controls.Add(this.labelTotalScore1);
+            // 
+            // splitContainerTotalScore.Panel2
+            // 
+            this.splitContainerTotalScore.Panel2.BackgroundImage = Properties.Resources.red_soldier;
+
+            this.splitContainerTotalScore.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
+            //this.splitContainerTotalScore.Panel2.Controls.Add(this.labelTotalScore2);
+            this.splitContainerTotalScore.Size = new System.Drawing.Size(100, 50);
+            this.splitContainerTotalScore.SplitterDistance = 50;
+            this.splitContainerTotalScore.SplitterWidth = 1;
+            this.splitContainerTotalScore.TabIndex = 3;
+            // 
+            // labelTotalScore1
+            // 
+            this.labelTotalScore1.AutoSize = true;
+            this.labelTotalScore1.BackColor = System.Drawing.Color.Transparent;
+            this.labelTotalScore1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelTotalScore1.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.labelTotalScore1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelTotalScore1.Location = new System.Drawing.Point(25, 25);
+            this.labelTotalScore1.Name = "labelTotalScore1";
+            this.labelTotalScore1.Size = new System.Drawing.Size(15, 15);
+            this.labelTotalScore1.TabIndex = 3;
+            this.labelTotalScore1.Text = "0";
+            this.labelTotalScore1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelTotalScore2
+            // 
+            this.labelTotalScore2.AutoSize = true;
+            this.labelTotalScore2.BackColor = System.Drawing.Color.Transparent;
+            this.labelTotalScore2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelTotalScore2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelTotalScore2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelTotalScore2.Location = new System.Drawing.Point(25, 25);
+            this.labelTotalScore2.Name = "labelTotalScore2";
+            this.labelTotalScore2.Size = new System.Drawing.Size(15, 15);
+            this.labelTotalScore2.TabIndex = 4;
+            this.labelTotalScore2.Text = "0";
+            this.labelTotalScore2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // labelPlayer1Name
             // 
@@ -637,7 +779,7 @@ namespace Ex5.UI
             this.labelPlayer1Name.Text = m_FormNameLogin.Player1Name;
             this.labelPlayer1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelPlayer1Name.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.labelPlayer1Name.Location = new System.Drawing.Point(61, 55);
+            this.labelPlayer1Name.Location = new System.Drawing.Point(40, 55);
             this.labelPlayer1Name.Name = "labelPlayer1Name";
             this.labelPlayer1Name.Size = new System.Drawing.Size(101, 40);
             this.labelPlayer1Name.TabIndex = 2;
@@ -650,7 +792,7 @@ namespace Ex5.UI
             this.labelPlayer2Name.BackColor = System.Drawing.Color.Transparent;
             this.labelPlayer2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelPlayer2Name.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelPlayer2Name.Location = new System.Drawing.Point(61, 55);
+            this.labelPlayer2Name.Location = new System.Drawing.Point(40, 55);
             this.labelPlayer2Name.Name = "labelPlayer2Name";
             this.labelPlayer2Name.Size = new System.Drawing.Size(101, 40);
             this.labelPlayer2Name.TabIndex = 3;
@@ -747,7 +889,7 @@ namespace Ex5.UI
             this.comboBoxBackground.Name = "comboBoxBackground";
             this.comboBoxBackground.Size = new System.Drawing.Size(143, 21);
             //this.comboBoxBackground.TabIndex = 0;
-            this.comboBoxBackground.Text = "Green";
+            this.comboBoxBackground.Text = "Blue";
             this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackground_SelectedIndexChanged);
             // 
             // labelBackground
@@ -756,7 +898,7 @@ namespace Ex5.UI
             this.labelBackground.BackColor = System.Drawing.Color.Transparent;
             this.labelBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelBackground.ForeColor = System.Drawing.Color.Yellow;
-            this.labelBackground.BackColor = System.Drawing.Color.Blue;
+            ////this.labelBackground.BackColor = System.Drawing.Color.Blue;
             this.labelBackground.Location = new System.Drawing.Point(680, 502);
             this.labelBackground.Name = "labelBackground";
             this.labelBackground.Size = new System.Drawing.Size(115, 15);
@@ -767,12 +909,14 @@ namespace Ex5.UI
             // FormGame
             // 
             this.BackColor = System.Drawing.Color.Black;
-            this.BackgroundImage = Properties.Resources.green_Background;
+            this.BackgroundImage = Properties.Resources.blue_Background;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 694);
             this.Controls.Add(this.buttonStartOver);
             this.Controls.Add(this.buttonQuit);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainerNameAndCurrentScore);
+            this.Controls.Add(this.splitContainerTotalScore);
+
             this.Controls.Add(this.headLine);
             this.Controls.Add(this.comboBoxBackground);
             this.Controls.Add(this.labelBackground);
@@ -782,12 +926,17 @@ namespace Ex5.UI
             this.MaximizeBox = false;
             this.MinimizeBox = true;
             this.Icon = Properties.Resources.damka_Icon;
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
+            this.splitContainerNameAndCurrentScore.Panel1.ResumeLayout(false);
+            this.splitContainerNameAndCurrentScore.Panel1.PerformLayout();
+            this.splitContainerNameAndCurrentScore.Panel2.ResumeLayout(false);
+            this.splitContainerNameAndCurrentScore.Panel2.PerformLayout();
+            this.splitContainerNameAndCurrentScore.ResumeLayout(false);
+            this.splitContainerTotalScore.Panel1.ResumeLayout(false);
+            this.splitContainerTotalScore.Panel1.PerformLayout();
+            this.splitContainerTotalScore.Panel2.ResumeLayout(false);
+            this.splitContainerTotalScore.Panel2.PerformLayout();
+            this.splitContainerTotalScore.ResumeLayout(false);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

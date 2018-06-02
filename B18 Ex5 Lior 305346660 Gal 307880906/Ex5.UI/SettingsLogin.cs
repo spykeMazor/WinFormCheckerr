@@ -40,11 +40,7 @@ namespace Ex5.UI
         {
             bool userChoosedSize = true;
             LogInExceptionForm logInException;
-            ////////
-            MessageBoxButtons checkrhis = MessageBoxButtons.OK;
-            
-            MessageBox checkrhgis;
-            ///////////
+     
             if ((Player1Name.Length > 0) && (Player2Name.Length > 0) && (Player1Name.Length < 15) && (Player2Name.Length < 15))
             {
                 if (boardGameSmallSize.Checked)

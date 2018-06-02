@@ -19,6 +19,10 @@ namespace Ex5.UI
 
         public const string k_NameLogInException = "\nPlayer\'s name must include \n1-15 charecters";
         public const string k_NameLogInExceptionTitle = "Name Login Error";
+        public const string k_WinnerMessage = " Won!\nAnother Round?";
+        public const string k_DrawMessage = " Tie!\nAnother Round?";
+        public const string k_DamkaTitle = "Damka";
+        public const string k_EmptyString = "";
 
     }
 }
