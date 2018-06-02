@@ -283,6 +283,7 @@ namespace Ex5.UI
                 else              
                 { //// Player wants to start over
                     ////this.buttonStartOver_Click.Click;
+
                     GetNameLogin.Player1TotalScoreCounter += m_Game.Player1Score();
                     GetNameLogin.Player2TotalScoreCounter += m_Game.Player2Score();
                     this.Update();
