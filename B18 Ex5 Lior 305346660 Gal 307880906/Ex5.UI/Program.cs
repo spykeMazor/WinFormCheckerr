@@ -10,14 +10,21 @@ namespace Ex5.UI
         public static void Main()
         {
             FormGame form = new FormGame();
-            form.FormGameStart();
+            SettingsLogin formNameLogin = new SettingsLogin();
+            formNameLogin.ShowDialog();
+            form.FormGameStart(formNameLogin);
             while (form.WantsToPlay)
             {
                 form.ShowDialog();
-                form.FormGameStart();
+                if (!form.StartOverGame)
+                {
+                    formNameLogin = new SettingsLogin();
+                    formNameLogin.ShowDialog();
+                }
+                form = new FormGame();
+                form.FormGameStart(formNameLogin);
             }
-            //GameSettings f = new GameSettings();
-            //f.ShowDialog();
+
         }
 
     }

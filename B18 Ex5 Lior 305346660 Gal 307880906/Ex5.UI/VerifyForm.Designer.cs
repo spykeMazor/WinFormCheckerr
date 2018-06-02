@@ -98,7 +98,6 @@ namespace Ex5.UI
             this.Text = WhatToPrintTitle;
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

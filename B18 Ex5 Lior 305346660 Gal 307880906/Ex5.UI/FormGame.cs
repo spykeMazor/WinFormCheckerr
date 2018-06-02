@@ -29,8 +29,9 @@ namespace Ex5.UI
             OptionalMoveTo
 
         }
+        SettingsLogin m_FormNameLogin;
 
-        SettingsLogin m_FormNameLogin = new SettingsLogin();
+        
         Image m_BlackChackerImage;
         Image m_RedChackerImage;
         Image m_BlackQueenChackerImage;
@@ -52,6 +53,8 @@ namespace Ex5.UI
         private Label labelPlayer1Name;
         private Label labelPlayer2Name;
         private Button buttonQuit;
+        private bool startOverSameDetails = false;
+        
         ////private ComboBox comboBoxBackground;
         private Button buttonStartOver;
 
@@ -59,27 +62,39 @@ namespace Ex5.UI
         private PictureBox arrowPictureBoxPlayer1;
         private PictureBox arrowPictureBoxPlayer2;
         ////private Image m_MyBackground ;
-        /// </summary>
-        /// 
+
         LogInExceptionForm wongInputException = new LogInExceptionForm("Worng Move", "Worng Move");
 
-        public void FormGameStart()
+        private ComboBox comboBoxBackground;
+
+        private Image m_MyBackground;
+        private Label labelBackground;
+
+        public void FormGameStart(SettingsLogin i_FormNameLogin)
         {
-            m_FormNameLogin.ShowDialog();
-            if (m_FormNameLogin.DialogResult == DialogResult.OK)
-            {                
+            ////m_FormNameLogin.ShowDialog();
+            GetNameLogin = i_FormNameLogin;
+            if (GetNameLogin.DialogResult == DialogResult.OK)
+            {
                 loadCheckersPics();
                 InitializeComponent();
             }
             else
             {
-                wantsToPlay = false;
+                WantsToPlay = false;
             }
         }
 
         public bool WantsToPlay
         {
             get { return wantsToPlay; }
+            set { wantsToPlay = value; }
+        }
+
+        public bool StartOverGame
+        {
+            get { return startOverSameDetails; }
+            set { startOverSameDetails = value; }
         }
 
         private void loadCheckersPics()
@@ -106,6 +121,11 @@ namespace Ex5.UI
             set { m_FormNameLogin = value; }
         }
 
+        public Image UpdateBackground
+        {
+            get { return m_MyBackground; }
+            set { m_MyBackground = value; }
+        }
         ////public Image UpdateBackground
         ////{
         ////    get { return m_MyBackground; }
@@ -369,7 +389,7 @@ namespace Ex5.UI
                      computerNextMove.Key,
                        computerNextMove.Value,
                        ref m_wasAttack, ref m_hasAnotherAttack);
-            Thread.Sleep(1500);
+            Thread.Sleep(2000);
             initCheckers();
             this.labelScore1.Text = m_Game.Player1Score().ToString();
             this.labelScore2.Text = m_Game.Player2Score().ToString();
@@ -478,36 +498,40 @@ namespace Ex5.UI
             }
         }
 
-        ////private void comboBoxBackground_SelectedIndexChanged(object sender, EventArgs e)
-        ////{
-        ////    if (this.Text.CompareTo("Blue") == 0)
-        ////    {
-        ////        UpdateBackground = Properties.Resources.blue_Background;
-        ////    }
-        ////    else if (this.Text.CompareTo("Purple") == 0)
-        ////    {
-        ////        UpdateBackground = Properties.Resources.purple_Background;
-        ////    }
-        ////    else if (this.Text.CompareTo("Heart") == 0)
-        ////    {
-        ////        UpdateBackground = Properties.Resources.heart_Background;
-        ////    }
-        ////    else if (this.Text.CompareTo("Green") == 0)
-        ////    {
-        ////        UpdateBackground = Properties.Resources.green_Background;
-        ////    }
-        ////    else
-        ////    {
-        ////        UpdateBackground = Properties.Resources.damka3d;
-        ////    }
+        private void comboBoxBackground_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxBackground.Text.CompareTo("Damka3D") == 0)
+            {
+                UpdateBackground = Properties.Resources.damka3d;
+                this.headLine.ForeColor = System.Drawing.Color.Yellow;
 
-        ////}
+            }
+            else if (this.comboBoxBackground.Text.CompareTo("Purple") == 0)
+            {
+                UpdateBackground = Properties.Resources.purple_Background;
+            }
+            else if (this.comboBoxBackground.Text.CompareTo("Heart") == 0)
+            {
+                UpdateBackground = Properties.Resources.heart_Background;
+            }
+            else if (this.comboBoxBackground.Text.CompareTo("Green") == 0)
+            {
+                UpdateBackground = Properties.Resources.green_Background;
+            }
+            else
+            {
+                UpdateBackground = Properties.Resources.blue_Background;
+            }
+
+            this.BackgroundImage = UpdateBackground;
+        }
+
 
         //private void checkerMove(Point i_MoveFrom,Point i_MoveTo, Image i_CheckerType)
         //{
         //    PictureBox tempPicBox = new PictureBox();
         //    tempPicBox.Image = i_CheckerType;
-            
+
         //}
 
         //private void timer_Tick(object sender, EventArgs e)
@@ -528,7 +552,8 @@ namespace Ex5.UI
             this.labelPlayer2Name = new Label();
             this.buttonQuit = new Button();
             this.buttonStartOver = new Button();
-            ////this.comboBoxBackground = new System.Windows.Forms.ComboBox();
+            this.labelBackground = new Label();
+            this.comboBoxBackground = new System.Windows.Forms.ComboBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -538,10 +563,10 @@ namespace Ex5.UI
             // 
             this.headLine.Anchor = AnchorStyles.Top;
             this.headLine.AutoSize = true;
-            this.headLine.BackColor = System.Drawing.Color.Yellow;
-            this.headLine.Font = new System.Drawing.Font("MV Boli", 19F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(177)), true);
-            this.headLine.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.headLine.Location = new System.Drawing.Point(298, 9);
+            this.headLine.BackColor = System.Drawing.Color.Transparent;
+            this.headLine.Font = new System.Drawing.Font("MV Boli", 19F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(177)), true);
+            this.headLine.ForeColor = System.Drawing.Color.Yellow;
+            this.headLine.Location = new System.Drawing.Point(320, 9);
             this.headLine.Name = "headLine";
             this.headLine.Size = new System.Drawing.Size(469, 43);
             this.headLine.TabIndex = 1;
@@ -595,7 +620,7 @@ namespace Ex5.UI
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackgroundImage = Properties.Resources.red_soldier; 
+            this.splitContainer1.Panel2.BackgroundImage = Properties.Resources.red_soldier;
 
             this.splitContainer1.Panel2.BackgroundImageLayout = ImageLayout.Stretch;
             this.splitContainer1.Panel2.Controls.Add(this.labelScore2);
@@ -700,48 +725,68 @@ namespace Ex5.UI
             this.buttonStartOver.TextImageRelation = TextImageRelation.ImageAboveText;
             this.buttonStartOver.UseVisualStyleBackColor = false;
             this.buttonStartOver.Click += new System.EventHandler(this.buttonStartOver_Click);
-            ////// 
-            ////// comboBoxBackground
-            ////// 
-            ////this.comboBoxBackground.BackColor = System.Drawing.Color.Blue;
-            ////this.comboBoxBackground.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            ////this.comboBoxBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            ////this.comboBoxBackground.ForeColor = System.Drawing.Color.Yellow;
-            ////this.comboBoxBackground.FormattingEnabled = true;
-            ////this.comboBoxBackground.ItemHeight = 13;
-            ////this.comboBoxBackground.Items.AddRange(new object[] {
-            ////"Blue ",
-            ////"Heart",
-            ////"Green",
-            ////"Purple",
-            ////"Damka3D"});
-            ////this.comboBoxBackground.Location = new System.Drawing.Point(832, 560);
-            ////this.comboBoxBackground.Name = "comboBoxBackground";
-            ////this.comboBoxBackground.Size = new System.Drawing.Size(143, 21);
-            ////this.comboBoxBackground.TabIndex = 0;
-            ////this.comboBoxBackground.Text = "BACKGROUNDS";
-            ////this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackground_SelectedIndexChanged);
+
+            ////////////////////////////////////////////////////////////////////////////
+            // 
+            // comboBoxBackground
+            // 
+            this.comboBoxBackground.BackColor = System.Drawing.Color.Blue;
+            this.comboBoxBackground.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.comboBoxBackground.ForeColor = System.Drawing.Color.Yellow;
+            this.comboBoxBackground.ItemHeight = 13;
+            this.comboBoxBackground.TabStop = false;
+            this.comboBoxBackground.Items.AddRange(new object[] {
+            "Blue",
+            "Heart",
+            "Green",
+            "Purple",
+            "Damka3D"});
+            this.comboBoxBackground.Location = new System.Drawing.Point(800, 500);
+            this.comboBoxBackground.Name = "comboBoxBackground";
+            this.comboBoxBackground.Size = new System.Drawing.Size(143, 21);
+            //this.comboBoxBackground.TabIndex = 0;
+            this.comboBoxBackground.Text = "Green";
+            this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackground_SelectedIndexChanged);
+            // 
+            // labelBackground
+            // 
+            this.labelBackground.AutoSize = true;
+            this.labelBackground.BackColor = System.Drawing.Color.Transparent;
+            this.labelBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelBackground.ForeColor = System.Drawing.Color.Yellow;
+            this.labelBackground.BackColor = System.Drawing.Color.Blue;
+            this.labelBackground.Location = new System.Drawing.Point(680, 502);
+            this.labelBackground.Name = "labelBackground";
+            this.labelBackground.Size = new System.Drawing.Size(115, 15);
+            this.labelBackground.TabIndex = 1;
+            this.labelBackground.Text = "BACKGROUNDS:";
+            //////////////////////////////////////////////////////////////////////
             //  
             // FormGame
             // 
             this.BackColor = System.Drawing.Color.Black;
-            this.BackgroundImage = Properties.Resources.damka3d;
+            this.BackgroundImage = Properties.Resources.green_Background;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 694);
             this.Controls.Add(this.buttonStartOver);
             this.Controls.Add(this.buttonQuit);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.headLine);
-            ////this.Controls.Add(this.comboBoxBackground);
+            this.Controls.Add(this.comboBoxBackground);
+            this.Controls.Add(this.labelBackground);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Name = "FormGame";
             this.Text = "Gal & Lior Checker Game";
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+            this.Icon = Properties.Resources.damka_Icon;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -763,9 +808,11 @@ namespace Ex5.UI
             startOver.ShowDialog();
             if (startOver.DialogResult == DialogResult.Yes)
             {
-                loadCheckersPics();
-                InitializeComponent();
-                InitControls();
+                ////////////////////////loadCheckersPics();
+                ////////////////////////InitializeComponent();
+                ////////////////////////InitControls();
+                StartOverGame = true;
+                this.Close();
             }
         }
     }

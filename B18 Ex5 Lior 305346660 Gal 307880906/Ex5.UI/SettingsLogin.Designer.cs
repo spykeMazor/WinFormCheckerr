@@ -44,6 +44,10 @@ namespace Ex5.UI
             this.labelBoardSize = new Label();
             this.labelPlayers = new Label();
             this.labelPlayer1Name = new Label();
+            this.pictureBoxBlackSoldier = new System.Windows.Forms.PictureBox();
+            this.pictureBoxRedSoldier = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlackSoldier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRedSoldier)).BeginInit();
             ////this.buttonCancel = new Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -199,6 +203,28 @@ namespace Ex5.UI
             ////this.buttonCancel.UseVisualStyleBackColor = false;
             ////this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // pictureBoxBlackSoldier
+            // 
+            this.pictureBoxBlackSoldier.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxBlackSoldier.BackgroundImage = global::Ex5.UI.Properties.Resources.black_soldier;
+            this.pictureBoxBlackSoldier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxBlackSoldier.Location = new System.Drawing.Point(435, 253);
+            this.pictureBoxBlackSoldier.Name = "pictureBoxBlackSoldier";
+            this.pictureBoxBlackSoldier.Size = new System.Drawing.Size(50, 50);
+            this.pictureBoxBlackSoldier.TabIndex = 2;
+            this.pictureBoxBlackSoldier.TabStop = false;
+            // 
+            // pictureBoxRedSoldier
+            // 
+            this.pictureBoxRedSoldier.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxRedSoldier.BackgroundImage = global::Ex5.UI.Properties.Resources.red_soldier;
+            this.pictureBoxRedSoldier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxRedSoldier.Location = new System.Drawing.Point(435, 316);
+            this.pictureBoxRedSoldier.Name = "pictureBoxRedSoldier";
+            this.pictureBoxRedSoldier.Size = new System.Drawing.Size(50, 50);
+            this.pictureBoxRedSoldier.TabIndex = 3;
+            this.pictureBoxRedSoldier.TabStop = false;
+            // 
             // SettingsLogin
             // 
             this.AcceptButton = this.buttonDone;
@@ -218,18 +244,23 @@ namespace Ex5.UI
             this.Controls.Add(this.checkBoxPlayer2);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.textBoxPlayer1Name);
+            this.Controls.Add(this.pictureBoxRedSoldier);
+            this.Controls.Add(this.pictureBoxBlackSoldier);
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+            this.Icon = Properties.Resources.damka_Icon;
             this.Name = "SettingsLogin";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Game Settings";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlackSoldier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRedSoldier)).EndInit();
             this.PerformLayout();
-
         }
+
 
         #endregion
         private TextBox textBoxPlayer1Name;
@@ -243,6 +274,8 @@ namespace Ex5.UI
         private Label labelBoardSize;
         private Label labelPlayers;
         private Label labelPlayer1Name;
+        private PictureBox pictureBoxBlackSoldier;
+        private PictureBox pictureBoxRedSoldier;
         ////private .Button buttonCancel;
     }
 }

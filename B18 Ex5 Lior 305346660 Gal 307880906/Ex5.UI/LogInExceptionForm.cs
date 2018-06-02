@@ -113,8 +113,8 @@ namespace Ex5.UI
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
         private Button buttonOK;
         private PictureBox pictureBoxIcon;
         private TextBox errorMessage;
