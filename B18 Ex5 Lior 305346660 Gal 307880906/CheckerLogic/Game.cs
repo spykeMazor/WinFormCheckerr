@@ -458,14 +458,27 @@ namespace CheckerLogic
             PointOfPosition leftDownAfterAttack = new PointOfPosition(i_XCoordinate - 2, i_YCoordinate + 2);
             PointOfPosition rightDownAfterAttack = new PointOfPosition(i_XCoordinate + 2, i_YCoordinate + 2);
             char SymbolOfChecker = i_SymbolOfChecker;
+            //char leftUp;
+            //char RightUp;
+            //char leftDown;
+            //char RightDown;
             //Player.e_LocationOfThePlayer location;
             //if(SymbolOfChecker == (char)Checker.Symbol.U || SymbolOfChecker ==)
+
+            //// {X OR K} PLAYIN, OR U
             if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K ||
                 SymbolOfChecker == (char)Checker.Symbol.U)
             {
+               
+                castingSymbolForNotEatingFromTheSameGroup(ref SymbolOfChecker);
+               
                 if ((leftUpAfterAttack.X >= 0 && leftUpAfterAttack.Y >= 0) &&
                     (leftUpAfterAttack.X < m_BoardSize && leftUpAfterAttack.Y < m_BoardSize))
                 {
+                    if (SymbolOfChecker == (char)Checker.Symbol.X && m_MatrixBoardForTesting[leftUp.Y, leftUp.X] == (char)Checker.Symbol.K)
+                    {
+                        SymbolOfChecker = (char)Checker.Symbol.K;
+                    }
                     if (m_MatrixBoardForTesting[leftUpAfterAttack.Y, leftUpAfterAttack.X] == '\0' &&
                         m_MatrixBoardForTesting[leftUp.Y, leftUp.X] != SymbolOfChecker &&
                         m_MatrixBoardForTesting[leftUp.Y, leftUp.X] != '\0')
@@ -479,6 +492,10 @@ namespace CheckerLogic
                 if ((rightUpAfterAttack.X >= 0 && rightUpAfterAttack.Y >= 0) &&
                     (rightUpAfterAttack.X < m_BoardSize && rightUpAfterAttack.Y < m_BoardSize))
                 {
+                    if (SymbolOfChecker == (char)Checker.Symbol.X && m_MatrixBoardForTesting[rightUp.Y, rightUp.X] == (char)Checker.Symbol.K)
+                    {
+                        SymbolOfChecker = (char)Checker.Symbol.K;
+                    }
                     if (m_MatrixBoardForTesting[rightUpAfterAttack.Y, rightUpAfterAttack.X] == '\0' &&
                         m_MatrixBoardForTesting[rightUp.Y, rightUp.X] != SymbolOfChecker &&
                         m_MatrixBoardForTesting[rightUp.Y, rightUp.X] != '\0')
@@ -489,13 +506,20 @@ namespace CheckerLogic
                     }
                 }
             }
-
+            //// 
             if (SymbolOfChecker == (char)Checker.Symbol.O || SymbolOfChecker == (char)Checker.Symbol.K ||
                SymbolOfChecker == (char)Checker.Symbol.U)
             {
+               
+                castingSymbolForNotEatingFromTheSameGroup(ref SymbolOfChecker);
+                
                 if ((leftDownAfterAttack.X >= 0 && leftDownAfterAttack.Y >= 0) &&
                     (leftDownAfterAttack.X < m_BoardSize && leftDownAfterAttack.Y < m_BoardSize))
                 {
+                    if (SymbolOfChecker == (char)Checker.Symbol.O && m_MatrixBoardForTesting[leftDown.Y, leftDown.X] == (char)Checker.Symbol.U)
+                    {
+                        SymbolOfChecker = (char)Checker.Symbol.U;
+                    }
                     if (m_MatrixBoardForTesting[leftDownAfterAttack.Y, leftDownAfterAttack.X] == '\0' &&
                         m_MatrixBoardForTesting[leftDown.Y, leftDown.X] != SymbolOfChecker &&
                         m_MatrixBoardForTesting[leftDown.Y, leftDown.X] != '\0')
@@ -509,6 +533,10 @@ namespace CheckerLogic
                 if ((rightDownAfterAttack.X >= 0 && rightDownAfterAttack.Y >= 0) &&
                     (rightDownAfterAttack.X < m_BoardSize && rightDownAfterAttack.Y < m_BoardSize))
                 {
+                    if (SymbolOfChecker == (char)Checker.Symbol.O && m_MatrixBoardForTesting[rightDown.Y, rightDown.X] == (char)Checker.Symbol.U)
+                    {
+                        SymbolOfChecker = (char)Checker.Symbol.U;
+                    }
                     if (m_MatrixBoardForTesting[rightDownAfterAttack.Y, rightDownAfterAttack.X] == '\0' &&
                         m_MatrixBoardForTesting[rightDown.Y, rightDown.X] != SymbolOfChecker &&
                         m_MatrixBoardForTesting[rightDown.Y, rightDown.X] != '\0')
@@ -519,6 +547,26 @@ namespace CheckerLogic
                     }
                 }
             }
+        }
+
+        private void castingSymbolForNotEatingFromTheSameGroup(ref char i_SymbolOfChecker)
+        {
+            if (i_SymbolOfChecker == (char)Checker.Symbol.K)
+            {
+                i_SymbolOfChecker = (char)Checker.Symbol.X;
+            }
+            //else if (i_SymbolOfChecker == (char)Checker.Symbol.X)
+            //{
+            //    i_SymbolOfChecker = (char)Checker.Symbol.K;
+            //}
+            else if (i_SymbolOfChecker == (char)Checker.Symbol.U)
+            {
+                i_SymbolOfChecker = (char)Checker.Symbol.O;
+            }
+            //else if (i_SymbolOfChecker == (char)Checker.Symbol.O)
+            //{
+            //    i_SymbolOfChecker = (char)Checker.Symbol.U;
+            //}
         }
 
         public Player TheWinnerPlayerIs()
