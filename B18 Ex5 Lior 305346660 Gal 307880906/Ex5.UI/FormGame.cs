@@ -328,7 +328,7 @@ namespace Ex5.UI
                     { ////--->Combo one more attack -> turn stay in Player2                 
                         invokeClickOnChecker(m_Game.AttackListOfPlayer2);
                     }
-
+                     
                     this.arrowPictureBoxPlayer1.Visible = false;
                     this.arrowPictureBoxPlayer2.Visible = true;
                 }
