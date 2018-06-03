@@ -9,13 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex5.UI", "Ex5.UI\Ex5.UI.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD48D1FC-3B84-4294-8200-BB70120AE2EE}"
 	ProjectSection(SolutionItems) = preProject
-		black_king.png = black_king.png
-		black_marble.jpg = black_marble.jpg
-		black_soldier.png = black_soldier.png
-		brown_square.PNG = brown_square.PNG
-		red_queen.png = red_queen.png
-		red_soldier.png = red_soldier.png
-		whitesquare.PNG = whitesquare.PNG
+		‏‏‫Exercise Checking Report.txt = ‏‏‫Exercise Checking Report.txt
 	EndProjectSection
 EndProject
 Global

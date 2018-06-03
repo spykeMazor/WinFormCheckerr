@@ -133,16 +133,6 @@ namespace Ex5.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap blue_Circle {
-            get {
-                object obj = ResourceManager.GetObject("blue_Circle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap brown_square {
             get {
                 object obj = ResourceManager.GetObject("brown_square", resourceCulture);

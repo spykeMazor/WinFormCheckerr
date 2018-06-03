@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Drawing;
 
 namespace Ex5.UI
 {
@@ -25,10 +26,10 @@ namespace Ex5.UI
             //// 
             //// comboBoxBackground
             //// 
-            this.comboBoxBackground.BackColor = System.Drawing.Color.Blue;
+            this.comboBoxBackground.BackColor = Color.Blue;
             this.comboBoxBackground.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.comboBoxBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (byte)177);
-            this.comboBoxBackground.ForeColor = System.Drawing.Color.Yellow;
+            this.comboBoxBackground.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, (byte)177);
+            this.comboBoxBackground.ForeColor = Color.Yellow;
             this.comboBoxBackground.FormattingEnabled = true;
             this.comboBoxBackground.ItemHeight = 13;
             this.comboBoxBackground.Items.AddRange(new object[] {
@@ -37,18 +38,18 @@ namespace Ex5.UI
             "Green",
             "Purple",
             "Damka3D"});
-            this.comboBoxBackground.Location = new System.Drawing.Point(457, 131);
+            this.comboBoxBackground.Location = new Point(457, 131);
             this.comboBoxBackground.Name = "comboBoxBackground";
-            this.comboBoxBackground.Size = new System.Drawing.Size(143, 21);
+            this.comboBoxBackground.Size = new Size(143, 21);
             this.comboBoxBackground.TabIndex = 0;
             this.comboBoxBackground.Text = "BACKGROUNDS";
             this.comboBoxBackground.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackground_SelectedIndexChanged);
             //// 
             //// Testing
             //// 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 627);
+            this.ClientSize = new Size(645, 627);
             this.Controls.Add(this.comboBoxBackground);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Testing";

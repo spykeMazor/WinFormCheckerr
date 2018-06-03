@@ -113,8 +113,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsLogin.resx">
       <DependentUpon>SettingsLogin.cs</DependentUpon>
@@ -134,6 +134,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\blue_Circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_Png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_PngYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\black_king.png" />
   </ItemGroup>
   <ItemGroup>
@@ -146,10 +155,28 @@
     <None Include="Resources\blue.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\blue_Background.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\brown_square.PNG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\damka3d.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart_Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\informationPng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purple_Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question_Png.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\red_queen.png" />
@@ -158,52 +185,25 @@
     <None Include="Resources\red_soldier.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Warning_Png.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\whitesquare.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\damka_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\information_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\informationPng.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Warning_Png.png" />
+    <None Include="Resources\question_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warning_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_Png.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\blue_Circle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow_PngYellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\question_Png.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\question_Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\blue_Background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\green_Background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\purple_Background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\heart_Background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\checkered.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\damka_Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
