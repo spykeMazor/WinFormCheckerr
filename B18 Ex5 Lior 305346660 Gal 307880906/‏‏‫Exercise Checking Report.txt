@@ -10,5 +10,7 @@
 			messages for different kind of events, we used those methods as necessary to show 
 			knowledge at the subject but also we created our own "custom" messageBox for other
 			events.
-			*We
+			Graphical additions added:
+			* We build a richer LOGIN form whith backgroubd and images to present player color.
+			* 
 ========================End Exercise Checking Report======================== 
