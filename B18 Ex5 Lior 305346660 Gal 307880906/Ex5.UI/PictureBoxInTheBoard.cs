@@ -9,7 +9,7 @@ namespace Ex5.UI
 {
     public class PictureBoxInTheBoard : PictureBox
     {
-        Point m_PointInTheBoard = new Point();
+        private Point m_PointInTheBoard = new Point();
 
         public Point PointInTheBoard
         {

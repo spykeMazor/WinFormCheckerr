@@ -15,7 +15,6 @@ namespace Ex5.UI
         public const string k_StartOverMessageTtle = "Start Over";
         public const string k_BoardSizeLogInException = "\nYou must choose Board \nSize from the given options";
         public const string k_BoardSizeLogInExceptionTitle = "Board Size Error";
-
         public const string k_NameLogInException = "\nPlayer\'s name must include \n1-15 charecters";
         public const string k_NameLogInExceptionTitle = "Name Login Error";
         public const string k_WinnerMessage = " Won!\nAnother Round?";

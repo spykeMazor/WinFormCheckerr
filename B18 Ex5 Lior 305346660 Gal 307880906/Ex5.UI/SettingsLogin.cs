@@ -10,7 +10,7 @@ namespace Ex5.UI
 {
     public partial class SettingsLogin : Form
     {
-        GameBoardUI.e_BoardSize m_BoardSizeSelection;
+        private GameBoardUI.e_BoardSize m_BoardSizeSelection;
         private int m_Player1TotalScore;
         private int m_Player2TotalScore;
 
@@ -67,11 +67,10 @@ namespace Ex5.UI
                 if (userChoosedSize)
                 {
                     this.DialogResult = DialogResult.OK;
-
                 }
                 else
                 {
-                    //MessageBox.Show(ConstantsUI.k_BoardSizeLogInException, "Board size error", checkrhis, MessageBoxIcon.Information);
+                    ////MessageBox.Show(ConstantsUI.k_BoardSizeLogInException, "Board size error", checkrhis, MessageBoxIcon.Information);
                     logInException = new LogInExceptionForm(ConstantsUI.k_BoardSizeLogInException, ConstantsUI.k_BoardSizeLogInExceptionTitle);
                     logInException.ShowDialog();
                 }
@@ -105,7 +104,10 @@ namespace Ex5.UI
 
                 return player2Name;
             }
-            set { textBoxPlayer2Name.Text = value; }
+            set
+            {
+                textBoxPlayer2Name.Text = value;
+            }
         }
 
         public int Player1TotalScoreCounter
@@ -127,7 +129,7 @@ namespace Ex5.UI
 
         public bool ComputerOrNot
         {
-            get {return checkBoxPlayer2.Checked; }
+            get { return checkBoxPlayer2.Checked; }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

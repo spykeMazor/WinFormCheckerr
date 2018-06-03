@@ -21,16 +21,10 @@ namespace Ex5.UI
                     formNameLogin = new SettingsLogin();
                     formNameLogin.ShowDialog();
                 }
-                ////else
-                ////{ //// Start Over Game Choosed
-                ////    formNameLogin.Player1TotalScoreCounter = form
-                ////    formNameLogin.Player2TotalScoreCounter = 
-                ////}
+
                 form = new FormGame();
                 form.FormGameStart(formNameLogin);
             }
-
         }
-
     }
 }

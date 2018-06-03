@@ -21,17 +21,16 @@ namespace Ex5.UI
             BROWN,
             WHITE,
             BLUE
-
         }
 
-        PictureBoxInTheBoard[,] m_ButtonMatrixGameBoard;
-        Image m_WhiteBackGround = Properties.Resources.whitesquare;
-        Image m_BrownBackGround = Properties.Resources.brown_square;
-        Image m_BlueBackGround = Properties.Resources.blue;
+        private PictureBoxInTheBoard[,] m_ButtonMatrixGameBoard;
+        private Image m_WhiteBackGround = Properties.Resources.whitesquare;
+        private Image m_BrownBackGround = Properties.Resources.brown_square;
+        private Image m_BlueBackGround = Properties.Resources.blue;
+        private LinkedList<PictureBoxInTheBoard> r_Player1CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
+        private LinkedList<PictureBoxInTheBoard> r_Player2CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
+        ////CheckerLogic.Game Game;
 
-        LinkedList <PictureBoxInTheBoard> r_Player1CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
-        LinkedList<PictureBoxInTheBoard> r_Player2CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
-        //CheckerLogic.Game Game;
         public GameBoardUI(e_BoardSize i_BoardSize)
         {
             int boardSizeAsInt = (int)i_BoardSize;

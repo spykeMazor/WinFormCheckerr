@@ -12,6 +12,7 @@ namespace Ex5.UI
     {
         private string m_WhatToDo;
         private string m_WhatToDoTitle;
+
         public VerifyForm(string i_WhatToDo, string i_WhatToDoTitle)
         {
             WhatToPrint = i_WhatToDo;
