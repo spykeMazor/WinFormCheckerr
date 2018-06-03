@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Ex5.UI
 {
-    partial class SettingsLogin
+    public partial class SettingsLogin
     {
         private System.ComponentModel.IContainer components = null;
 

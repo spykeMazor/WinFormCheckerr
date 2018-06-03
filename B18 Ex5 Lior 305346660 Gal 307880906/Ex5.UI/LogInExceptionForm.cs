@@ -39,28 +39,28 @@ namespace Ex5.UI
         
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInExceptionForm));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(LogInExceptionForm));
             this.buttonOK = new Button();
             this.errorMessage = new TextBox();
             this.pictureBoxIcon = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)this.pictureBoxIcon).BeginInit();
+            ((ISupportInitialize)this.pictureBoxIcon).BeginInit();
             this.SuspendLayout();
             //// 
             //// buttonOK
             //// 
             this.buttonOK.AutoSize = true;
-            this.buttonOK.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.buttonOK.BackColor = SystemColors.MenuBar;
             this.buttonOK.BackgroundImageLayout = ImageLayout.Center;
             this.buttonOK.DialogResult = DialogResult.Cancel;
-            this.buttonOK.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonOK.FlatAppearance.BorderColor = Color.Black;
             this.buttonOK.FlatAppearance.BorderSize = 5;
-            this.buttonOK.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonOK.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            this.buttonOK.FlatAppearance.MouseOverBackColor = Color.Transparent;
             this.buttonOK.FlatStyle = FlatStyle.Popup;
-            this.buttonOK.Location = new System.Drawing.Point(84, 66);
+            this.buttonOK.Location = new Point(84, 66);
             this.buttonOK.Margin = new Padding(2);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new Size(75, 23);
             this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = false;
@@ -68,15 +68,15 @@ namespace Ex5.UI
             //// 
             //// errorMessage
             //// 
-            this.errorMessage.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.errorMessage.BackColor = SystemColors.ActiveBorder;
             this.errorMessage.BorderStyle = BorderStyle.None;
-            this.errorMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (byte)177);
-            this.errorMessage.Location = new System.Drawing.Point(66, 9);
+            this.errorMessage.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, (byte)177);
+            this.errorMessage.Location = new Point(66, 9);
             this.errorMessage.Margin = new Padding(2);
             this.errorMessage.Multiline = true;
             this.errorMessage.Name = "errorMessage";
             this.errorMessage.ReadOnly = true;
-            this.errorMessage.Size = new System.Drawing.Size(175, 48);
+            this.errorMessage.Size = new Size(175, 48);
             this.errorMessage.TabIndex = 1;
             this.errorMessage.Text = WhatIsExceptionType;
             this.errorMessage.TextAlign = HorizontalAlignment.Center;
@@ -85,9 +85,9 @@ namespace Ex5.UI
             //// 
             this.pictureBoxIcon.Image = Properties.Resources.Warning_Png;
             this.pictureBoxIcon.InitialImage = Properties.Resources.Warning_Png;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(12, 12);
+            this.pictureBoxIcon.Location = new Point(12, 12);
             this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.Size = new System.Drawing.Size(45, 45);
+            this.pictureBoxIcon.Size = new Size(45, 45);
             this.pictureBoxIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pictureBoxIcon.TabIndex = 2;
             this.pictureBoxIcon.TabStop = false;
@@ -95,10 +95,10 @@ namespace Ex5.UI
             //// LogInExceptionForm
             //// 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(250, 110);
+            this.BackColor = SystemColors.ActiveBorder;
+            this.ClientSize = new Size(250, 110);
             this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.buttonOK);
@@ -107,10 +107,11 @@ namespace Ex5.UI
             this.Margin = new Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.ShowInTaskbar = false;
             this.Name = "LogInExceptionForm";
             this.StartPosition = FormStartPosition.CenterParent;
             this.Text = WhatIsExceptionTitle;
-            ((System.ComponentModel.ISupportInitialize)this.pictureBoxIcon).EndInit();
+            ((ISupportInitialize)this.pictureBoxIcon).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

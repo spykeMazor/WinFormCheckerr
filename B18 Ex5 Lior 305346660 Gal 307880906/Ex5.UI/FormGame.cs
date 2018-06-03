@@ -214,8 +214,8 @@ namespace Ex5.UI
                 }
             }
         }
-        //// Convert from "PositionPoint"  to Drawing.Point obj
 
+        //// Convert from "PositionPoint" to Drawing.Point obj
         private string convertCheckerPositionPointToSquareOfLogic(Point i_CheckerPoint)
         {
             PointOfPosition tempPointPosition = new PointOfPosition();
@@ -235,19 +235,17 @@ namespace Ex5.UI
         private bool winnerOrDraw()
         {
             bool winnerOrDrawFlag = false;
-            ////int player1TotalScore = 0;
-            ////int player2TotalScore = 0;
             Player tempPlayer = m_Game.TheWinnerPlayerIs();
             DialogResult gameEndedAndWantsToStartOver;
             string resultMessage = ConstantsUI.k_EmptyString;
             if (tempPlayer != null)
-            { ////There is a WINNER IN THE GAME
+            { //// There is a WINNER in the game
                 initCheckers();
                 winnerOrDrawFlag = true;
                 resultMessage = tempPlayer.GetName + ConstantsUI.k_WinnerMessage;
             }
             else if (m_Game.ThereIsDraw())
-            { ////tHERE IS A dRAW IN THE GAME
+            { //// There is a DRAW in the game
                 initCheckers();
                 winnerOrDrawFlag = true;
                 resultMessage = tempPlayer.GetName + ConstantsUI.k_DrawMessage;
@@ -365,24 +363,29 @@ namespace Ex5.UI
                 if (!m_CurrentPlayer)
                 { //// case this is the player 1
                     changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
-                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player1,
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(
+                        m_Game.Player1,
                   m_Game.Player2,
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                   convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                 ref m_wasAttack, ref m_hasAnotherAttack);
+                 ref m_wasAttack, 
+                 ref m_hasAnotherAttack);
                     if (!winnerOrDraw())
                     {
                         initCheckers();
                         updateScore();
+                        enableOrDisableStartOverButton(ConstantsUI.k_Player2Turn);
                         m_WasMove = false;
                         if (!m_hasAnotherAttack)
                         {
                             if (m_Game.Player2.MachineOrNot)
                             {
                                 computerMove();
+                                changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                             }
                             else
                             {
+                                changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
                                 m_CurrentPlayer = true; ////---> now player2 turn
                                 if (m_Game.AttackListOfPlayer2.Count > 0)
                                 {
@@ -399,20 +402,23 @@ namespace Ex5.UI
                             invokeClickOnChecker(m_Game.AttackListOfPlayer1);
                         }
 
-                        changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                     }
                 }
                 else
                 { //// case this is the player 2
-                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
-                    m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+                    ////changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
+                    m_Game.MoveTheCheckerOfTheCorecctPlayer(
+                        m_Game.Player2,
                             m_Game.Player1,
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                             convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                            ref m_wasAttack, ref m_hasAnotherAttack);
+                            ref m_wasAttack,
+                            ref m_hasAnotherAttack);
                     if (!winnerOrDraw())
                     {
                         initCheckers();
+                        updateScore();
+                        enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);
                         m_WasMove = false;
                         if (!m_hasAnotherAttack)
                         {
@@ -431,7 +437,7 @@ namespace Ex5.UI
                             invokeClickOnChecker(m_Game.AttackListOfPlayer2);
                         }
 
-                        changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
+                        changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                     }
                 }
             }
@@ -451,17 +457,54 @@ namespace Ex5.UI
             }
         }
 
+        private void enableOrDisableStartOverButton(int i_CurrentPlayerTurn)
+        {
+            if (i_CurrentPlayerTurn == ConstantsUI.k_Player1Turn)
+            {
+                if (m_Game.Player1Score() < m_Game.Player2Score())
+                {
+                    this.buttonStartOver.Enabled = true;
+                }
+                else
+                {
+                    this.buttonStartOver.Enabled = false;
+                }
+            }
+            else
+            {
+                if (m_Game.Player1Score() > m_Game.Player2Score())
+                {
+                    this.buttonStartOver.Enabled = true;
+                }
+                else
+                {
+                    this.buttonStartOver.Enabled = false;
+                }
+            }
+
+            this.Update();
+        }
+
         private void updateScore()
         {
             this.labelScore1.Text = m_Game.Player1Score().ToString();
             this.labelScore2.Text = m_Game.Player2Score().ToString();
-            if (m_Game.Player1Score() < m_Game.Player2Score())
+            if (m_Game.Player1Score() > 9)
             {
-                this.buttonStartOver.Enabled = true;
+                this.labelScore1.Location = new Point(75, 110);
             }
             else
             {
-                this.buttonStartOver.Enabled = false;
+                this.labelScore1.Location = new Point(80, 110);
+            }
+
+            if (m_Game.Player2Score() > 9)
+            {
+                this.labelScore2.Location = new Point(75, 110);
+            }
+            else
+            {
+                this.labelScore2.Location = new Point(80, 110);
             }
 
             this.Update();
@@ -472,17 +515,19 @@ namespace Ex5.UI
             
             KeyValuePair<string, string> computerNextMove = new KeyValuePair<string, string>();
             computerNextMove = m_Game.SelectRandomMove();
-
-            m_Game.MoveTheCheckerOfTheCorecctPlayer(m_Game.Player2,
+            m_Game.MoveTheCheckerOfTheCorecctPlayer(
+                m_Game.Player2,
                        m_Game.Player1,
                      computerNextMove.Key,
                        computerNextMove.Value,
-                       ref m_wasAttack, ref m_hasAnotherAttack);
+                       ref m_wasAttack,
+                       ref m_hasAnotherAttack);
             if (!winnerOrDraw())
             {
                 Thread.Sleep(2000);
                 initCheckers();
                 updateScore();
+                enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);
                 m_WasMove = false;
                 if (!m_hasAnotherAttack)
                 {
@@ -896,7 +941,7 @@ namespace Ex5.UI
             "Green",
             "Purple",
             "Damka3D"
-            } );
+            });
 
             this.comboBoxBackground.Location = new Point(805, 500);
             this.comboBoxBackground.Name = "comboBoxBackground";

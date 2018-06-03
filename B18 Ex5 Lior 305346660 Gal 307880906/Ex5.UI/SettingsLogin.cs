@@ -104,6 +104,7 @@ namespace Ex5.UI
 
                 return player2Name;
             }
+
             set
             {
                 textBoxPlayer2Name.Text = value;

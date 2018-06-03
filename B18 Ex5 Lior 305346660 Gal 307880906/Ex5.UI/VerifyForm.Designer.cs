@@ -2,7 +2,7 @@
 
 namespace Ex5.UI
 {
-    partial class VerifyForm
+    public partial class VerifyForm
     {
         private System.ComponentModel.IContainer components = null;
 

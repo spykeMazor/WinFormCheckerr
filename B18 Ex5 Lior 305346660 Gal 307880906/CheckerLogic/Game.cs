@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.Specialized;
 using static System.Math;
+
 namespace CheckerLogic
 {
     public class Game
     {
+        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
+
+        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
+
         private Player m_Player1;
 
         private Player m_Player2;
 
-        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
-                                                                  
-        private readonly LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
-                                                                  
         private LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer1 = new LinkedList<KeyValuePair<string, string>>();
                                                                   
         private LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer2 = new LinkedList<KeyValuePair<string, string>>();
@@ -55,25 +56,25 @@ namespace CheckerLogic
 
         public LinkedList<KeyValuePair<string, string>> MoveListOfPlayer1
         {
-            get { return  r_MovesListOfPlayer1; }
+            get { return r_MovesListOfPlayer1; }
         }
 
         public LinkedList<KeyValuePair<string, string>> MoveListOfPlayer2
         {
-            get { return  r_MovesListOfPlayer2; }
+            get { return r_MovesListOfPlayer2; }
         }
 
         public LinkedList<KeyValuePair<string, string>> AttackListOfPlayer1
         {
-            get { return  m_AttackListOfPlayer1; }
+            get { return m_AttackListOfPlayer1; }
         }
 
         public LinkedList<KeyValuePair<string, string>> AttackListOfPlayer2
         {
-            get { return  m_AttackListOfPlayer2; }
+            get { return m_AttackListOfPlayer2; }
         }
 
-        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, Player i_SecondPlayer, string i_InputMoveFrom, string i_InputMoveTo,ref bool i_AttackFlag, ref bool i_AttackMoreFlag)
+        public void MoveTheCheckerOfTheCorecctPlayer(Player i_CorrectPlayer, Player i_SecondPlayer, string i_InputMoveFrom, string i_InputMoveTo, ref bool i_AttackFlag, ref bool i_AttackMoreFlag)
         {
             i_CorrectPlayer.MoveChecker(i_InputMoveFrom, i_InputMoveTo);
             i_AttackFlag = ConfirmAttack(i_InputMoveFrom, i_InputMoveTo, i_CorrectPlayer, this);
@@ -138,19 +139,17 @@ namespace CheckerLogic
             return scoreForKings + distance;
         }
 
-       
-
         public KeyValuePair<string, string> SelectRandomMove()
         {
             Random rand = new Random();
             KeyValuePair<string, string> selectedMove = new KeyValuePair<string, string>();
             UpdateMoveListOfPlayer2();
-            if ( m_AttackListOfPlayer2.Count > 0)
+            if (m_AttackListOfPlayer2.Count > 0)
             {
                 int counter = 0;
-                int numberOfMoves =  m_AttackListOfPlayer2.Count;
+                int numberOfMoves = m_AttackListOfPlayer2.Count;
                 int randomNumber = rand.Next(numberOfMoves);
-                foreach (KeyValuePair<string, string> move in  m_AttackListOfPlayer2)
+                foreach (KeyValuePair<string, string> move in m_AttackListOfPlayer2)
                 {
                     if (counter == randomNumber)
                     {
@@ -163,9 +162,9 @@ namespace CheckerLogic
             else
             {
                 int counter = 0;
-                int numberOfMoves =  r_MovesListOfPlayer2.Count;
+                int numberOfMoves = r_MovesListOfPlayer2.Count;
                 int randomNumber = rand.Next(numberOfMoves);
-                foreach (KeyValuePair<string, string> move in  r_MovesListOfPlayer2)
+                foreach (KeyValuePair<string, string> move in r_MovesListOfPlayer2)
                 {
                     if (counter == randomNumber)
                     {
@@ -298,14 +297,14 @@ namespace CheckerLogic
             bool optionalMove = false;
             if (i_UpOrDownPlayer == Player.e_LocationOfThePlayer.UP)
             {
-                if (ListContainTwoStringsInOneNode( r_MovesListOfPlayer1, i_MoveFrom, i_MoveTo))
+                if (ListContainTwoStringsInOneNode(r_MovesListOfPlayer1, i_MoveFrom, i_MoveTo))
                 {
                     optionalMove = true;
                 }
             }
             else
             {
-                if (ListContainTwoStringsInOneNode( r_MovesListOfPlayer2, i_MoveFrom, i_MoveTo))
+                if (ListContainTwoStringsInOneNode(r_MovesListOfPlayer2, i_MoveFrom, i_MoveTo))
                 {
                     optionalMove = true;
                 }
@@ -314,31 +313,31 @@ namespace CheckerLogic
             return optionalMove;
         }
 
-        //private bool LliegalInputByBoardSize(string i_MoveFrom, string i_MoveTo)
-        //{
-        //    bool lligalMove = true;
-        //    string limitSquare = Player.ConvertSizeOfTheBoardToSquare(m_BoardSize);
-        //    char[] limitSqureAsTwoChars = { limitSquare[0], limitSquare[1] };
+        ////private bool LliegalInputByBoardSize(string i_MoveFrom, string i_MoveTo)
+        ////{
+        ////    bool lligalMove = true;
+        ////    string limitSquare = Player.ConvertSizeOfTheBoardToSquare(m_BoardSize);
+        ////    char[] limitSqureAsTwoChars = { limitSquare[0], limitSquare[1] };
 
-        //    if (i_MoveFrom[0] < 'A' || i_MoveFrom[0] > limitSqureAsTwoChars[0])
-        //    {
-        //        lligalMove = false;
-        //    }
-        //    else if (i_MoveFrom[1] < 'a' || i_MoveFrom[1] > limitSqureAsTwoChars[1])
-        //    {
-        //        lligalMove = false;
-        //    }
-        //    else if (i_MoveTo[0] < 'A' || i_MoveTo[0] > limitSqureAsTwoChars[0])
-        //    {
-        //        lligalMove = false;
-        //    }
-        //    else if (i_MoveTo[1] < 'a' || i_MoveTo[1] > limitSqureAsTwoChars[1])
-        //    {
-        //        lligalMove = false;
-        //    }
+        ////    if (i_MoveFrom[0] < 'A' || i_MoveFrom[0] > limitSqureAsTwoChars[0])
+        ////    {
+        ////        lligalMove = false;
+        ////    }
+        ////    else if (i_MoveFrom[1] < 'a' || i_MoveFrom[1] > limitSqureAsTwoChars[1])
+        ////    {
+        ////        lligalMove = false;
+        ////    }
+        ////    else if (i_MoveTo[0] < 'A' || i_MoveTo[0] > limitSqureAsTwoChars[0])
+        ////    {
+        ////        lligalMove = false;
+        ////    }
+        ////    else if (i_MoveTo[1] < 'a' || i_MoveTo[1] > limitSqureAsTwoChars[1])
+        ////    {
+        ////        lligalMove = false;
+        ////    }
 
-        //    return lligalMove;
-        //}
+        ////    return lligalMove;
+        ////}
 
         public void UpdateMoveList(Player.e_LocationOfThePlayer i_UpOrDownPlayer)
         {
@@ -361,8 +360,8 @@ namespace CheckerLogic
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves( r_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks( r_MovesListOfPlayer1,  m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalMoves(r_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalAttacks(r_MovesListOfPlayer1,  m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
             }
         }
 
@@ -375,11 +374,11 @@ namespace CheckerLogic
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves( r_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks( r_MovesListOfPlayer2,  m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
-
+                Check4OptionalMoves(r_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
+                Check4OptionalAttacks(r_MovesListOfPlayer2,  m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
             }
         }
+
         private void Check4OptionalMoves(LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer, int i_XCoordinate, int i_YCoordinate, char i_SymbolOfChecker)
         {
             PointOfPosition checkerPoint = new PointOfPosition(i_XCoordinate, i_YCoordinate);
@@ -450,13 +449,9 @@ namespace CheckerLogic
             PointOfPosition leftDownAfterAttack = new PointOfPosition(i_XCoordinate - 2, i_YCoordinate + 2);
             PointOfPosition rightDownAfterAttack = new PointOfPosition(i_XCoordinate + 2, i_YCoordinate + 2);
             char SymbolOfChecker = i_SymbolOfChecker;
-           
-
             //// {X OR K} PLAYIN, OR U
-            if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K ||
-                SymbolOfChecker == (char)Checker.Symbol.U)
+            if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K || SymbolOfChecker == (char)Checker.Symbol.U)
             {              
-               
                 if ((leftUpAfterAttack.X >= 0 && leftUpAfterAttack.Y >= 0) &&
                     (leftUpAfterAttack.X < m_BoardSize && leftUpAfterAttack.Y < m_BoardSize))
                 {
@@ -486,12 +481,9 @@ namespace CheckerLogic
                 }
             }
             //// 
-            if (SymbolOfChecker == (char)Checker.Symbol.O || SymbolOfChecker == (char)Checker.Symbol.K ||
-               SymbolOfChecker == (char)Checker.Symbol.U)
-            {
-               
-               // castingSymbolForNotEatingFromTheSameGroup(ref SymbolOfChecker);
-                
+            if (SymbolOfChecker == (char)Checker.Symbol.O || SymbolOfChecker == (char)Checker.Symbol.K || SymbolOfChecker == (char)Checker.Symbol.U)
+            {          
+               //// castingSymbolForNotEatingFromTheSameGroup(ref SymbolOfChecker);      
                 if ((leftDownAfterAttack.X >= 0 && leftDownAfterAttack.Y >= 0) &&
                     (leftDownAfterAttack.X < m_BoardSize && leftDownAfterAttack.Y < m_BoardSize))
                 {
@@ -590,7 +582,6 @@ namespace CheckerLogic
             foreach (KeyValuePair<string, string> kvp in updatedAttackList)
             {
                 i_AttackingListOfTheCorrectPlayer.AddLast(kvp);
-
             }
         }
 

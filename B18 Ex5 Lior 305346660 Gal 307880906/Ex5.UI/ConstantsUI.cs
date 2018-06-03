@@ -23,5 +23,7 @@ namespace Ex5.UI
         public const string k_EmptyString = "";
         public const int k_ArrowPlayer1 = 1;
         public const int k_ArrowPlayer2 = 2;
+        public const int k_Player1Turn = 1;
+        public const int k_Player2Turn = 2;
     }
 }

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Ex5.UI
 {
-    partial class Testing
+    public partial class Testing
     {
         private System.ComponentModel.IContainer components = null;
 

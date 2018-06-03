@@ -54,8 +54,6 @@ namespace CheckerLogic
             return point;
         }
 
-
-
         public static string ConvertPointToSquare(PointOfPosition i_Point)
         {
             char[] coords = new char[2];
@@ -64,7 +62,6 @@ namespace CheckerLogic
             string square = new string(coords);
             return square;
         }
-
 
         public string SquareInTheBoard
         {
