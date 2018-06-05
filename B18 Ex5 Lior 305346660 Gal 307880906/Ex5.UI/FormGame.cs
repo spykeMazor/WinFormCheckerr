@@ -561,7 +561,7 @@ namespace Ex5.UI
             }
             else
             {
-                if (m_Game.AttackListOfPlayer1.Count > 0)
+                if (m_Game.AttackListOfPlayer2.Count > 0)
                 {
                     enableMoveToSquare(m_Game.AttackListOfPlayer2, blueSquare);
                 }
