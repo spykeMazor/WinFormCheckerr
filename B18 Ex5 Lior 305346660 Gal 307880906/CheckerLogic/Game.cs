@@ -30,7 +30,7 @@ namespace CheckerLogic
             m_Player2 = i_Player2;
             m_BoardSize = i_BoardSize;
             m_MatrixBoardForTesting = new char[m_BoardSize, m_BoardSize];
-            CreateMatrixBoardForTesting();
+            createMatrixBoardForTesting();
         }
 
         public static bool ListContainTwoStringsInOneNode(LinkedList<KeyValuePair<string, string>> i_ListOfTwoStrings, string i_String1, string i_String2)
@@ -78,7 +78,7 @@ namespace CheckerLogic
         {
             i_CorrectPlayer.MoveChecker(i_InputMoveFrom, i_InputMoveTo);
             i_AttackFlag = ConfirmAttack(i_InputMoveFrom, i_InputMoveTo, i_CorrectPlayer, this);
-            UpdateTestingMatrix(i_InputMoveFrom, i_InputMoveTo, i_AttackFlag);
+            updateTestingMatrix(i_InputMoveFrom, i_InputMoveTo, i_AttackFlag);
             UpdateMoveList(i_CorrectPlayer.GetUpOrDown);
             UpdateMoveList(i_SecondPlayer.GetUpOrDown);
             if (i_AttackFlag)
@@ -178,7 +178,7 @@ namespace CheckerLogic
             return selectedMove;
         }
 
-        private void UpdateTestingMatrix(string i_InputMoveFrom, string i_InputMoveTo, bool i_AttackFlag)
+        private void updateTestingMatrix(string i_InputMoveFrom, string i_InputMoveTo, bool i_AttackFlag)
         {
             PointOfPosition moveFromPoint = new PointOfPosition();
             PointOfPosition moveToPoint = new PointOfPosition();
@@ -202,32 +202,32 @@ namespace CheckerLogic
 
             if (i_AttackFlag)
             {
-                UpdadeAfterAttacking(moveFromPoint, moveToPoint);
+                updadeAfterAttacking(moveFromPoint, moveToPoint);
             }
         }
 
-        private void UpdadeAfterAttacking(PointOfPosition i_InputMoveFromPoint, PointOfPosition i_InputMoveToPoint)
+        private void updadeAfterAttacking(PointOfPosition i_InputMoveFromPoint, PointOfPosition i_InputMoveToPoint)
         {
             if (i_InputMoveFromPoint.X + 2 == i_InputMoveToPoint.X && i_InputMoveFromPoint.Y + 2 == i_InputMoveToPoint.Y)
             { ////Down Right Attack
 
-                RemoveChecker(new PointOfPosition(i_InputMoveFromPoint.X + 1, i_InputMoveFromPoint.Y + 1));
+                removeChecker(new PointOfPosition(i_InputMoveFromPoint.X + 1, i_InputMoveFromPoint.Y + 1));
             }
             else if (i_InputMoveFromPoint.X - 2 == i_InputMoveToPoint.X && i_InputMoveFromPoint.Y + 2 == i_InputMoveToPoint.Y)
             { ////Down Left Attack
-                RemoveChecker(new PointOfPosition(i_InputMoveFromPoint.X - 1, i_InputMoveFromPoint.Y + 1));
+                removeChecker(new PointOfPosition(i_InputMoveFromPoint.X - 1, i_InputMoveFromPoint.Y + 1));
             }
             else if (i_InputMoveFromPoint.X - 2 == i_InputMoveToPoint.X && i_InputMoveFromPoint.Y - 2 == i_InputMoveToPoint.Y)
             { ////Up Left Attack
-                RemoveChecker(new PointOfPosition(i_InputMoveFromPoint.X - 1, i_InputMoveFromPoint.Y - 1));
+                removeChecker(new PointOfPosition(i_InputMoveFromPoint.X - 1, i_InputMoveFromPoint.Y - 1));
             }
             else if (i_InputMoveFromPoint.X + 2 == i_InputMoveToPoint.X && i_InputMoveFromPoint.Y - 2 == i_InputMoveToPoint.Y)
             { ////Up Right Attack
-                RemoveChecker(new PointOfPosition(i_InputMoveFromPoint.X + 1, i_InputMoveFromPoint.Y - 1));
+                removeChecker(new PointOfPosition(i_InputMoveFromPoint.X + 1, i_InputMoveFromPoint.Y - 1));
             }
         }
 
-        private void RemoveChecker(PointOfPosition i_CheckerSquarePoint)
+        private void removeChecker(PointOfPosition i_CheckerSquarePoint)
         {
             char colorOfTheChecker = m_MatrixBoardForTesting[i_CheckerSquarePoint.Y, i_CheckerSquarePoint.X];
             string squareOfThePoint = Position.ConvertPointToSquare(i_CheckerSquarePoint);
@@ -268,7 +268,7 @@ namespace CheckerLogic
             get { return m_Player2; }
         }
 
-        private void CreateMatrixBoardForTesting()
+        private void createMatrixBoardForTesting()
         {
             foreach (Checker checker in m_Player1.ListOfCheckers)
             {
@@ -284,7 +284,7 @@ namespace CheckerLogic
         public bool IllegalMove(Player i_CorrectPlayer, Player i_SecondPlayer, string i_MoveFrom, string i_MoveTo)
         {
             bool llegalMove = true;
-            if (!OptionMove(i_MoveFrom, i_MoveTo, i_CorrectPlayer.GetUpOrDown))
+            if (!optionMove(i_MoveFrom, i_MoveTo, i_CorrectPlayer.GetUpOrDown))
             {
                 llegalMove = false;
             }
@@ -292,7 +292,7 @@ namespace CheckerLogic
             return llegalMove;
         }
 
-        private bool OptionMove(string i_MoveFrom, string i_MoveTo, Player.e_LocationOfThePlayer i_UpOrDownPlayer)
+        private bool optionMove(string i_MoveFrom, string i_MoveTo, Player.e_LocationOfThePlayer i_UpOrDownPlayer)
         {
             bool optionalMove = false;
             if (i_UpOrDownPlayer == Player.e_LocationOfThePlayer.UP)
@@ -312,32 +312,6 @@ namespace CheckerLogic
 
             return optionalMove;
         }
-
-        ////private bool LliegalInputByBoardSize(string i_MoveFrom, string i_MoveTo)
-        ////{
-        ////    bool lligalMove = true;
-        ////    string limitSquare = Player.ConvertSizeOfTheBoardToSquare(m_BoardSize);
-        ////    char[] limitSqureAsTwoChars = { limitSquare[0], limitSquare[1] };
-
-        ////    if (i_MoveFrom[0] < 'A' || i_MoveFrom[0] > limitSqureAsTwoChars[0])
-        ////    {
-        ////        lligalMove = false;
-        ////    }
-        ////    else if (i_MoveFrom[1] < 'a' || i_MoveFrom[1] > limitSqureAsTwoChars[1])
-        ////    {
-        ////        lligalMove = false;
-        ////    }
-        ////    else if (i_MoveTo[0] < 'A' || i_MoveTo[0] > limitSqureAsTwoChars[0])
-        ////    {
-        ////        lligalMove = false;
-        ////    }
-        ////    else if (i_MoveTo[1] < 'a' || i_MoveTo[1] > limitSqureAsTwoChars[1])
-        ////    {
-        ////        lligalMove = false;
-        ////    }
-
-        ////    return lligalMove;
-        ////}
 
         public void UpdateMoveList(Player.e_LocationOfThePlayer i_UpOrDownPlayer)
         {
@@ -360,8 +334,8 @@ namespace CheckerLogic
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves(r_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks(r_MovesListOfPlayer1,  m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                check4OptionalMoves(r_MovesListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
+                check4OptionalAttacks(r_MovesListOfPlayer1,  m_AttackListOfPlayer1, xCoordinate, yCoordinate, SymbolOfChecker);
             }
         }
 
@@ -374,12 +348,12 @@ namespace CheckerLogic
                 int xCoordinate = checker.PositintOfTheChecker.Coordinate.X;
                 int yCoordinate = checker.PositintOfTheChecker.Coordinate.Y;
                 char SymbolOfChecker = (char)checker.SymbolOfChecker;
-                Check4OptionalMoves(r_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
-                Check4OptionalAttacks(r_MovesListOfPlayer2,  m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
+                check4OptionalMoves(r_MovesListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
+                check4OptionalAttacks(r_MovesListOfPlayer2,  m_AttackListOfPlayer2, xCoordinate, yCoordinate, SymbolOfChecker);
             }
         }
 
-        private void Check4OptionalMoves(LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer, int i_XCoordinate, int i_YCoordinate, char i_SymbolOfChecker)
+        private void check4OptionalMoves(LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer, int i_XCoordinate, int i_YCoordinate, char i_SymbolOfChecker)
         {
             PointOfPosition checkerPoint = new PointOfPosition(i_XCoordinate, i_YCoordinate);
             PointOfPosition leftUp = new PointOfPosition(i_XCoordinate - 1, i_YCoordinate - 1);
@@ -432,7 +406,7 @@ namespace CheckerLogic
             }
         }
 
-        private void Check4OptionalAttacks(
+        private void check4OptionalAttacks(
          LinkedList<KeyValuePair<string, string>> r_MovesListOfPlayer,
          LinkedList<KeyValuePair<string, string>> m_AttackListOfPlayer,
         int i_XCoordinate,

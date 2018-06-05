@@ -35,7 +35,7 @@ namespace CheckerLogic
             m_BoardSize = i_BoardSize;
             m_MachineOrNot = i_ComputerFlag;
             r_PlayerName = i_PlayerName;
-            m_NumberOfCheckers = NumberOfCheckersByBoardSize(i_BoardSize);
+            m_NumberOfCheckers = numberOfCheckersByBoardSize(i_BoardSize);
             if (i_FirstOrSecondPlayer == 1)
             {
                 m_UpOrDown = e_LocationOfThePlayer.UP;
@@ -103,7 +103,7 @@ namespace CheckerLogic
             get { return m_ListOfAllTheChecker; }
         }
 
-        private int NumberOfCheckersByBoardSize(int i_BoardSize)
+        private int numberOfCheckersByBoardSize(int i_BoardSize)
         {
             int numberOfCheckers = 0;
 
@@ -159,7 +159,7 @@ namespace CheckerLogic
             if (i_Location == e_LocationOfThePlayer.DOWN)
             {
                 m_ListOfAllTheChecker.Clear();
-                char startSmallLetter = StartSquareSmallLetter(i_SizeOfBoard);
+                char startSmallLetter = startSquareSmallLetter(i_SizeOfBoard);
                 char startBigLetter;
                 if (i_SizeOfBoard == 8)
                 {
@@ -199,7 +199,7 @@ namespace CheckerLogic
             get { return m_ListOfAllTheChecker.Count; }
         }
 
-        private char StartSquareSmallLetter(int i_BoardSize)
+        private char startSquareSmallLetter(int i_BoardSize)
         {
             char startSmallLetter = 'a'; ////Just for assign
 

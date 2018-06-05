@@ -29,13 +29,12 @@ namespace Ex5.UI
         private Image m_BlueBackGround = Properties.Resources.blue;
         private LinkedList<PictureBoxInTheBoard> r_Player1CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
         private LinkedList<PictureBoxInTheBoard> r_Player2CheckersListOnTheBoard = new LinkedList<PictureBoxInTheBoard>();
-        ////CheckerLogic.Game Game;
 
         public GameBoardUI(e_BoardSize i_BoardSize)
         {
             int boardSizeAsInt = (int)i_BoardSize;
             m_ButtonMatrixGameBoard = new PictureBoxInTheBoard[boardSizeAsInt, boardSizeAsInt];
-            CreateBoard(boardSizeAsInt);
+            createBoard(boardSizeAsInt);
         }
 
         public Image WhiteBackGround
@@ -59,7 +58,7 @@ namespace Ex5.UI
             set { m_ButtonMatrixGameBoard = value; }
         }
 
-        private void CreateBoard(int i_BoardSize)
+        private void createBoard(int i_BoardSize)
         {
             for (int i = 0; i < i_BoardSize; i++)
             {

@@ -38,14 +38,14 @@ namespace Ex5.UI
         private CheckerLogic.Game m_Game;
         private Point m_LastMoveFrom = new Point();
         private Point m_LastMoveTo = new Point();
-        private bool wantsToPlay = true;
+        private bool m_WantsToPlay = true;
         private bool m_WasMove = false;
         private bool m_CurrentPlayer = false; //// False = Player1, True = Player2
         private List<KeyValuePair<Point, Point>> m_AllTheClickableSquareReadyToMove = new List<KeyValuePair<Point, Point>>();
-        private bool m_wasAttack = false;
-        private bool m_hasAnotherAttack = false;
+        private bool m_WasAttack = false;
+        private bool m_HasAnotherAttack = false;
         private bool m_ChekerSelectedOnBoard = false;      
-        private bool startOverSameDetails = false;
+        private bool m_StartOverSameDetails = false;
 
         public void FormGameStart(SettingsLogin i_FormNameLogin)
         {
@@ -63,14 +63,14 @@ namespace Ex5.UI
 
         public bool WantsToPlay
         {
-            get { return wantsToPlay; }
-            set { wantsToPlay = value; }
+            get { return m_WantsToPlay; }
+            set { m_WantsToPlay = value; }
         }
 
         public bool StartOverGame
         {
-            get { return startOverSameDetails; }
-            set { startOverSameDetails = value; }
+            get { return m_StartOverSameDetails; }
+            set { m_StartOverSameDetails = value; }
         }
 
         private void loadCheckersPics()
@@ -88,7 +88,7 @@ namespace Ex5.UI
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            InitControls();
+            initControls();
         }
 
         public SettingsLogin GetNameLogin
@@ -103,7 +103,7 @@ namespace Ex5.UI
             set { m_MyBackground = value; }
         }
 
-        private void InitControls()
+        private void initControls()
         {
             GameBoardUI.e_BoardSize i_BoardSize = m_FormNameLogin.BoardSizeSelection;
             string player1Name = m_FormNameLogin.Player1Name;
@@ -351,22 +351,22 @@ namespace Ex5.UI
 
         private void player1Moving()
         {
-            changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
             m_Game.MoveTheCheckerOfTheCorecctPlayer(
                 m_Game.Player1,
           m_Game.Player2,
           convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
           convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-         ref m_wasAttack,
-         ref m_hasAnotherAttack);
+         ref m_WasAttack,
+         ref m_HasAnotherAttack);
             if (!winnerOrDraw())
             {
                 initCheckers();
                 updateScore();
                 enableOrDisableStartOverButton(ConstantsUI.k_Player2Turn);
                 m_WasMove = false;
-                if (!m_hasAnotherAttack)
+                if (!m_HasAnotherAttack)
                 {
+                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
                     if (m_Game.Player2.MachineOrNot)
                     {
                         computerMove();
@@ -387,7 +387,7 @@ namespace Ex5.UI
                 }
                 else
                 { ////--->Combo one more attack -> turn stay in Player1 
-                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
+                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                     invokeClickOnChecker(m_Game.AttackListOfPlayer1);
                 }
             }
@@ -400,16 +400,17 @@ namespace Ex5.UI
                            m_Game.Player1,
                            convertCheckerPositionPointToSquareOfLogic(m_LastMoveFrom),
                            convertCheckerPositionPointToSquareOfLogic(m_LastMoveTo),
-                           ref m_wasAttack,
-                           ref m_hasAnotherAttack);
+                           ref m_WasAttack,
+                           ref m_HasAnotherAttack);
             if (!winnerOrDraw())
             {
                 initCheckers();
                 updateScore();
                 enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);
                 m_WasMove = false;
-                if (!m_hasAnotherAttack)
+                if (!m_HasAnotherAttack)
                 {
+                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                     m_CurrentPlayer = false; ////---> now player1 turn
                     if (m_Game.AttackListOfPlayer1.Count > 0)
                     {
@@ -422,7 +423,7 @@ namespace Ex5.UI
                 }
                 else
                 { ////--->Combo one more attack -> turn stay in Player2   
-                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
+                    changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
                     invokeClickOnChecker(m_Game.AttackListOfPlayer2);               
                 }            
             }
@@ -505,8 +506,8 @@ namespace Ex5.UI
                        m_Game.Player1,
                      computerNextMove.Key,
                        computerNextMove.Value,
-                       ref m_wasAttack,
-                       ref m_hasAnotherAttack);
+                       ref m_WasAttack,
+                       ref m_HasAnotherAttack);
             if (!winnerOrDraw())
             {
                 Thread.Sleep(1700);
@@ -514,7 +515,7 @@ namespace Ex5.UI
                 updateScore();
                 enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);
                 m_WasMove = false;
-                if (!m_hasAnotherAttack)
+                if (!m_HasAnotherAttack)
                 {
                     m_CurrentPlayer = false; ////---> now player1 turn
                     if (m_Game.AttackListOfPlayer1.Count > 0)
