@@ -169,19 +169,19 @@ namespace Ex5.UI
                     else
                     {
                         m_Board.GetBoard[i, j].Tag = e_SquaerTag.WrongChecker;
-                        if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.O)
+                        if (m_Game.GetTestingMatrix[j, i] == (char)Checker.e_Symbol.O)
                         {
                             m_Board.GetBoard[i, j].Image = m_BlackChackerImage;
                         }
-                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.X)
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.e_Symbol.X)
                         {
                             m_Board.GetBoard[i, j].Image = m_RedChackerImage;
                         }
-                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.K)
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.e_Symbol.K)
                         {
                             m_Board.GetBoard[i, j].Image = m_RedQueenChackerImage;
                         }
-                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.Symbol.U)
+                        else if (m_Game.GetTestingMatrix[j, i] == (char)Checker.e_Symbol.U)
                         {
                             m_Board.GetBoard[i, j].Image = m_BlackQueenChackerImage;
                         }
@@ -299,7 +299,6 @@ namespace Ex5.UI
             }
         }
 
-
         private void tryToMove(PictureBoxInTheBoard i_SenderPicBoxInTheBoard)
         {
             if (i_SenderPicBoxInTheBoard.Tag.ToString() == e_SquaerTag.OptionalMoveFrom.ToString())
@@ -326,11 +325,7 @@ namespace Ex5.UI
                     }
                 }
             }
-
-
         }
-
-
 
         private void afterMoving(PictureBoxInTheBoard i_CurrentPicBoxThatMoveTo)
         {
@@ -378,8 +373,7 @@ namespace Ex5.UI
                         changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
                     }
                     else
-                    {
-                        
+                    {                   
                         m_CurrentPlayer = true; ////---> now player2 turn
                         if (m_Game.AttackListOfPlayer2.Count > 0)
                         {
@@ -429,11 +423,8 @@ namespace Ex5.UI
                 else
                 { ////--->Combo one more attack -> turn stay in Player2   
                     changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer1);
-                    invokeClickOnChecker(m_Game.AttackListOfPlayer2);
-                    
-                }
-
-                
+                    invokeClickOnChecker(m_Game.AttackListOfPlayer2);               
+                }            
             }
         }
 
@@ -518,7 +509,7 @@ namespace Ex5.UI
                        ref m_hasAnotherAttack);
             if (!winnerOrDraw())
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(1700);
                 initCheckers();
                 updateScore();
                 enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);

@@ -137,7 +137,7 @@ namespace CheckerLogic
                 ////string squreIterator = "aA";
                 for (int i = 0; i < m_NumberOfCheckers; i++)
                 {
-                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.Symbol.O)); ////Create new checker and push hit to the end of the list
+                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.e_Symbol.O)); ////Create new checker and push hit to the end of the list
                     if (squreIterator[0] == limitSqureAsTwoChars[0])
                     { ////End of the line
                         squreIterator[0] = 'A';
@@ -174,7 +174,7 @@ namespace CheckerLogic
                 ////string squreIterator = "aA";
                 for (int i = 0; i < m_NumberOfCheckers; i++)
                 {
-                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.Symbol.X)); ////Create new checker and push him to the end of the list
+                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.e_Symbol.X)); ////Create new checker and push him to the end of the list
                     if (squreIterator[0] == limitSqureAsTwoChars[0] - 1)
                     { ////End of the line 
                         squreIterator[0] = 'B';
@@ -226,15 +226,15 @@ namespace CheckerLogic
                 if (checker.PositintOfTheChecker.SquareInTheBoard.Equals(i_MoveFrom))
                 {
                     checker.SetPositionOfTheChecker(i_MoveTo);
-                    if (checker.SymbolOfChecker == Checker.Symbol.O &&
+                    if (checker.SymbolOfChecker == Checker.e_Symbol.O &&
                         checker.PositintOfTheChecker.Coordinate.Y == m_BoardSize - 1)
                     {
-                        checker.SymbolOfChecker = Checker.Symbol.U;
+                        checker.SymbolOfChecker = Checker.e_Symbol.U;
                     }
-                    else if (checker.SymbolOfChecker == Checker.Symbol.X &&
+                    else if (checker.SymbolOfChecker == Checker.e_Symbol.X &&
                         checker.PositintOfTheChecker.Coordinate.Y == 0)
                     {
-                        checker.SymbolOfChecker = Checker.Symbol.K;
+                        checker.SymbolOfChecker = Checker.e_Symbol.K;
                     }
 
                     break;

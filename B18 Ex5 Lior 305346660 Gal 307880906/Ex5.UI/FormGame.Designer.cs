@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.Specialized;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
-using System.Xml;
-using System.Threading;
-using CheckerLogic;
 
 namespace Ex5.UI
 {
-    partial class FormGame
+    public partial class FormGame
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -20,6 +13,7 @@ namespace Ex5.UI
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -271,8 +265,6 @@ namespace Ex5.UI
             this.buttonStartOver.TextImageRelation = TextImageRelation.ImageAboveText;
             this.buttonStartOver.UseVisualStyleBackColor = false;
             this.buttonStartOver.Click += new System.EventHandler(this.buttonStartOver_Click);
-
-            ////////////////////////////////////////////////////////////////////////////
             //// 
             //// comboBoxBackground
             //// 
@@ -345,8 +337,6 @@ namespace Ex5.UI
             this.PerformLayout();
         }
 
-
-   
         private Label headLine;
         private Label labelScore1;
         private Label labelScore2;
@@ -357,18 +347,14 @@ namespace Ex5.UI
         private Label labelPlayer1Name;
         private Label labelPlayer2Name;
         private Button buttonExit;
-        ////private ComboBox comboBoxBackground;
         private Button buttonStartOver;
         private PictureBox arrowPictureBoxPlayer1;
         private PictureBox arrowPictureBoxPlayer2;
-        ////private Image m_MyBackground ;
         private LogInExceptionForm wongInputException = new LogInExceptionForm("Worng Move", "Worng Move");
         private ComboBox comboBoxBackground;
         private Image m_MyBackground;
         private Label labelBackground;
         private Label labelTotalScoreTitle;
     }
-
     #endregion
-
 }

@@ -102,7 +102,7 @@ namespace CheckerLogic
             int distance;
             foreach (Checker checker in m_Player1.ListOfCheckers)
             {
-                if (checker.SymbolOfChecker == Checker.Symbol.U)
+                if (checker.SymbolOfChecker == Checker.e_Symbol.U)
                 {
                     scoreForKings += 4;
                 }
@@ -123,7 +123,7 @@ namespace CheckerLogic
             int distance = 0;
             foreach (Checker checker in m_Player2.ListOfCheckers)
             {
-                if (checker.SymbolOfChecker == Checker.Symbol.K)
+                if (checker.SymbolOfChecker == Checker.e_Symbol.K)
                 {
                     scoreForKings += 4;
                 }
@@ -184,14 +184,14 @@ namespace CheckerLogic
             PointOfPosition moveToPoint = new PointOfPosition();
             moveFromPoint = Position.ConvertSqureToPoint(i_InputMoveFrom);
             moveToPoint = Position.ConvertSqureToPoint(i_InputMoveTo);
-            if (m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] == (char)Checker.Symbol.O && moveToPoint.Y == m_BoardSize - 1)
+            if (m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] == (char)Checker.e_Symbol.O && moveToPoint.Y == m_BoardSize - 1)
             {
-                m_MatrixBoardForTesting[moveToPoint.Y, moveToPoint.X] = (char)Checker.Symbol.U;
+                m_MatrixBoardForTesting[moveToPoint.Y, moveToPoint.X] = (char)Checker.e_Symbol.U;
                 m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] = '\0';
             }
-            else if (m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] == (char)Checker.Symbol.X && moveToPoint.Y == 0)
+            else if (m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] == (char)Checker.e_Symbol.X && moveToPoint.Y == 0)
             {
-                m_MatrixBoardForTesting[moveToPoint.Y, moveToPoint.X] = (char)Checker.Symbol.K;
+                m_MatrixBoardForTesting[moveToPoint.Y, moveToPoint.X] = (char)Checker.e_Symbol.K;
                 m_MatrixBoardForTesting[moveFromPoint.Y, moveFromPoint.X] = '\0';
             }
             else
@@ -231,7 +231,7 @@ namespace CheckerLogic
         {
             char colorOfTheChecker = m_MatrixBoardForTesting[i_CheckerSquarePoint.Y, i_CheckerSquarePoint.X];
             string squareOfThePoint = Position.ConvertPointToSquare(i_CheckerSquarePoint);
-            if (colorOfTheChecker == (char)Checker.Symbol.O || colorOfTheChecker == (char)Checker.Symbol.U)
+            if (colorOfTheChecker == (char)Checker.e_Symbol.O || colorOfTheChecker == (char)Checker.e_Symbol.U)
             {
                 foreach (Checker checker in m_Player1.ListOfCheckers)
                 {
@@ -243,7 +243,7 @@ namespace CheckerLogic
                 }
             }
 
-            if (colorOfTheChecker == (char)Checker.Symbol.X || colorOfTheChecker == (char)Checker.Symbol.K)
+            if (colorOfTheChecker == (char)Checker.e_Symbol.X || colorOfTheChecker == (char)Checker.e_Symbol.K)
             {
                 foreach (Checker checker in m_Player2.ListOfCheckers)
                 {
@@ -387,8 +387,8 @@ namespace CheckerLogic
             PointOfPosition leftDown = new PointOfPosition(i_XCoordinate - 1, i_YCoordinate + 1);
             PointOfPosition rightDown = new PointOfPosition(i_XCoordinate + 1, i_YCoordinate + 1);
             char SymbolOfChecker = i_SymbolOfChecker;
-            if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K ||
-                SymbolOfChecker == (char)Checker.Symbol.U)
+            if (SymbolOfChecker == (char)Checker.e_Symbol.X || SymbolOfChecker == (char)Checker.e_Symbol.K ||
+                SymbolOfChecker == (char)Checker.e_Symbol.U)
             {
                 if ((leftUp.X >= 0 && leftUp.Y >= 0) && (leftUp.X < m_BoardSize && leftUp.Y < m_BoardSize))
                 {
@@ -409,8 +409,8 @@ namespace CheckerLogic
                 }
             }
 
-            if (SymbolOfChecker == (char)Checker.Symbol.O || SymbolOfChecker == (char)Checker.Symbol.K ||
-               SymbolOfChecker == (char)Checker.Symbol.U)
+            if (SymbolOfChecker == (char)Checker.e_Symbol.O || SymbolOfChecker == (char)Checker.e_Symbol.K ||
+               SymbolOfChecker == (char)Checker.e_Symbol.U)
             {
                 if ((leftDown.X >= 0 && leftDown.Y >= 0) && (leftDown.X < m_BoardSize && leftDown.Y < m_BoardSize))
                 {
@@ -450,7 +450,7 @@ namespace CheckerLogic
             PointOfPosition rightDownAfterAttack = new PointOfPosition(i_XCoordinate + 2, i_YCoordinate + 2);
             char SymbolOfChecker = i_SymbolOfChecker;
             //// {X OR K} PLAYIN, OR U
-            if (SymbolOfChecker == (char)Checker.Symbol.X || SymbolOfChecker == (char)Checker.Symbol.K || SymbolOfChecker == (char)Checker.Symbol.U)
+            if (SymbolOfChecker == (char)Checker.e_Symbol.X || SymbolOfChecker == (char)Checker.e_Symbol.K || SymbolOfChecker == (char)Checker.e_Symbol.U)
             {              
                 if ((leftUpAfterAttack.X >= 0 && leftUpAfterAttack.Y >= 0) &&
                     (leftUpAfterAttack.X < m_BoardSize && leftUpAfterAttack.Y < m_BoardSize))
@@ -481,7 +481,7 @@ namespace CheckerLogic
                 }
             }
             //// 
-            if (SymbolOfChecker == (char)Checker.Symbol.O || SymbolOfChecker == (char)Checker.Symbol.K || SymbolOfChecker == (char)Checker.Symbol.U)
+            if (SymbolOfChecker == (char)Checker.e_Symbol.O || SymbolOfChecker == (char)Checker.e_Symbol.K || SymbolOfChecker == (char)Checker.e_Symbol.U)
             {          
                //// castingSymbolForNotEatingFromTheSameGroup(ref SymbolOfChecker);      
                 if ((leftDownAfterAttack.X >= 0 && leftDownAfterAttack.Y >= 0) &&
@@ -516,21 +516,21 @@ namespace CheckerLogic
 
         private void castingSymbolForNotEatingFromTheSameGroup(ref char i_SymbolOfChecker, char i_OptionalForAttack )
         {
-            if (i_SymbolOfChecker == (char)Checker.Symbol.O && i_OptionalForAttack == (char)Checker.Symbol.U)
+            if (i_SymbolOfChecker == (char)Checker.e_Symbol.O && i_OptionalForAttack == (char)Checker.e_Symbol.U)
             {
-                i_SymbolOfChecker = (char)Checker.Symbol.U;
+                i_SymbolOfChecker = (char)Checker.e_Symbol.U;
             }
-            else if (i_SymbolOfChecker == (char)Checker.Symbol.U && i_OptionalForAttack == (char)Checker.Symbol.O)
+            else if (i_SymbolOfChecker == (char)Checker.e_Symbol.U && i_OptionalForAttack == (char)Checker.e_Symbol.O)
             {
-                i_SymbolOfChecker = (char)Checker.Symbol.O;
+                i_SymbolOfChecker = (char)Checker.e_Symbol.O;
             }
-            else if(i_SymbolOfChecker == (char)Checker.Symbol.X && i_OptionalForAttack == (char)Checker.Symbol.K)
+            else if(i_SymbolOfChecker == (char)Checker.e_Symbol.X && i_OptionalForAttack == (char)Checker.e_Symbol.K)
             {
-                i_SymbolOfChecker = (char)Checker.Symbol.K;
+                i_SymbolOfChecker = (char)Checker.e_Symbol.K;
             }
-            else if (i_SymbolOfChecker == (char)Checker.Symbol.K && i_OptionalForAttack == (char)Checker.Symbol.X)
+            else if (i_SymbolOfChecker == (char)Checker.e_Symbol.K && i_OptionalForAttack == (char)Checker.e_Symbol.X)
             {
-                i_SymbolOfChecker = (char)Checker.Symbol.X;
+                i_SymbolOfChecker = (char)Checker.e_Symbol.X;
             }
         }
 
