@@ -1,0 +1,16 @@
+==========================Exercise Checking Report========================== 
+ Exercise No...........: 5
+ First Student Details : 305346660 - Lior Ben-Yehuda 
+ Second Student Details: 307880906- Gal Mazor
+ Delivery Date.........: 06 - June - 2018
+ Delivered In Delay....: No.
+ Delay Reason..........: . 
+ Visual Studio Version.: 2015 
+ Comments..............: In the exercise description we were asked to use a messageBox methods to display 
+			messages for different kind of events, we used those methods as necessary to show 
+			knowledge at the subject but also we created our own "custom" messageBox for other
+			events.
+			Graphical additions added:
+			* We build a richer LOGIN form whith backgroubd and images to present player color.
+			* 
+========================End Exercise Checking Report======================== 

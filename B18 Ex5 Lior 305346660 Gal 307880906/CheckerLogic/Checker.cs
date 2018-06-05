@@ -6,7 +6,7 @@ namespace CheckerLogic
 {
     public class Checker
     {
-        public enum Symbol
+        public enum e_Symbol
         {
             O = 'O',
             U = 'U',
@@ -15,9 +15,9 @@ namespace CheckerLogic
         }
 
         private Position m_PositionOfTheChecker;
-        private Symbol m_SymbolOfChecker;
+        private e_Symbol m_SymbolOfChecker;
 
-        public Checker(Position i_Position, Symbol i_SymbolOfChecker) /// Cto'r of Checker
+        public Checker(Position i_Position, e_Symbol i_SymbolOfChecker) /// Cto'r of Checker
         {
             PositionOfTheChecker = new Position(i_Position.SquareInTheBoard);
             m_SymbolOfChecker = i_SymbolOfChecker;
@@ -36,7 +36,7 @@ namespace CheckerLogic
             m_PositionOfTheChecker.SetPosition(i_NewSquareInTheBoard);
         }
 
-        public Symbol SymbolOfChecker
+        public e_Symbol SymbolOfChecker
         {
             get
             {

@@ -35,7 +35,7 @@ namespace CheckerLogic
             m_BoardSize = i_BoardSize;
             m_MachineOrNot = i_ComputerFlag;
             r_PlayerName = i_PlayerName;
-            m_NumberOfCheckers = NumberOfCheckersByBoardSize(i_BoardSize);
+            m_NumberOfCheckers = numberOfCheckersByBoardSize(i_BoardSize);
             if (i_FirstOrSecondPlayer == 1)
             {
                 m_UpOrDown = e_LocationOfThePlayer.UP;
@@ -103,7 +103,7 @@ namespace CheckerLogic
             get { return m_ListOfAllTheChecker; }
         }
 
-        private int NumberOfCheckersByBoardSize(int i_BoardSize)
+        private int numberOfCheckersByBoardSize(int i_BoardSize)
         {
             int numberOfCheckers = 0;
 
@@ -137,7 +137,7 @@ namespace CheckerLogic
                 ////string squreIterator = "aA";
                 for (int i = 0; i < m_NumberOfCheckers; i++)
                 {
-                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.Symbol.O)); ////Create new checker and push hit to the end of the list
+                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.e_Symbol.O)); ////Create new checker and push hit to the end of the list
                     if (squreIterator[0] == limitSqureAsTwoChars[0])
                     { ////End of the line
                         squreIterator[0] = 'A';
@@ -159,7 +159,7 @@ namespace CheckerLogic
             if (i_Location == e_LocationOfThePlayer.DOWN)
             {
                 m_ListOfAllTheChecker.Clear();
-                char startSmallLetter = StartSquareSmallLetter(i_SizeOfBoard);
+                char startSmallLetter = startSquareSmallLetter(i_SizeOfBoard);
                 char startBigLetter;
                 if (i_SizeOfBoard == 8)
                 {
@@ -174,7 +174,7 @@ namespace CheckerLogic
                 ////string squreIterator = "aA";
                 for (int i = 0; i < m_NumberOfCheckers; i++)
                 {
-                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.Symbol.X)); ////Create new checker and push him to the end of the list
+                    m_ListOfAllTheChecker.AddLast(new Checker(new Position(new string(squreIterator)), Checker.e_Symbol.X)); ////Create new checker and push him to the end of the list
                     if (squreIterator[0] == limitSqureAsTwoChars[0] - 1)
                     { ////End of the line 
                         squreIterator[0] = 'B';
@@ -199,7 +199,7 @@ namespace CheckerLogic
             get { return m_ListOfAllTheChecker.Count; }
         }
 
-        private char StartSquareSmallLetter(int i_BoardSize)
+        private char startSquareSmallLetter(int i_BoardSize)
         {
             char startSmallLetter = 'a'; ////Just for assign
 
@@ -226,15 +226,15 @@ namespace CheckerLogic
                 if (checker.PositintOfTheChecker.SquareInTheBoard.Equals(i_MoveFrom))
                 {
                     checker.SetPositionOfTheChecker(i_MoveTo);
-                    if (checker.SymbolOfChecker == Checker.Symbol.O &&
+                    if (checker.SymbolOfChecker == Checker.e_Symbol.O &&
                         checker.PositintOfTheChecker.Coordinate.Y == m_BoardSize - 1)
                     {
-                        checker.SymbolOfChecker = Checker.Symbol.U;
+                        checker.SymbolOfChecker = Checker.e_Symbol.U;
                     }
-                    else if (checker.SymbolOfChecker == Checker.Symbol.X &&
+                    else if (checker.SymbolOfChecker == Checker.e_Symbol.X &&
                         checker.PositintOfTheChecker.Coordinate.Y == 0)
                     {
-                        checker.SymbolOfChecker = Checker.Symbol.K;
+                        checker.SymbolOfChecker = Checker.e_Symbol.K;
                     }
 
                     break;

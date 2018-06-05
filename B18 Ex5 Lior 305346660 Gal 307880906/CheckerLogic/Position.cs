@@ -41,7 +41,7 @@ namespace CheckerLogic
         private PointOfPosition m_Coord;
         private string m_SquareInTheBoard;
 
-        public Position(string i_StartSquarePosition) /// Cto'r of Position
+        public Position(string i_StartSquarePosition) //// Cto'r of Position
         {
             m_SquareInTheBoard = i_StartSquarePosition;
             m_Coord = ConvertSqureToPoint(i_StartSquarePosition);

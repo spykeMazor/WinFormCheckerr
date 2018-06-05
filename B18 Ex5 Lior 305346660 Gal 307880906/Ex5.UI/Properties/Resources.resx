@@ -118,7 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="arrow_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_PngYellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_PngYellow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_king" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_king.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="black_marble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_marble.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_soldier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_soldier.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue_Background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brown_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\brown_square.PNG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="damka3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\damka3d.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="damka_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\damka_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heart_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heart_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="informationPng" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\informationPng.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="information_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\information_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="purple_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\purple_Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\red_queen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_soldier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\red_soldier.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Warning_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Warning_Png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning_Png.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="whitesquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\whitesquare.PNG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checkered" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\checkered.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
