@@ -315,39 +315,49 @@ namespace Ex5.UI
                 MessageBox.Show("Wrong Checker Selected", "Wrong", wrongInputExceptionMessageType, MessageBoxIcon.Warning);
             }
             else if(picAsSender.Image != null)
-             {
-                if (picAsSender.Tag.ToString() == e_SquaerTag.OptionalMoveFrom.ToString())
-                {
-                    Image DefaultBackGroundImage = m_Board.WhiteBackGround;
-                    if (picAsSender.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
-                    {
-                        picAsSender.BackgroundImage = m_Board.BlueBackGround;
-                        picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
-                        m_ChekerSelectedOnBoard = true;
-                        picAsSender.Tag = e_SquaerTag.OptionalMoveFrom;
-                        m_LastMoveFrom = picAsSender.PointInTheBoard;
-                        invokeAllTheOptionalMoveSquare(picAsSender);
-                    }
-                    else if(picAsSender.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
-                    {
-                        picAsSender.BackgroundImage = DefaultBackGroundImage;
-                        picAsSender.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
-                        m_ChekerSelectedOnBoard = false;
-                        disableAllMoveToClickableSquare();
-                        foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
-                        {
-                            //// m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
-                            
-                            m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Tag = e_SquaerTag.OptionalMoveFrom;
-                        }
-                    }
-                }
+            {
+                tryToMove(picAsSender);    
             }
             else if(picAsSender.Tag.ToString() == e_SquaerTag.OptionalMoveTo.ToString())
             {
                 afterMoving(picAsSender);
             }
         }
+
+
+        private void tryToMove(PictureBoxInTheBoard i_SenderPicBoxInTheBoard)
+        {
+            if (i_SenderPicBoxInTheBoard.Tag.ToString() == e_SquaerTag.OptionalMoveFrom.ToString())
+            {
+                Image DefaultBackGroundImage = m_Board.WhiteBackGround;
+                if (i_SenderPicBoxInTheBoard.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.WHITE.ToString())
+                {
+                    i_SenderPicBoxInTheBoard.BackgroundImage = m_Board.BlueBackGround;
+                    i_SenderPicBoxInTheBoard.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.BLUE;
+                    m_ChekerSelectedOnBoard = true;
+                    i_SenderPicBoxInTheBoard.Tag = e_SquaerTag.OptionalMoveFrom;
+                    m_LastMoveFrom = i_SenderPicBoxInTheBoard.PointInTheBoard;
+                    invokeAllTheOptionalMoveSquare(i_SenderPicBoxInTheBoard);
+                }
+                else if (i_SenderPicBoxInTheBoard.BackgroundImage.Tag.ToString() == GameBoardUI.e_TypeOfBackGround.BLUE.ToString())
+                {
+                    i_SenderPicBoxInTheBoard.BackgroundImage = DefaultBackGroundImage;
+                    i_SenderPicBoxInTheBoard.BackgroundImage.Tag = GameBoardUI.e_TypeOfBackGround.WHITE;
+                    m_ChekerSelectedOnBoard = false;
+                    disableAllMoveToClickableSquare();
+                    foreach (KeyValuePair<Point, Point> kvp in m_AllTheClickableSquareReadyToMove)
+                    {
+                        //// m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Enabled = true;
+
+                        m_Board.GetBoard[kvp.Key.X, kvp.Key.Y].Tag = e_SquaerTag.OptionalMoveFrom;
+                    }
+                }
+            }
+
+
+        }
+
+
 
         private void afterMoving(PictureBoxInTheBoard i_CurrentPicBoxThatMoveTo)
         {        
