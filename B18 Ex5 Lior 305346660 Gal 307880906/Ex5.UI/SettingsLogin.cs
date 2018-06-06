@@ -70,7 +70,6 @@ namespace Ex5.UI
                 }
                 else
                 {
-                    ////MessageBox.Show(ConstantsUI.k_BoardSizeLogInException, "Board size error", checkrhis, MessageBoxIcon.Information);
                     logInException = new LogInExceptionForm(ConstantsUI.k_BoardSizeLogInException, ConstantsUI.k_BoardSizeLogInExceptionTitle);
                     logInException.ShowDialog();
                 }

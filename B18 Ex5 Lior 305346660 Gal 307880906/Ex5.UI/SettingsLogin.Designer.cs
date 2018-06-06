@@ -36,7 +36,6 @@ namespace Ex5.UI
             this.pictureBoxRedSoldier = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlackSoldier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRedSoldier)).BeginInit();
-            ////this.buttonCancel = new Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             //// 
@@ -115,7 +114,6 @@ namespace Ex5.UI
             //// textBoxPlayer2Name
             //// 
             this.textBoxPlayer2Name.BackColor = SystemColors.AppWorkspace;
-            ////this.textBoxPlayer2Name.BorderStyle = .BorderStyle.FixedSingle;
             this.textBoxPlayer2Name.Enabled = false;
             this.textBoxPlayer2Name.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, (byte)177);
             this.textBoxPlayer2Name.Location = new Point(197, 321);
@@ -166,9 +164,6 @@ namespace Ex5.UI
             this.buttonDone.BackColor = SystemColors.ButtonHighlight;
             this.buttonDone.FlatStyle = FlatStyle.Popup;
             this.buttonDone.Font = new Font("Microsoft Sans Serif", 8.5F, FontStyle.Bold, GraphicsUnit.Point, (byte)177);
-            ////////// CASE WE WANT TO ADD AGAIN THE CANCEL BUTTON
-            ////this.buttonDone.Location = new Point(226, 385);
-            ///////////
             this.buttonDone.Location = new Point(374, 385);
             this.buttonDone.Name = "buttonDone";
             this.buttonDone.Size = new Size(125, 42);
@@ -176,20 +171,6 @@ namespace Ex5.UI
             this.buttonDone.Text = "DONE";
             this.buttonDone.UseVisualStyleBackColor = false;
             this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
-            //// 
-            //// buttonCancel
-            //// 
-            ////this.buttonCancel.Anchor = ((.AnchorStyles)((.AnchorStyles.Bottom | .AnchorStyles.Right)));
-            ////this.buttonCancel.BackColor = SystemColors.ButtonFace;
-            ////this.buttonCancel.FlatStyle = .FlatStyle.Popup;
-            ////this.buttonCancel.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, (byte)177);
-            ////this.buttonCancel.Location = new Point(374, 385);
-            ////this.buttonCancel.Name = "buttonCancel";
-            ////this.buttonCancel.Size = new Size(125, 35);
-            ////this.buttonCancel.TabIndex = 7;
-            ////this.buttonCancel.Text = "CANCEL";
-            ////this.buttonCancel.UseVisualStyleBackColor = false;
-            ////this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             //// 
             //// pictureBoxBlackSoldier
             //// 
@@ -223,7 +204,6 @@ namespace Ex5.UI
             this.BackgroundImage = Properties.Resources.black_marble;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.ClientSize = new Size(511, 445);
-            ////this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelPlayer1Name);
             this.Controls.Add(this.labelPlayers);
             this.Controls.Add(this.labelBoardSize);
@@ -263,6 +243,5 @@ namespace Ex5.UI
         private Label labelPlayer1Name;
         private PictureBox pictureBoxBlackSoldier;
         private PictureBox pictureBoxRedSoldier;
-        ////private .Button buttonCancel;
     }
 }

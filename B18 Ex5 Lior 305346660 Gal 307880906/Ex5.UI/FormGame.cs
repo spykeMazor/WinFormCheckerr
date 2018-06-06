@@ -519,7 +519,6 @@ namespace Ex5.UI
 
         private void computerMove()
         { //// computer moving managment
-
             KeyValuePair<string, string> computerNextMove = new KeyValuePair<string, string>();
             computerNextMove = m_Game.SelectRandomMove();
             m_Game.MoveTheCheckerOfTheCorecctPlayer(
