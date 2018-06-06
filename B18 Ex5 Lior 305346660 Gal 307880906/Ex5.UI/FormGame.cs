@@ -387,6 +387,7 @@ namespace Ex5.UI
                 if (!m_HasAnotherAttack)
                 {
                     changeVisibleStatusFoeArrows(ConstantsUI.k_ArrowPlayer2);
+                    this.Update();
                     if (m_Game.Player2.MachineOrNot)
                     {
                         computerMove();
@@ -530,7 +531,7 @@ namespace Ex5.UI
                        ref m_HasAnotherAttack);
             if (!winnerOrDraw())
             {
-                Thread.Sleep(1700);
+                Thread.Sleep(1200);
                 initCheckers();
                 updateScore();
                 enableOrDisableStartOverButton(ConstantsUI.k_Player1Turn);
