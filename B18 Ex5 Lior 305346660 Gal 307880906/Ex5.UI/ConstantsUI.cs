@@ -25,5 +25,8 @@ namespace Ex5.UI
         public const int k_ArrowPlayer2 = 2;
         public const int k_Player1Turn = 1;
         public const int k_Player2Turn = 2;
+        public const int k_SmallBoardStartingLocation = 3;
+        public const int k_MediumBoardStartingLocation = 2;
+        public const int k_LargeBoardStartingLocation = 1;
     }
 }

@@ -129,15 +129,35 @@ namespace Ex5.UI
 
         private void locateBoardOnTheForm(int i_BoardSize)
         {
+            int boardPrintLocation = getStartingLocationOfBoard(i_BoardSize);
             for (int i = 0; i < i_BoardSize; i++)
             {
                 for (int j = 0; j < i_BoardSize; j++)
                 {
                     m_Board.GetBoard[i, j].Size = new Size(60, 60);
-                    m_Board.GetBoard[i, j].Location = new Point((i + 1) * 60, (j + 1) * 60);
+                    m_Board.GetBoard[i, j].Location = new Point((i + boardPrintLocation) * 60, (j + boardPrintLocation) * 60);
                     this.Controls.Add(m_Board.GetBoard[i, j]);
                 }
             }
+        }
+
+        private int getStartingLocationOfBoard(int i_BoardSize)
+        {
+            int boardEntryPoint;
+            if(i_BoardSize == Constants.K_SmallGameBoard)
+            {
+                boardEntryPoint = ConstantsUI.k_SmallBoardStartingLocation;
+            }
+            else if (i_BoardSize == Constants.K_MediumGameBoard)
+            {
+                boardEntryPoint = ConstantsUI.k_MediumBoardStartingLocation;
+            }
+            else
+            { //// i_BoardSize == Constants.K_LargeGameBoard
+                boardEntryPoint = ConstantsUI.k_LargeBoardStartingLocation;
+            }
+            
+            return boardEntryPoint;
         }
 
         private void invokeTheBoard()
