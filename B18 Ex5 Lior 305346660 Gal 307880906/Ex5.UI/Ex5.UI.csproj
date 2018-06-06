@@ -78,6 +78,7 @@
     <Compile Include="SettingsLogin.Designer.cs">
       <DependentUpon>SettingsLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="StartPlaying.cs" />
     <Compile Include="VerifyForm.cs">
       <SubType>Form</SubType>
     </Compile>

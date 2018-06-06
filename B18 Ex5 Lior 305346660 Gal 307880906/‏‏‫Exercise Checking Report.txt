@@ -11,6 +11,12 @@
 			knowledge at the subject but also we created our own "custom" messageBox for other
 			events.
 			Graphical additions added:
-			* We build a richer LOGIN form whith backgroubd and images to present player color.
-			* 
+			* We build a richer LOGIN form whith background and images to present player color.
+			* We used PictureBox instead of Buttons to present the UI game board.
+			* The PictureBox we used is called PictureBoxInTheBoard that inharinted from
+			   PictureBox objct.
+			* We add an option to change the background of the form.
+			* In our form design we present the score on the right side instead the top of the form.
+			* We don't autosize the form size because of our different design but 
+			  we center the board according to the size.
 ========================End Exercise Checking Report======================== 

@@ -27,14 +27,14 @@ namespace Ex5.UI
             if (checkBoxPlayer2.Checked)
             {
                 textBoxPlayer2Name.Clear();
-                textBoxPlayer2Name.BackColor = System.Drawing.SystemColors.Window;
+                textBoxPlayer2Name.BackColor = SystemColors.Window;
                 textBoxPlayer2Name.Enabled = true;
                 textBoxPlayer2Name.TabStop = true;
             }
             else
             {
                 textBoxPlayer2Name.Text = ConstantsUI.k_ComputerNameTextBox;
-                textBoxPlayer2Name.BackColor = System.Drawing.SystemColors.AppWorkspace;
+                textBoxPlayer2Name.BackColor = SystemColors.AppWorkspace;
                 textBoxPlayer2Name.Enabled = false;
                 textBoxPlayer2Name.TabStop = false;
             }
