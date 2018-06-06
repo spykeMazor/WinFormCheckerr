@@ -47,7 +47,7 @@ namespace Ex5.UI
         private bool m_ChekerSelectedOnBoard = false;      
         private bool m_StartOverSameDetails = false;
 
-        public void FormGameStart(SettingsLogin i_FormNameLogin)
+        public FormGame(SettingsLogin i_FormNameLogin)
         {
             GetNameLogin = i_FormNameLogin;
             if (GetNameLogin.DialogResult == DialogResult.OK)

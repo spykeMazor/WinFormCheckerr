@@ -6,23 +6,22 @@ namespace Ex5.UI
 {
     public class StartPlaying
     {
-        public void StartCheckersGame(SettingsLogin i_FormNameLogin)
+        public void StartCheckersGame()
         {
-            FormGame form = new FormGame();
-            //SettingsLogin formNameLogin = new SettingsLogin();
-            //formNameLogin.ShowDialog();
-            form.FormGameStart(i_FormNameLogin);
-            if (form.WantsToPlay)
+            FormGame form;
+            SettingsLogin formNameLogin = new SettingsLogin();
+            formNameLogin.ShowDialog();
+            form = new FormGame(formNameLogin);
+            while (form.WantsToPlay)
             {
                 form.ShowDialog();
-                ////if (!form.StartOverGame)
-                ////{
-                ////    formNameLogin = new SettingsLogin();
-                ////    formNameLogin.ShowDialog();
-                ////}
+                if (!form.StartOverGame)
+                {
+                    formNameLogin = new SettingsLogin();
+                    formNameLogin.ShowDialog();
+                }
 
-                ////form = new FormGame();
-                ////form.FormGameStart(formNameLogin);
+                form = new FormGame(formNameLogin);
             }
         }       
     }

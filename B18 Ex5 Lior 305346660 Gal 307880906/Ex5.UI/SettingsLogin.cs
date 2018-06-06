@@ -131,15 +131,5 @@ namespace Ex5.UI
         {
             get { return checkBoxPlayer2.Checked; }
         }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            VerifyForm quitForm = new VerifyForm(ConstantsUI.k_QuitMessage, ConstantsUI.k_QuitMessageTitle);
-            quitForm.ShowDialog();
-            if (quitForm.DialogResult == DialogResult.Yes)
-            {
-                this.Close();
-            }
-        }
     }
 }
